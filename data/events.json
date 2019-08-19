@@ -1,0 +1,222 @@
+{
+  "Forced Fitting Room - Lingerie and Blindfold": {
+    "description": {
+      "en-US": "Forced fitting room! I am surrounded by mirrors on all sides! A perverted outfit and blindfold appear on a hanger, and a note says that I will not be freed until I put them on and perform a humiliating pose!",
+      "ja-JP": "強制試着室だ！　鏡に四方を囲まれてしまった！　用意されたアイマスクとエッチな服を着て、恥ずかしいポーズをしないと解放されない！"
+    },
+    "results": [
+      {
+        "type": "choice",
+        "choices": [
+          {
+            "description": {
+              "en-US": "Follow Instructions",
+              "ja-JP": "指示に従う"
+            },
+            "results": "Forced Fitting Room - Lingerie and Blindfold: Follow Instructions"
+          },
+          {
+            "description": {
+              "en-US": "Go Against Instructions",
+              "ja-JP": "指示に逆らう"
+            },
+            "results": "Forced Fitting Room - Lingerie and Blindfold: Go Against Instructions"
+          }
+        ]
+      }
+    ]
+  },
+  "Forced Fitting Room - Lingerie and Blindfold: Follow Instructions": {
+    "parent": "Forced Fitting Room - Lingerie and Blindfold",
+    "description": {
+      "en-US": "I change into the clothes and do the pose as instructed. The mirror disappears and I am released, but I do not notice. I continue to pose embarrassingly where there was no need for it any longer!",
+      "ja-JP": "ポーズを維持すると、鏡が消えて解放されるが、気付けない。何もないところで必死に恥ずかしいポーズを取り続けた！"
+    },
+    "results": { "name": "humiliation", "value": 50 }
+  },
+  "Forced Fitting Room - Lingerie and Blindfold: Go Against Instructions": {
+    "parent": "Forced Fitting Room - Lingerie and Blindfold",
+    "description": "I struggle to break out of the fitting room.",
+    "results": [
+      { "name": "need-for-bathroom", "value": 10 },
+      {
+        "type": "accident-check",
+        "value": 300,
+        "saving-throw": "STR",
+        "results": "Forced Fitting Room - Lingerie and Blindfold: Accident"
+      },
+      {
+        "type": "saving-throw",
+        "saving-throw": "Force",
+        "results": [
+          {
+            "type": "message",
+            "message": "My mirrored prison still resists my efforts to break free."
+          },
+          "Forced Fitting Room - Lingerie and Blindfold"
+        ]
+      },
+      {
+        "type": "message",
+        "message": "I finally manage to break out of the fitting room."
+      }
+    ]
+  },
+  "Forced Fitting Room - Lingerie and Blindfold: Accident": {
+    "parent": "Forced Fitting Room - Lingerie and Blindfold",
+    "description": {
+      "en-US": {
+        "pee": "I rub my thighs together, but can’t hold it any longer. A shameful pool spreads in the little room, and my hand between my legs makes me feel good.",
+        "poo": "I squeeze my cheeks together, but can’t hold it any longer. A shameful bulge spreads in the seat of my panties.",
+        "both": "I rub my thighs together and squeeze my cheeks together, but can’t hold it any longer. A shameful pool spreads in the little room and even more shameful bulge spreads in the seat of my panties, and my hand between my legs makes me feel good."
+      },
+      "ja-JP": "内股を摺り合わせ、耐えていたが……。羞恥で半べそになりながら失禁して、気持ちよさそうに股間をヒクつかせてしまった！　　小部屋の中に羞恥の水溜まりが広がっていく。"
+    },
+    "results": [
+      {
+        "type": "accident",
+        "name": "need-to-pee",
+        "results": [
+          { "name": "urination", "value": true },
+          { "name": "humiliation", "value": 200 },
+          { "name": "horniness", "value": 100 }
+        ]
+      },
+      {
+        "type": "accident",
+        "name": "need-to-poo",
+        "results": [
+          { "name": "defecation", "value": true },
+          { "name": "humiliation", "value": 300 }
+        ]
+      },
+      {
+        "type": "saving-throw",
+        "save": "Force",
+        "results": "Forced Fitting Room - Lingerie and Blindfold",
+        "message": "My mirrored prison still resists my efforts to break free."
+      },
+      {
+        "type": "message",
+        "message": "I finally manage to break out of the fitting room."
+      }
+    ]
+  },
+  "Herd of Cats": {
+    "description": {
+      "en-US": "Cats are swarming around my waist.",
+      "ja-JP": "腰の高さに猫じゃらしが群生している。"
+    },
+    "results": [
+      {
+        "type": "stat-check",
+        "name": "panties",
+        "value": false,
+        "results": "Herd of Cats: Already Nopan"
+      },
+      "Herd of Cats: Panties Stolen"
+    ]
+  },
+  "Herd of Cats: Panties Stolen": {
+    "parent": "Herd of Cats",
+    "description": {
+      "en-US": [
+        "Pickpocket imp! ♪ I couldn't see my feet, and before I knew it, it had stolen my underwear! And all the other female adventurers are squirming...",
+        "My exposed crotch is stimulated by the floating tail-tips of the herd, and it feels pleasurable. In addition, the need to pee is growing. As I try to keep a straight face through the blushing, I make it through the field of tail-tips."
+      ],
+      "ja-JP": [
+        "スリ盗りインプだ！　足元が見えず、いつの間にか下穿きを盗まれてしまった！　…周囲の女冒険者も、皆一様にモジモジしている…",
+        "群生する穂先に剥き出しの股間をコショコショ♡と刺激され、気持ちよくされてしまう。その上、尿意も高まっていき…。取り繕った涼しい顔を、密やかに紅潮させながら、穂波を掻き分けて進む。尿意+100% 開発度+100"
+      ]
+    },
+    "results": [
+      { "name": "panties", "value": false },
+      { "name": "need-to-pee", "value": 100 },
+      { "name": "horniness", "value": 100 },
+      {
+        "type": "accident-check",
+        "name": "need-to-pee",
+        "value": 250,
+        "saving-throw": "DEX",
+        "results": "Herd of Cats: Panties Stolen: Peeing"
+      },
+      { "name": "panties", "value": true }
+    ]
+  },
+  "Herd of Cats: Panties Stolen: Peeing": {
+    "parent": "Herd of Cats: Panties Stolen",
+    "description": {
+      "en-US": "There are people around, but if I crouch, no one should know! “I can’t hold it any longer…” I said to myself. While uttering a cute voice, I blush with the pleasure of urination. An embarrassing cloud steam rose around me, and it was obvious that I was peeing.",
+      "ja-JP": "人目はあるけど、屈めば分からないはず！　もう限界っ…可愛らしい声を漏らしながら、放尿の快楽に頬を染める。　恥ずかしい湯気が立ち昇り、周囲からはバレバレだった！　尿意を0%に。開発度+700。"
+    },
+    "results": [
+      { "name": "urination", "value": true },
+      { "name": "horniness", "value": 700 },
+      { "name": "panties", "value": true }
+    ]
+  },
+  "Herd of Cats: Already Nopan": {
+    "parent": "Herd of Cats",
+    "description": {
+      "en-US": "My exposed crotch is stimulated by the floating tail-tips of the herd, and it feels pleasurable. In addition, the need to pee is growing. As I try to keep a straight face through the blushing, I make it through the field of tail-tips.",
+      "ja-JP": "群生する穂先に剥き出しの股間をコショコショ♡と刺激され、気持ちよくされてしまう。その上、尿意も高まっていき…。取り繕った涼しい顔を、密やかに紅潮させながら、穂波を掻き分けて進む。尿意+100% 開発度+100"
+    },
+    "results": [
+      { "name": "need-to-pee", "value": 100 },
+      { "name": "horniness", "value": 100 },
+      {
+        "type": "accident-check",
+        "name": "need-to-pee",
+        "value": 250,
+        "saving-throw": "DEX",
+        "results": "Herd of Cats: Already Nopan: Peeing"
+      }
+    ]
+  },
+  "Herd of Cats: Already Nopan: Peeing": {
+    "parent": "Herd of Cats: Already Nopan",
+    "description": {
+      "en-US": "There are people around, but if I crouch, no one should know! “I can’t hold it any longer…” I said to myself. While uttering a cute voice, I blush with the pleasure of urination. An embarrassing cloud steam rose around me, and it was obvious that I was peeing.",
+      "ja-JP": "人目はあるけど、屈めば分からないはず！　もう限界っ…可愛らしい声を漏らしながら、放尿の快楽に頬を染める。　恥ずかしい湯気が立ち昇り、周囲からはバレバレだった！　尿意を0%に。開発度+700。"
+    },
+    "results": [
+      { "name": "urination", "value": true },
+      { "name": "horniness", "value": 700 }
+    ]
+  },
+  "Nopan-Only Toilet": {
+    "description": {
+      "en-US": "I found a toilet as I went through the stone dungeon! A sign on the door says \"No Panties\".",
+      "ja-JP": "石造りのダンジョンを進んでいると、トイレを発見した！　ドアの文字を解読すると『下半身裸』でなければ開かないらしい。"
+    },
+    "results": [
+      {
+        "type": "stat-check",
+        "name": "panties",
+        "value": false,
+        "results": "Nopan-Only Toilet: Already Nopan"
+      },
+      {
+        "type": "accident-check",
+        "value": 200,
+        "save": "WIS",
+        "choice": true,
+        "results": "Nopan-Only Toilet: Used"
+      }
+    ]
+  },
+  "Nopan-Only Toilet: Used": {
+    "parent": "Nopan-Only Toilet",
+    "description": {
+      "en-US": "I fold my panties in the bin and opened the door. I sit down on the toilet seat and let myself go. After I finish and returning, it seems like my panties have shrunk…",
+      "ja-JP": "用意された籠に衣服を畳んで入れ、扉を開く。便座に腰掛けて、我慢の果ての開放感に、涎を垂らしながら恍惚として、幸せそうに息を漏らす。　……済ませて戻ってくると、パンツが一回り縮んでいるような…？"
+    },
+    "results": [
+      { "name": "panties", "value": false },
+      { "name": "urination", "value": true },
+      { "name": "defecation", "value": true },
+      { "name": "panties", "value": true },
+      { "name": "wedgie", "value": true }
+    ]
+  }
+}

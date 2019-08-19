@@ -1,0 +1,185 @@
+回復の泉だ！　……裸になって体を清める。
+
+突然、泉から現れた水精霊に抱き付かれてしまった！　身を任せれば回復してくれるらしい。 
+
+少女の指が全身を這い回り、清らかな水の力で異常を濯がれる。
+
+リフレッシュしたのも束の間、ゾクッとした寒気が走った。　任意の状態異常を３つ解除。尿意+200% 
+
+《分岐条件：お漏らし経験あり》
+穢れを見つけた水精霊が、アソコを念入りに洗ってくる。――わしゃわしゃ、くしゅくしゅ、いやらしい指使いで責め立てられ、14回もイかされてしまった！　開発度+900pt。
+
+Event: Healing Spring
+Description
+A spring of recovery!  I strip down and cleanse my body.
+Suddenly, I was hugged by a water spirit that emerged from the fountain! It seems to want to heal me if I let her.
+
+The girl's fingers crawl around my entire body and rinses away any abnormalities with the power of clean water.
+
+The refreshing chill ran for a while.
+Result
+Effect: Remove three status effects.
+Effect: +200% [Need for the bathroom].
+Status Event: If ([Wet Panties] or [Soiled Panties]), go to [Event: Healing Spring: Lewd Cleaning].
+Event: Healing Spring: Lewd Cleaning
+Description
+The water spirit found dirtiness between my legs, and washed my crotch and bottom carefully. “Swish-swish, goosh-goosh…” I was fingered lewdly and I came 14 times!
+Result
+Effect: +900 [Humiliation].
+Effect: [Climax] occurs (no change).
+Effect: Remove [Wet Panties].
+Effect: Remove [Soiled Panties].
+
+ダンジョンメイドに遭遇した！
+
+《分岐条件：お漏らし0回》
+丁重にもてなされ、ハーブティをご馳走になった！　尿意+20%。開発度-30。
+
+《分岐条件：それ以外》
+いつも掃除させられている仕返しに、媚薬紅茶を飲まされた！　尿意+100%。【催淫】を取得。
+
+【催淫】いやらしい疼きが収まらず、エッチな妄想が止まらない。「股間を押えた」際、無意識に弄って気持ちよくなってしまい、開発度+100。
+Event: Dungeon Maid
+Description
+I encountered a dungeon maid!
+Result
+Status Event: If (not [Wet Panties] and not [Soiled Panties]), go to [Event: Dungeon Maid: Herbal Tea].
+Event: Go to [Event: Dungeon Maid: Cleanup at a Price].
+Event: Dungeon Maid: Herbal Tea
+Description
+She was courteous and served me herbal tea!
+Result
+Effect: +20% [Need to pee].
+Effect: -30 [Humiliation].
+Event: Dungeon Maid: Cleanup at a Price
+Description
+She washed my dirty underwear for me, but to pay me back for making her do my filthy laundry, she put an aphrodisiac in my tea!
+Result
+Effect: +100% [Need for the bathroom].
+Effect: Gained [Aphrodisiac].
+Effect: Removed [Wet Panties].
+Effect: Removed [Soiled Panties].
+
+
+キャンプを見つけた！　焚き火に当たっていた女冒険者に声を掛けてられる
+
+《分岐条件：下着暴露持ち》
+思い切りパンツを見せつけてしまい、誘っていると勘違いされた！　お酒を呑まされた後テントの中に連れ込まれ、一晩中レズプレイに付き合わされた！　開発度+250【酩酊】を取得
+
+《分岐条件：それ以外》
+お酒と焼き肉とビールとワインとお酒をご馳走になった。尿意+120%【酩酊】を取得
+
+【酩酊】酔っ払っていて理性が働かない。尿意上限-50%。3階層進むと、我に返って解除。
+Event: Woman at a Campfire
+Description
+I found a camp! Talking to a female adventurer hitting a bonfire
+Result
+Status Event: If ([Exposed Panties]), go to [Event: Woman at a Campfire: Lesbian Tryst].
+Event: Go to [Event: Woman at a Campfire: Drinking Party].
+Event: Woman at a Campfire: Lesbian Tryst
+Description
+I accidentally flashed her my panties, and she mistook it for flirting! After she got me drunk, she took me into her tent and spent all night in a lesbian orgy! Afterward, I was so drunk that I 
+Result
+Effect: +250 [Humiliation]
+Effect: Gained [Drunk].
+Event: Woman at a Campfire: Drinking Party
+Description
+We enjoyed sake, roasted meat, beer, wine and liquor.
+Result
+Effect: +120% [Need for the bathroom].
+Effect: Gained [Drunk].
+
+クイックの罠だ！　動きが速くなる代わりに、おしっこの溜まり方もスピードアップ！　群がってくるモンスターを一蹴し、足早に進む。　尿意+80%
+
+《分岐条件：魔法攻撃ができない》
+超合金ぬり壁が行く手を阻んでいる！　手数が増えてもなかなか倒せず、尿意が高まっていく…！　尿意+100%。
+Event: Haste Trap
+Description
+It’s a magical haste trap! It speeds up my movements, but also my excretory system! I defeat the monsters that gather, and move on as fast as I can.
+Result
+Effect: +80% [Need for the bathroom]
+Class Event: If ([Fighter] or [Ninja]), go to [Event: Haste Trap: Cannot use magic].
+Event: Haste Trap: Cannot use magic
+Description
+A prismatic wall bars my way! I have to fight more monsters as I find a way around, and my need for the bathroom increases even more.
+Result
+Effect: +100% [Need for the bathroom]
+拘束ロデオマシンだ！　無理やり騎乗させられ、足を固定された！　暴れ馬を模した動きに翻弄される！　ローションまみれのイボイボで股間を無茶苦茶に擦られ、気持ちよくなってしまう……！　尿意+90 開発度+100 
+
+《分岐条件：尿意200%以上》
+息を荒げながら耐えていたが……、「んぅっ♡」と小さな嬌声を隠しながら気持ちよさそうに漏らしてしまった！　それと同時に暴れ馬は動きを緩めていく。クチュクチュと緩やかに股間を嬲られながら、揶揄われるように揺られ続けた。尿意を0%に。開発度+900。
+Event: Rodeo Machine
+Description
+Restraint rodeo machine! I was forced to ride and my legs were bound in place! I was confused by the movement that imitates a rampage! The crotch is rubbed with a lotion covered wart and it feels good ...! Urine urge +90 Development level +100  
+Result
+Effect: +90 [Need to pee]
+Effect: +100 [Horniness]
+Continence Event: If (>200% [Need to pee]) and fail a [STR] save, then go to [Event: Rodeo Machine: Accident]
+Event: Rodeo Machine: Accident
+Description
+Although I was holding my breath, “Nnnh♡” I moaned in a small hoarse voice while I wet myself in the grip of pleasure! At the same time, the rodeo machine eases its movements. It continues to rock me gently as it grinds against my crotch..
+Result
+Effect: [Urination] occurs.
+Effect: Gained [Wet Panties].
+Effect: +900 [Horniness].
+囚われた子供達を発見した！　安全な場所まで引率する。…なかなか進めず、尿意が溜まっていく。…信頼に満ちた無垢な視線を受けて、前を抑えられない。尿意+100%
+
+《分岐条件：ズボン&パンツ》
+悪戯っ子に不意を突かれた！　豪快に穿き物をズリ降ろされてしまう！　慌ててしゃがみ込むと、膀胱に甘い振動が加わった……！　尿意+150% 開発度+50 
+
+《分岐条件：尿意280%以上》
+ピュッ♡とチビった一滴が呼び水になる。可愛らしい声でうわごとを呟きながら静々とお漏らししてしまった！　子供達の目の前で盛大に痴態を見せ、散々囃し立てられた！　尿意を0%に。開発度+800
+Event: Prisoner Rescue
+Description
+I found some prisoners! As I led them to a safe place. ... it got harder to go on, and my need to go to the bathroom was growing. ... While being looked at by innocent eyes, I had to keep my hands out from between my legs.
+Result
+Effect: +100 [Need for the bathroom].
+Equipment Event: If (wearing [Trousers]), then go to [Event: Prisoner Rescue: Pantsed!]
+Continence Event: If (>280% [Need for the bathroom]) then go to [Event: Prisoner Rescue: Accident].
+Event: Prisoner Rescue: Pantsed!
+Description
+I was caught off guard by a mischievous girl! She pulled my pants down in excitement! When I squatted down in a hurry to pull them back up, a sweet vibration was added to my bladder!
+Result
+Effect: +150% [Need for the bathroom].
+Effect: +50 [Humiliation].
+Continence event:  If (>280% [Need for the bathroom]) then go to [Event: Prisoner Rescue: Accident].
+Event: Prisoner Rescue: Accident
+Description
+$(With a little “Pyu♡” sound, a little drop becomes a waterfall.) $(|With a little “Pft♡” sound, a little pebble becomes a landslide.) I $(wet|soiled|wet and soiled) myself while quietly whispering with a cute voice! I made a fool of myself in front of the children and was devastated! Urine will be reduced to 0%. Development level +800
+Result
+Pee result:
+  Effect: [Urination] occurs.
+  Effect: Gained [Wet Panties].
+  Effect: +800 [Humiliation].
+Poo result:
+  Effect: [Defecation] occurs.
+  Effect: Gained [Soiled Panties].
+  Effect: +1600 [Humiliation].
+Event: Name here
+Description
+Result
+Appendix C: Boss Fight Events
+Event: Facing the Dark Lord
+Description
+Passing the final door, I am face to face with the Dark Lord himself. With gloating laughter he says, “Well, little girl… you’ve come this far… but have you the strength left to defeat me?” With that, he gestures to the walls around him - and they all come to life, showing pictures of the inside of all his temples. As the congregants turn to look at me, he raises his hand and hits me with a beam that strips me to my panties and fills me with an urge to relieve myself that I’ve never felt before.
+Result
+Effect: Gained [On Camera].
+Effect: Gained [Exposed Panties].
+Effect: +400 [Humiliation].
+Effect: +(150-300)% [Need for the bathroom].
+Continence Event: If (>(200-400)% [Need for the bathroom]), go to [Event: Facing the Dark Lord: Accident]
+Event: Go to [Event: Facing the Dark Lord: Victory!]
+Event: Facing the Dark Lord: Accident
+Description
+His power is too much for my $(bladder|bowels|bladder and bowels)! With a gasp, as hundreds of thousands look on in amazement, $(a shameful yellow stain spreads in my crotch and a dirty waterfall cascades down my thighs)$(||, and )$(|a brown bulge appears in the seat of my panties as I helplessly fill them with disgusting brown mud).
+The Dark Lord’s minions and subjects pause, and then begin an uproar of mocking laughter as they watch me helplessly $(wet|soil|wet and soil) myself. As the last of my waste flows into my panties, he joins them with a cruel laugh of his own. “Behold! Your would be savior, going to the bathroom in her panties like a little child! What’s the matter, little girl, couldn’t make it to the potty?” he sneers at me with a cruel smile.
+Result
+Pee effect:
+  Effect: [Urination] occurs.
+  Effect: Gained [Wet Panties].
+  Effect: +1000 [Humiliation].
+Poo effect:
+  Effect: [Defecation] occurs.
+  Effect: Gained [Soiled Panties].
+  Effect: +2000 [Humiliation].
+Event: Go to [Event: Facing the Dark Lord: Victory!]

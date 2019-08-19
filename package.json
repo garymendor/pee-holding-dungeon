@@ -1,0 +1,16 @@
+{
+  "name": "pee-holding-dungeon",
+  "version": "0.0.1",
+  "description": "A roguelike involving a dungeon where adventurers try not to pee themselves.",
+  "main": "index.js",
+  "author": "Gary Mendor",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "@babel/register": "^7.5.5",
+    "regenerator-runtime": "^0.13.3"
+  }
+}

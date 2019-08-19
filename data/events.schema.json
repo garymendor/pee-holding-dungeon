@@ -1,0 +1,202 @@
+{
+  "$schema": "http://json-schema.org/schema#",
+  "id": "https://unstoppable-tides.blog/pee-dungeon/events",
+  "definitions": {
+    "string-collection": {
+      "#$id": "#string-collection",
+      "anyOf": [
+        { "type": "string" },
+        { "type": "array", "items": { "type": "string" } }
+      ]
+    },
+    "accident-string": {
+      "$id": "#accident-string",
+      "description": "A string that has variants for 'pee', 'poo', or 'both'",
+      "type": "object",
+      "properties": {
+        "pee": { "$ref": "#string-collection" },
+        "poo": { "$ref": "#string-collection" },
+        "both": { "$ref": "#string-collection" }
+      },
+      "required": ["pee", "poo", "both"]
+    },
+    "localizable-string": {
+      "$id": "#localizable-string",
+      "anyOf": [
+        { "$ref": "#string-collection" },
+        { "#ref": "#accident-string" },
+        {
+          "type": "object",
+          "patternProperties": { "^..(-..)?$": { "#ref": "#accident-string" } },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "saving-throw": {
+      "$id": "#saving-throw",
+      "description": "A saving throw that can prevent execution of a branch.",
+      "type": "string",
+      "enum": [
+        "STR",
+        "DEX",
+        "INT",
+        "WIS",
+        "Force",
+        "Healing",
+        "Willpower",
+        "Puzzle",
+        "Uncurse",
+        "Holy"
+      ]
+    },
+    "event": {
+      "#id": "#event",
+      "description": "An event that triggers at the start of a floor.",
+      "type": "object",
+      "properties": {
+        "parent": {
+          "type": "string",
+          "description": "The root-level event that is associated with this event. If not present, this event is a root-level event."
+        },
+        "description": { "$ref": "#localizable-string" },
+        "results": {
+          "$ref": "#result-array"
+        }
+      },
+      "required": ["description", "results"]
+    },
+    "result-array": {
+      "$id": "#result-array",
+      "oneOf": [
+        { "$ref": "#result" },
+        { "type": "array", "items": { "$ref": "#result" } }
+      ]
+    },
+    "result": {
+      "$id": "#result",
+      "description": "A result that can happen during an event.",
+      "oneOf": [
+        {
+          "type": "string",
+          "description": "A result that goes to the specified event."
+        },
+        { "$ref": "#result/effect" },
+        { "$ref": "#result/choice" },
+        { "$ref": "#result/stat-check" },
+        { "$ref": "#result/accident-check" },
+        { "$ref": "#result/accident" },
+        { "$ref": "#result/saving-throw" },
+        { "#ref": "#result/message" }
+      ]
+    },
+    "result-effect": {
+      "$id": "#result/effect",
+      "description": "A result that applies a change to a stat or status effect.",
+      "type": "object",
+      "properties": {
+        "type": { "const": "effect" },
+        "name": {
+          "type": "string",
+          "description": "The name of the stat being modified."
+        },
+        "value": {
+          "type": ["string", "number", "boolean"],
+          "description": "The value to which to set the stat."
+        }
+      },
+      "required": ["name", "value"]
+    },
+    "result-choice": {
+      "$id": "#result/choice",
+      "description": "A result that allows the user to choose a branch. Whichever branch is chosen, the specified results are executed.",
+      "type": "object",
+      "properties": {
+        "type": { "const": "choice" },
+        "choices": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "description": { "$ref": "#localizable-string" },
+              "results": { "$ref": "#result-array" }
+            }
+          }
+        }
+      },
+      "required": ["type", "choices"]
+    },
+    "result-stat-check": {
+      "$id": "#result/stat-check",
+      "description": "A result that checks a particular stat, and if it matches, executes the specified results.",
+      "type": "object",
+      "properties": {
+        "type": { "const": "stat-check" },
+        "name": { "type": "string" },
+        "value": true,
+        "results": { "$ref": "#result-array" }
+      },
+      "required": ["type", "name", "value", "results"]
+    },
+    "result-accident-check": {
+      "$id": "#result/accident-check",
+      "description": "A result that checks the player's bladder and/or bowel status, and if they exceed the specified limit, executes a new set of results.",
+      "type": "object",
+      "properties": {
+        "type": { "const": "accident-check" },
+        "value": {
+          "type": "number",
+          "description": "The target value; if the value exceeds this, execute the results."
+        },
+        "name": {
+          "type": ["string", "null"],
+          "enum": ["need-to-pee", "need-to-poo", null],
+          "description": "If set, checks only the one value. If not set or null, checks both."
+        },
+        "saving-throw": { "$ref": "#saving-throw" },
+        "choice": {
+          "type": "boolean",
+          "description": "If true, the player can take the branch to go to the bathroom even if they succeed at the check."
+        },
+        "results": { "$ref": "#result-array" }
+      },
+      "required": ["type", "value", "results"]
+    },
+    "result-accident": {
+      "$id": "#result/accident",
+      "description": "A result that only occurs if the calling event was the specified type of accident.",
+      "type": "object",
+      "properties": {
+        "type": { "const": "accident" },
+        "name": {
+          "type": "string",
+          "enum": ["need-to-pee", "need-to-poo"]
+        },
+        "results": { "$ref": "#result-array" }
+      },
+      "required": ["type", "name", "results"]
+    },
+    "result-saving-throw": {
+      "$id": "#result/saving-throw",
+      "description": "A result that rolls a saving throw, and if the throw fails, executes a new set of results.",
+      "type": "object",
+      "properties": {
+        "type": { "const": "saving-throw" },
+        "saving-throw": { "$ref": "#saving-throw" },
+        "results": { "$ref": "#result-array" }
+      },
+      "required": ["type", "saving-throw", "results"]
+    },
+    "#result-message": {
+      "$id": "#result/message",
+      "description": "A result that displays a specified message.",
+      "type": "object",
+      "properties": {
+        "type": { "const": "message" },
+        "message": { "$ref": "#localizable-string" }
+      },
+      "required": ["type", "message"]
+    }
+  },
+  "type": "object",
+  "patternProperties": { ".*": { "$ref": "#event " } }
+}
