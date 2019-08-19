@@ -3,14 +3,14 @@ class Character {
     name = "Sample Character",
     stats = { STR: 11, DEX: 11, INT: 11, WIS: 11 },
     values = {
-      "need-to-pee": 300,
-      "need-to-poo": 300,
+      "need-to-pee": 120,
+      "need-to-poo": 50,
       humiliation: 0,
       horniness: 0,
-      "pee-incontinence": 0,
+      "pee-incontinence": 100,
       "poo-incontinence": 0
     },
-    status = {},
+    status = { "sensitive-urethra": true },
     clothes = { skirt: true, panties: true }
   }) {
     this.data = {
@@ -51,7 +51,7 @@ class Character {
   /**
    * @param {string} name
    * @param {any} value
-   * @param {any[]} events
+   * @param {{name:string,value:any}[]} events
    * An array of events that occur during the application process.
    * @returns {Character}
    */
@@ -63,6 +63,8 @@ class Character {
       case "need-to-poo":
       case "humiliation":
       case "horniness":
+      case "pee-incontinence":
+      case "poo-incontinence":
         newCharacter.data.values[name] += value;
         break;
       case "need-for-bathroom":
@@ -73,7 +75,7 @@ class Character {
       case "panties":
       case "trousers":
       case "skirt":
-        events.push({ event: "apply-other", name, value });
+        events.push({ name, value });
         if (value === null) {
           delete newCharacter.data.clothes[name];
         } else {
@@ -83,18 +85,20 @@ class Character {
       // Special cases
       case "urination":
         newCharacter.data.values["need-to-pee"] = 0;
+        events.push({ name, value: true });
         if (newCharacter.data.clothes.panties) {
           this.apply("wet-panties", true, events);
         }
         break;
       case "defecation":
         newCharacter.data.values["need-to-poo"] = 0;
+        events.push({ name, value: true });
         if (newCharacter.data.clothes.panties) {
           this.apply("soiled-panties", true, events);
         }
         break;
       default:
-        events.push({ event: "apply-other", name, value });
+        events.push({ name, value });
         if (typeof value === "boolean") {
           if (value === true) {
             newCharacter.data.status[name] = true;
@@ -116,6 +120,9 @@ class Character {
       `Need to pee: ${this.data.values["need-to-pee"]}\tNeed to poo: ${
         this.data.values["need-to-poo"]
       }\tHorniness:${this.data.values.horniness}`,
+      `Pee weakness ${this.data.values["pee-incontinence"]}\tPoo weakness: ${
+        this.data.values["poo-incontinence"]
+      }`,
       `Humiliation: ${this.data.values.humiliation}`,
       `Clothes: ${Object.keys(this.data.clothes).filter(
         clothes => this.data.clothes[clothes]

@@ -23,6 +23,7 @@ import readlineSync from "readline-sync";
  * @property {StatusCollection} statusCollection
  * @property {string} eventId
  * @property {string} localeId
+ * @property {Console} output
  */
 
 class ExecuteEvent {
@@ -32,12 +33,12 @@ class ExecuteEvent {
    */
   constructor(data) {
     this.data = {
-      ...data,
-      events: []
+      output: console,
+      ...data
     };
   }
 
-  run(output = console) {
+  run() {
     const event = this.data.eventCollection.get(this.data.eventId);
     if (!event) {
       return;
@@ -45,20 +46,32 @@ class ExecuteEvent {
 
     const description = event.description(this.data.localeId);
     if (description) {
-      output.log(description);
+      this.data.output.log(description);
     }
-    this.runResults(event.results(), output);
-    return this.data.character;
+    if (this.runResults(event.results())) {
+      // Execute floor-end status events
+      for (const statusId in this.data.character.data.status) {
+        const status = this.data.statusCollection.get(statusId);
+        if (status) {
+          for (const effectIndex in status.effect()) {
+            const effect = status.effect()[effectIndex];
+            if (effect.event === "floor-end") {
+              this.runResults(effect.results);
+            }
+          }
+        }
+      }
+    }
+    return this.data;
   }
 
   /**
    * Runs a collection of events.
    * @param {ResultCollection} results
-   * @param {Console} output
    */
-  runResults(results, output) {
+  runResults(results) {
     for (const result of results.items()) {
-      if (!this.runResult(result, output)) {
+      if (!this.runResult(result)) {
         return false;
       }
     }
@@ -67,9 +80,8 @@ class ExecuteEvent {
 
   /**
    * @param {Result} result
-   * @param {Console} output
    */
-  runResult(result, output) {
+  runResult(result) {
     const resultTypeMap = {
       event: this.runEvent,
       effect: this.runEffect,
@@ -82,23 +94,22 @@ class ExecuteEvent {
     };
     const runResultMethod = resultTypeMap[result.type()];
     if (!runResultMethod) {
-      output.error(`Not supported: ${result.type()}`);
+      this.data.output.error(`Not supported: ${result.type()}`);
       return true;
     }
-    return runResultMethod.call(this, result, output);
+    return runResultMethod.call(this, result);
   }
 
   /**
    *
    * @param {EventResult} result
-   * @param {Console} output
    */
-  runEvent(result, output) {
+  runEvent(result) {
     const nextEvent = new ExecuteEvent({
       ...this.data,
       eventId: result.event()
     });
-    this.data.character = nextEvent.run(output);
+    this.data = nextEvent.run();
     return false;
   }
 
@@ -106,32 +117,52 @@ class ExecuteEvent {
    * @param {EffectResult} result
    */
   runEffect(result) {
+    const events = [];
     this.data.character = this.data.character.apply(
       result.data.name,
       result.data.value,
-      this.data.events
+      events
     );
-    // TODO: Run the events through the status effects
+    for (const index in events) {
+      const event = events[index];
+      // Execute apply events for the newly applied status
+      const status = this.data.statusCollection.get(event.name);
+      if (status) {
+        for (const effectIndex in status.effect()) {
+          const effect = status.effect()[effectIndex];
+          if (effect.event === "apply") {
+            this.runResults(effect.results);
+          }
+        }
+      }
+      // Execute onStatus events
+      const onStatusList = this.data.statusCollection.getOnStatus(event.name);
+      for (const onStatusIndex in onStatusList) {
+        const onStatus = onStatusList[onStatusIndex];
+        // TODO: Use expression comparison
+        if (event.value === onStatus.value) {
+          this.runResults(onStatus.results);
+        }
+      }
+    }
     return true;
   }
 
   /**
    * @param {MessageResult} result
-   * @param {Console} output
    */
-  runMessage(result, output) {
-    output.log(result.message(this.data.localeId));
+  runMessage(result) {
+    this.data.output.log(result.message(this.data.localeId));
     return true;
   }
 
   /**
    * @param {ChoiceResult} result
-   * @param {Console} output
    */
-  runChoice(result, output) {
+  runChoice(result) {
     const choices = [];
     // TODO: Localize
-    output.log("Choose one of the following actions:");
+    this.data.output.log("Choose one of the following actions:");
     for (const choiceIndex in result.choices()) {
       const choice = result.choices()[choiceIndex];
       choices.push(choice.description(this.data.localeId));
@@ -153,12 +184,11 @@ class ExecuteEvent {
 
   /**
    * @param {StatCheckResult} result
-   * @param {Console} output
    */
-  runStatCheck(result, output) {
+  runStatCheck(result) {
     const actualValue = this.data.character.get(result.name());
     if (result.compare(actualValue)) {
-      if (!this.runResults(result.results(), output)) {
+      if (!this.runResults(result.results())) {
         return false;
       }
     }
@@ -167,12 +197,11 @@ class ExecuteEvent {
 
   /**
    * @param {AccidentCheckResult} result
-   * @param {Console} output
    */
-  runAccidentCheck(result, output) {
+  runAccidentCheck(result) {
     this.data.accident = result.compare(this.data.character);
     if (this.data.accident) {
-      if (!this.runResults(result.results(), output)) {
+      if (!this.runResults(result.results())) {
         return false;
       }
     }
@@ -181,9 +210,8 @@ class ExecuteEvent {
 
   /**
    * @param {AccidentResult} result
-   * @param {Console} output
    */
-  runAccident(result, output) {
+  runAccident(result) {
     let results = null;
     switch (this.data.accident) {
       case "pee":
@@ -198,7 +226,7 @@ class ExecuteEvent {
     }
     delete this.data.accident;
     if (results) {
-      if (!this.runResults(results, output)) {
+      if (!this.runResults(results)) {
         return false;
       }
     }
@@ -207,13 +235,12 @@ class ExecuteEvent {
 
   /**
    * @param {SavingThrowResult} result
-   * @param {Console} output
    */
-  runSavingThrow(result, output) {
+  runSavingThrow(result) {
     const saveValue = this.data.character.get(result.savingThrow());
     const d20 = 1 + Math.floor(Math.random() * 20);
     if (saveValue + d20 < result.dc()) {
-      if (!this.runResults(result.results(), output)) {
+      if (!this.runResults(result.results())) {
         return false;
       }
     }

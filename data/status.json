@@ -170,6 +170,21 @@
     },
     "saving-throw": "Healing"
   },
+  "sensitive-urethra": {
+    "name": {
+      "ja-JP": "尿道性感",
+      "en-US": "Sensitive Urethra"
+    },
+    "description": {
+      "en-US": "[Sensitive Urethra]: The victim's urethra is sexually sensitive, adding +100 [Horniness] when [Urination] occurs. Removed with [Healing]."
+    },
+    "on-status": {
+      "name": "urination",
+      "value": true,
+      "results": { "name": "horniness", "value": 100 }
+    },
+    "saving-throw": "Healing"
+  },
   "aphrodisiac": {
     "name": {
       "en-US": "Aphrodisiac",
@@ -370,6 +385,11 @@
       "en-US": "The victim's panties are too tight and wedge into her crotch, stimulating her and actually making it harder to hold it.",
       "ja-JP": "パンツが捻れ、キツく食い込んでいる状態。おしっこ穴を強く抑えられる代わりに、クリや割れ目が擦れて気持ち良い。分岐時、尿意-50%で計算、階を進むごとに開発度+20。"
     },
+    "on-status": {
+      "name": "panties",
+      "value": null,
+      "results": { "name": "wedgie", "value": null }
+    },
     "effect": [
       {
         "event": "apply",
@@ -378,13 +398,6 @@
       {
         "event": "floor-end",
         "results": { "name": "horniness", "value": 20 }
-      },
-      {
-        "//": "When panties is set to null (distinct from set to false), remove the effect.",
-        "event": "apply-other",
-        "name": "panties",
-        "value": null,
-        "results": { "name": "wedgie", "value": null }
       }
     ],
     "saving-throw": false
@@ -418,9 +431,7 @@
     "description": {
       "en-US": "Your panties have a visible pee stain - a sign of a close call or incomplete washing. No direct effect, but can trigger branches."
     },
-    "effect": {
-      "//": "When panties is set to null (distinct from set to false), remove the effect.",
-      "event": "apply-other",
+    "on-status": {
       "name": "panties",
       "value": null,
       "results": { "name": "stained-panties", "value": null }
@@ -435,6 +446,11 @@
     "description": {
       "en-US": "You have peed in your panties. They are soaking wet and feel gross against your crotch. +100 [Humiliation] whenever you go up a floor."
     },
+    "on-status": {
+      "name": "panties",
+      "value": null,
+      "results": { "name": "wet-panties", "value": null }
+    },
     "effect": [
       {
         "event": "apply",
@@ -443,13 +459,6 @@
       {
         "event": "floor-end",
         "results": { "name": "humiliation", "value": 100 }
-      },
-      {
-        "//": "When panties is set to null (distinct from set to false), remove the effect.",
-        "event": "apply-other",
-        "name": "panties",
-        "value": null,
-        "results": { "name": "wet-panties", "value": null }
       }
     ],
     "saving-throw": false
@@ -462,9 +471,7 @@
     "description": {
       "en-US": "Your panties have a visible poo stain - a sign of a close call or incomplete washing. No direct effect, but can trigger branches."
     },
-    "effect": {
-      "//": "When panties is set to null (distinct from set to false), remove the effect.",
-      "event": "apply-other",
+    "on-status": {
       "name": "panties",
       "value": null,
       "results": { "name": "skidmarked-panties", "value": null }
@@ -479,6 +486,11 @@
     "description": {
       "en-US": "You have pooped in your panties. They are squishy and muddy and feel utterly disgusting against your butt. +200 [Humiliation] whenever you go up a floor."
     },
+    "on-status": {
+      "name": "panties",
+      "value": null,
+      "results": { "name": "soiled-panties", "value": null }
+    },
     "effect": [
       {
         "event": "apply",
@@ -487,13 +499,6 @@
       {
         "event": "floor-end",
         "results": { "name": "humiliation", "value": 200 }
-      },
-      {
-        "//": "When panties is set to null (distinct from set to false), remove the effect.",
-        "event": "apply-other",
-        "name": "panties",
-        "value": null,
-        "results": { "name": "soiled-panties", "value": null }
       }
     ],
     "saving-throw": false

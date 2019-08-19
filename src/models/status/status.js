@@ -1,4 +1,5 @@
 import LocalizableString from "../localizable-string";
+import ResultCollection from "../result/result-collection";
 
 class Status {
   constructor(data) {
@@ -7,6 +8,20 @@ class Status {
       name: new LocalizableString(data.name),
       description: new LocalizableString(data.description)
     };
+    // TODO: Effect and EffectCollection
+    if (Array.isArray(this.data.effect)) {
+      this.data.effect = this.data.effect.map(effect => ({
+        ...effect,
+        results: new ResultCollection(effect.results)
+      }));
+    } else if (this.data.effect) {
+      this.data.effect = [
+        {
+          ...this.data.effect,
+          results: new ResultCollection(this.data.effect.results)
+        }
+      ];
+    }
   }
 
   name(localeId) {
@@ -15,6 +30,13 @@ class Status {
 
   description(localeId) {
     return this.data.description.get(localeId);
+  }
+
+  /**
+   * @returns {{event:string,results:ResultCollection}[]}
+   */
+  effect() {
+    return this.data.effect;
   }
 }
 

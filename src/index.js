@@ -32,11 +32,11 @@ const command = new ExecuteEvent({
   localeId,
   eventId
 });
-const newCharacter = command.run();
-if (newCharacter !== character) {
+const newData = command.run();
+if (newData.character !== character) {
   console.log("");
   console.log("---");
   console.log("");
   console.log("New character state:");
-  console.log(newCharacter.toString());
+  console.log(newData.character.toString());
 }
