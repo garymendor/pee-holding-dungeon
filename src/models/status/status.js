@@ -8,6 +8,14 @@ class Status {
       description: new LocalizableString(data.description)
     };
   }
+
+  name(localeId) {
+    return this.data.name.get(localeId);
+  }
+
+  description(localeId) {
+    return this.data.description.get(localeId);
+  }
 }
 
 export default Status;

@@ -1,22 +1,42 @@
 import "core-js/stable";
 import "regenerator-runtime/runtime";
-import toPairs from "lodash/toPairs";
 import statusData from "../data/status";
-import StatusCollection from "./models/status/status-collection";
 import eventsData from "../data/events";
+import StatusCollection from "./models/status/status-collection";
 import EventCollection from "./models/event/event-collection";
+import Character from "./models/character/character";
+import ExecuteEvent from "./commands/execute-event";
 
-const locale = process.env.APP_LOCALE;
-
-console.log("Status effects:");
-toPairs(new StatusCollection(statusData).data).forEach(([key, value]) => {
-  console.log(`Key: ${key}`);
-  console.log(`Name: ${value.data.name.get(locale)}`);
+const character = new Character({
+  stats: {
+    STR: 15,
+    DEX: 11,
+    INT: 9,
+    WIS: 9
+  }
 });
+const statusCollection = new StatusCollection(statusData);
+const eventCollection = new EventCollection(eventsData);
+const localeId = process.env.APP_LOCALE;
+const eventId = process.env.APP_EVENT_ID || eventCollection.getRandomEventId();
 
+console.log("Starting character state:");
+console.log(character.toString());
+console.log("---");
 console.log("");
-console.log("Events:");
-toPairs(new EventCollection(eventsData).data).forEach(([key, value]) => {
-  console.log(`Key: ${key}`);
-  console.log(`Description: ${value.data.description.get(locale)}`);
+
+const command = new ExecuteEvent({
+  character,
+  eventCollection,
+  statusCollection,
+  localeId,
+  eventId
 });
+const newCharacter = command.run();
+if (newCharacter !== character) {
+  console.log("");
+  console.log("---");
+  console.log("");
+  console.log("New character state:");
+  console.log(newCharacter.toString());
+}

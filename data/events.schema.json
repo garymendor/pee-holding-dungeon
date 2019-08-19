@@ -9,25 +9,15 @@
         { "type": "array", "items": { "type": "string" } }
       ]
     },
-    "accident-string": {
-      "$id": "#accident-string",
-      "description": "A string that has variants for 'pee', 'poo', or 'both'",
-      "type": "object",
-      "properties": {
-        "pee": { "$ref": "#string-collection" },
-        "poo": { "$ref": "#string-collection" },
-        "both": { "$ref": "#string-collection" }
-      },
-      "required": ["pee", "poo", "both"]
-    },
     "localizable-string": {
       "$id": "#localizable-string",
       "anyOf": [
         { "$ref": "#string-collection" },
-        { "#ref": "#accident-string" },
         {
           "type": "object",
-          "patternProperties": { "^..(-..)?$": { "#ref": "#accident-string" } },
+          "patternProperties": {
+            "^..(-..)?$": { "$ref": "#string-collection" }
+          },
           "additionalProperties": false
         }
       ]

@@ -1,6 +1,10 @@
 const DEFAULT_LANGID = "en-US";
 
 class LocalizableString {
+  /**
+   * Creates a new localizable string.
+   * @param {string|string[]|any} data
+   */
   constructor(data = "") {
     this.data = data;
   }
@@ -15,21 +19,29 @@ class LocalizableString {
     return null;
   }
 
-  get(langId, accidentType = "both") {
+  /**
+   * Gets the localized string for the specified locale ID.
+   * @param {string} localeId The locale for which to get a translated string.
+   * @returns {string} The string value, or null if the relevant string could not be found.
+   */
+  get(localeId) {
+    if (!this.data) {
+      return null;
+    }
+
     const dataString = LocalizableString.stringOrArray(this.data);
     if (dataString) {
       return dataString;
     }
 
-    const localizedValue = this.data[langId];
+    const localizedValue = this.data[localeId];
     if (localizedValue) {
       const localizedString = LocalizableString.stringOrArray(localizedValue);
       if (localizedString) {
         return localizedString;
       }
-
-      return LocalizableString.stringOrArray(localizedValue[accidentType]);
     }
+
     const defaultLocalizedValue = this.data[DEFAULT_LANGID];
     if (defaultLocalizedValue) {
       const localizedString = LocalizableString.stringOrArray(
@@ -38,11 +50,9 @@ class LocalizableString {
       if (localizedString) {
         return localizedString;
       }
-
-      return LocalizableString.stringOrArray(localizedValue[accidentType]);
     }
 
-    return LocalizableString.stringOrArray(this.data[accidentType]);
+    return null;
   }
 }
 

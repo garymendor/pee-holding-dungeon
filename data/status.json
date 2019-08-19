@@ -9,9 +9,12 @@
       "ja-JP": "重要な場面で視界を封じてくる一対のゴーストハンド。霊体なので取り外せず、暗闇の中で行動しなければならない。周囲が見えずに全身の感度が上がってしまい、開発度の増加量が2倍に。"
     },
     "effect": {
-      "event": "floor-resolve",
-      "condition": { "tag": "vision" },
-      "targets": { "name": "double-humiliation", "value": 1 }
+      "event": "floor-start",
+      "results": {
+        "type": "tag-check",
+        "tag": "vision",
+        "results": { "name": "double-humiliation", "value": 1 }
+      }
     },
     "saving-throw": "Holy"
   },
@@ -25,14 +28,17 @@
       "ja-JP": "我慢中に敏感な場所を擽って決壊を促す霊体。尿意100%以上でチビってしまい、開発度+100"
     },
     "effect": {
-      "event": "floor-change",
-      "condition": {
-        "$or": [
-          { "stat": { "name": "need-to-pee", "value": { "$gt": 100 } } },
-          { "stat": { "name": "need-to-poo", "value": { "$gt": 100 } } }
-        ]
-      },
-      "targets": { "name": "humiliation", "value": 100 }
+      "event": "floor-end",
+      "results": {
+        "type": "stat-check",
+        "expression": {
+          "$or": [
+            { "name": "need-to-pee", "value": { "$gt": 100 } },
+            { "name": "need-to-poo", "value": { "$gt": 100 } }
+          ]
+        },
+        "results": { "name": "humiliation", "value": 100 }
+      }
     },
     "saving-throw": "Holy"
   },
@@ -46,39 +52,18 @@
     },
     "effect": [
       {
-        "event": "floor-change",
-        "targets": { "name": "horniness", "value": 100 }
+        "event": "floor-end",
+        "results": { "name": "horniness", "value": 100 }
       },
       {
-        "event": "accident-check",
-        "targets": [
-          { "name": "need-to-pee", "value": 100 },
-          { "name": "need-to-poo", "value": 100 }
+        "event": "apply",
+        "results": [
+          { "name": "pee-incontinence", "value": 100 },
+          { "name": "poo-incontinence", "value": 100 }
         ]
       }
     ],
     "tags": "breast-touching",
-    "saving-throw": "Holy"
-  },
-  "crotch-holding-hand": {
-    "name": {
-      "en-US": "Crotch-Holding Hand",
-      "ja-JP": "前抑えハンド"
-    },
-    "description": {
-      "en-US": "A ghost hand that fondles your crotch and keeps you from pressing on your pee hole. Adds +100 [Horniness] per level, and increases [Need to pee] by 100% during an accident check."
-    },
-    "effect": [
-      {
-        "event": "floor-change",
-        "targets": { "name": "horniness", "value": 100 }
-      },
-      {
-        "event": "accident-check",
-        "targets": { "name": "need-to-pee", "value": 100 }
-      }
-    ],
-    "tags": "crotch-touching",
     "saving-throw": "Holy"
   },
   "crotch-groping-hand": {
@@ -87,17 +72,38 @@
       "ja-JP": "前揉みハンド"
     },
     "description": {
+      "en-US": "A ghost hand that fondles your crotch and keeps you from pressing on your pee hole. Adds +100 [Horniness] per level, and increases [Need to pee] by 100% during an accident check."
+    },
+    "effect": [
+      {
+        "event": "apply",
+        "results": { "name": "pee-incontinence", "value": 100 }
+      },
+      {
+        "event": "floor-end",
+        "results": { "name": "horniness", "value": 100 }
+      }
+    ],
+    "tags": "crotch-touching",
+    "saving-throw": "Holy"
+  },
+  "crotch-holding-hand": {
+    "name": {
+      "en-US": "Crotch-Holding Hand",
+      "ja-JP": "前抑えハンド"
+    },
+    "description": {
       "en-US": "A ghost hand that fondles your crotch. Adds +100 [Horniness] per level, but reduces [Need to pee] by 50% during an accident check.",
       "ja-JP": "本人の代わりに股間を抑えてくれるゴーストハンド。いやらしく揉み解されて階層ごとに開発度+100。分岐時、尿意-50%で計算"
     },
     "effect": [
       {
-        "event": "floor-change",
-        "targets": { "name": "horniness", "value": 100 }
+        "event": "apply",
+        "results": { "name": "pee-incontinence", "value": 100 }
       },
       {
-        "event": "accident-check",
-        "targets": { "name": "need-to-pee", "value": -50 }
+        "event": "floor-end",
+        "targets": { "name": "horniness", "value": 100 }
       }
     ],
     "tags": "crotch-touching",
@@ -113,12 +119,12 @@
     },
     "effect": [
       {
-        "event": "floor-change",
-        "targets": { "name": "horniness", "value": 50 }
+        "event": "apply",
+        "targets": { "name": "poo-incontinence", "value": -50 }
       },
       {
-        "event": "accident-check",
-        "targets": { "name": "need-to-poo", "value": -50 }
+        "event": "floor-end",
+        "targets": { "name": "horniness", "value": 50 }
       }
     ],
     "tags": "butt-touching",
@@ -135,12 +141,12 @@
     },
     "effect": [
       {
-        "event": "floor-change",
-        "targets": { "name": "horniness", "value": 50 }
+        "event": "apply",
+        "results": { "name": "poo-incontinence", "value": 100 }
       },
       {
-        "event": "accident-check",
-        "targets": { "name": "need-to-poo", "value": 100 }
+        "event": "floor-end",
+        "results": { "name": "horniness", "value": 50 }
       }
     ],
     "tags": "butt-touching",
@@ -157,7 +163,7 @@
     },
     "effect": {
       "event": "climax",
-      "targets": [
+      "results": [
         { "name": "urination", "value": true },
         { "name": "defecation", "value": true }
       ]
@@ -176,15 +182,23 @@
     "effect": [
       {
         "event": true,
-        "condition": { "tag": "crotch-touching" },
-        "targets": { "name": "horniness", "value": 100 }
+        "results": {
+          "type": "tag-check",
+          "tag": "crotch-touching",
+          "results": {
+            "name": "horniness",
+            "value": 100
+          }
+        }
       },
       {
-        "event": "floor-change",
-        "condition": {
-          "stat": { "name": "need-to-pee", "value": { "$gt": 100 } }
-        },
-        "targets": { "name": "horniness", "value": 100 }
+        "event": "floor-end",
+        "results": {
+          "type": "accident-check",
+          "name": "need-to-pee",
+          "value": 100,
+          "results": { "name": "horniness", "value": 100 }
+        }
       }
     ],
     "saving-throw": "Healing"
@@ -200,23 +214,48 @@
     },
     "effect": [
       {
-        "event": "floor-change",
-        "condition": {
-          "stat": { "name": "need-to-pee", "value": { "$gt": 100 } }
-        },
-        "targets": {
-          "name": "horniness",
-          "value": { "$sub": ["need-to-pee", 100] }
-        }
-      },
-      {
-        "event": "floor-change",
-        "condition": {
-          "stat": { "name": "need-to-poo", "value": { "$gt": 100 } }
-        },
-        "targets": {
-          "name": "horniness",
-          "value": { "$sub": ["need-to-poo", 100] }
+        "event": "floor-end",
+        "results": {
+          "type": "accident-check",
+          "value": 100,
+          "results": [
+            {
+              "type": "accident",
+              "name": "need-to-pee",
+              "results": {
+                "name": "horniness",
+                "value": {
+                  "$sub": [
+                    {
+                      "$sum": [
+                        { "$val": "need-to-pee" },
+                        { "$val": "pee-incontinence" }
+                      ]
+                    },
+                    100
+                  ]
+                }
+              }
+            },
+            {
+              "type": "accident",
+              "name": "need-to-poo",
+              "results": {
+                "name": "horniness",
+                "value": {
+                  "$sub": [
+                    {
+                      "$sum": [
+                        { "$val": "need-to-poo" },
+                        { "$val": "poo-incontinence" }
+                      ]
+                    },
+                    100
+                  ]
+                }
+              }
+            }
+          ]
         }
       }
     ],
@@ -231,8 +270,11 @@
     },
     "effect": {
       "event": true,
-      "condition": { "tag": "public" },
-      "targets": { "name": "humiliation", "value": 50 }
+      "results": {
+        "type": "tag-check",
+        "tag": "public",
+        "results": { "name": "humiliation", "value": 50 }
+      }
     },
     "saving-throw": "Willpower"
   },
@@ -245,8 +287,11 @@
     },
     "effect": {
       "event": true,
-      "condition": { "tag": "public" },
-      "targets": { "name": "humiliation", "value": 50 }
+      "results": {
+        "type": "tag-check",
+        "tag": "public",
+        "results": { "name": "humiliation", "value": 50 }
+      }
     },
     "saving-throw": false
   },
@@ -259,33 +304,28 @@
       "en-US": "You've been hypnotized into thinking it's a good idea to expose your panties. Add +50 [Humiliation] when in public, with an additional +150 [Humiliation] if you've wet your panties and +200 [Humiliation] if you've soiled your panties.",
       "ja-JP": "パンツが良く見えるようにスカートを捲りあげてしまう催眠暗示。人前で開発度+50。お漏らしパンツなら開発度+200"
     },
-    "effect": [
-      {
-        "event": true,
-        "condition": { "tag": "public" },
-        "targets": { "name": "humiliation", "value": 50 }
-      },
-      {
-        "event": true,
-        "condition": {
-          "$and": [
-            { "tag": "public" },
-            { "stat": { "name": "wet-panties", "value": true } }
-          ]
-        },
-        "targets": { "name": "humiliation", "value": 150 }
-      },
-      {
-        "event": true,
-        "condition": {
-          "$and": [
-            { "tag": "public" },
-            { "stat": { "name": "soiled-panties", "value": true } }
-          ]
-        },
-        "targets": { "name": "humiliation", "value": 200 }
+    "effect": {
+      "event": true,
+      "results": {
+        "type": "tag-check",
+        "tag": "public",
+        "results": [
+          { "name": "humiliation", "value": 50 },
+          {
+            "type": "stat-check",
+            "name": "wet-panties",
+            "value": true,
+            "results": { "name": "humiliation", "value": 150 }
+          },
+          {
+            "type": "stat-check",
+            "name": "soiled-panties",
+            "value": true,
+            "results": { "name": "humiliation", "value": 200 }
+          }
+        ]
       }
-    ],
+    },
     "saving-throw": "Willpower"
   },
   "exposed-panties-damage": {
@@ -297,31 +337,54 @@
       "en-US": "Your lower-body clothing has been damaged so that you cannot cover your panties. Add +50 [Humiliation] when in public, with an additional +150 [Humiliation] if you've wet your panties and +200 [Humiliation] if you've soiled your panties.",
       "ja-JP": "人前で開発度+50。お漏らしパンツなら開発度+200"
     },
+    "effect": {
+      "event": true,
+      "results": {
+        "type": "tag-check",
+        "tag": "public",
+        "results": [
+          { "name": "humiliation", "value": 50 },
+          {
+            "type": "stat-check",
+            "name": "wet-panties",
+            "value": true,
+            "results": { "name": "humiliation", "value": 150 }
+          },
+          {
+            "type": "stat-check",
+            "name": "soiled-panties",
+            "value": true,
+            "results": { "name": "humiliation", "value": 200 }
+          }
+        ]
+      }
+    },
+    "saving-throw": false
+  },
+  "wedgie": {
+    "name": {
+      "en-US": "Wedgie",
+      "ja-JP": "食い込み"
+    },
+    "description": {
+      "en-US": "The victim's panties are too tight and wedge into her crotch, stimulating her and actually making it harder to hold it.",
+      "ja-JP": "パンツが捻れ、キツく食い込んでいる状態。おしっこ穴を強く抑えられる代わりに、クリや割れ目が擦れて気持ち良い。分岐時、尿意-50%で計算、階を進むごとに開発度+20。"
+    },
     "effect": [
       {
-        "event": true,
-        "condition": { "tag": "public" },
-        "targets": { "name": "humiliation", "value": 50 }
+        "event": "apply",
+        "results": { "name": "pee-incontinence", "value": 50 }
       },
       {
-        "event": true,
-        "condition": {
-          "$and": [
-            { "tag": "public" },
-            { "stat": { "name": "wet-panties", "value": true } }
-          ]
-        },
-        "targets": { "name": "humiliation", "value": 150 }
+        "event": "floor-end",
+        "results": { "name": "horniness", "value": 20 }
       },
       {
-        "event": true,
-        "condition": {
-          "$and": [
-            { "tag": "public" },
-            { "stat": { "name": "soiled-panties", "value": true } }
-          ]
-        },
-        "targets": { "name": "humiliation", "value": 200 }
+        "//": "When panties is set to null (distinct from set to false), remove the effect.",
+        "event": "apply-other",
+        "name": "panties",
+        "value": null,
+        "results": { "name": "wedgie", "value": null }
       }
     ],
     "saving-throw": false
@@ -335,12 +398,34 @@
       "en-US": "Your underwear cannot be removed, and constantly molests your crotch. +100 [Horniness] added per floor.",
       "ja-JP": "呪いの装備に股間を責められ、階層を進むごとに開発度+100"
     },
-    "effect": {
-      "event": "floor-change",
-      "targets": { "name": "horniness", "value": 100 }
-    },
-    "tags": "stuck-panties",
+    "effect": [
+      {
+        "event": "apply",
+        "results": { "name": "stuck-panties", "value": true }
+      },
+      {
+        "event": "floor-end",
+        "results": { "name": "horniness", "value": 100 }
+      }
+    ],
     "saving-throw": "Uncurse"
+  },
+  "stained-panties": {
+    "name": {
+      "en-US": "Stained Panties",
+      "ja-JP": "染みパン"
+    },
+    "description": {
+      "en-US": "Your panties have a visible pee stain - a sign of a close call or incomplete washing. No direct effect, but can trigger branches."
+    },
+    "effect": {
+      "//": "When panties is set to null (distinct from set to false), remove the effect.",
+      "event": "apply-other",
+      "name": "panties",
+      "value": null,
+      "results": { "name": "stained-panties", "value": null }
+    },
+    "saving-throw": false
   },
   "wet-panties": {
     "name": {
@@ -350,9 +435,39 @@
     "description": {
       "en-US": "You have peed in your panties. They are soaking wet and feel gross against your crotch. +100 [Humiliation] whenever you go up a floor."
     },
+    "effect": [
+      {
+        "event": "apply",
+        "results": { "name": "stained-panties", "value": true }
+      },
+      {
+        "event": "floor-end",
+        "results": { "name": "humiliation", "value": 100 }
+      },
+      {
+        "//": "When panties is set to null (distinct from set to false), remove the effect.",
+        "event": "apply-other",
+        "name": "panties",
+        "value": null,
+        "results": { "name": "wet-panties", "value": null }
+      }
+    ],
+    "saving-throw": false
+  },
+  "skidmarked-panties": {
+    "name": {
+      "en-US": "Skidmarked Panties",
+      "ja-JP": "うんち染みパン"
+    },
+    "description": {
+      "en-US": "Your panties have a visible poo stain - a sign of a close call or incomplete washing. No direct effect, but can trigger branches."
+    },
     "effect": {
-      "event": "floor-change",
-      "targets": { "name": "humiliation", "value": 100 }
+      "//": "When panties is set to null (distinct from set to false), remove the effect.",
+      "event": "apply-other",
+      "name": "panties",
+      "value": null,
+      "results": { "name": "skidmarked-panties", "value": null }
     },
     "saving-throw": false
   },
@@ -364,96 +479,23 @@
     "description": {
       "en-US": "You have pooped in your panties. They are squishy and muddy and feel utterly disgusting against your butt. +200 [Humiliation] whenever you go up a floor."
     },
-    "effect": {
-      "event": "floor-change",
-      "targets": { "name": "humiliation", "value": 200 }
-    },
+    "effect": [
+      {
+        "event": "apply",
+        "results": { "name": "skidmarked-panties", "value": true }
+      },
+      {
+        "event": "floor-end",
+        "results": { "name": "humiliation", "value": 200 }
+      },
+      {
+        "//": "When panties is set to null (distinct from set to false), remove the effect.",
+        "event": "apply-other",
+        "name": "panties",
+        "value": null,
+        "results": { "name": "soiled-panties", "value": null }
+      }
+    ],
     "saving-throw": false
-  },
-  "panties": {
-    "name": {
-      "en-US": "Panties",
-      "en-GB": "Pants",
-      "ja-JP": "パンツ"
-    },
-    "description": {
-      "en-US": "You are wearing panties."
-    }
-  },
-  "trousers": {
-    "name": {
-      "en-US": "Pants",
-      "en-GB": "Trousers",
-      "ja-JP": "ズボン"
-    },
-    "description": {
-      "en-US": "You are wearing trousers."
-    }
-  },
-  "skirt": {
-    "name": {
-      "en-US": "Skirt",
-      "ja-JP": "スカート"
-    },
-    "description": {
-      "en-US": "You are wearing a skirt."
-    }
-  },
-  "need-for-bathroom": {
-    "priority": -1,
-    "effect": [
-      {
-        "event": true,
-        "targets": [
-          { "name": "need-to-pee", "value": { "$var": "value" } },
-          {
-            "name": "need-to-poo",
-            "value": { "$div": [{ "$var": "value" }, 2] }
-          }
-        ]
-      }
-    ]
-  },
-  "urination": {
-    "name": {
-      "en-US": "Peeing",
-      "ja-JP": "おしっこ"
-    },
-    "priority": -1,
-    "effect": [
-      {
-        "event": true,
-        "condition": { "stat": { "name": "panties", "value": true } },
-        "targets": { "name": "wet-panties", "value": true }
-      },
-      {
-        "event": true,
-        "targets": [
-          { "name": "need-to-pee", "value": { "$sub": [0, "need-to-pee"] } },
-          { "name": "urination", "value": false }
-        ]
-      }
-    ]
-  },
-  "defecation": {
-    "name": {
-      "en-US": "Pooping",
-      "ja-JP": "うんち"
-    },
-    "priority": -1,
-    "effect": [
-      {
-        "event": true,
-        "condition": { "stat": { "name": "panties", "value": true } },
-        "targets": { "name": "soiled-panties", "value": true }
-      },
-      {
-        "event": true,
-        "targets": [
-          { "name": "need-to-poo", "value": { "$sub": [0, "need-to-poo"] } },
-          { "name": "defecation", "value": false }
-        ]
-      }
-    ]
   }
 }

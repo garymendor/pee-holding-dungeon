@@ -1,4 +1,8 @@
 {
+  "End": {
+    "parent": "End",
+    "comment": "A dummy event that does nothing, allowing other events to short-circuit execution without doing anything."
+  },
   "Forced Fitting Room - Lingerie and Blindfold": {
     "description": {
       "en-US": "Forced fitting room! I am surrounded by mirrors on all sides! A perverted outfit and blindfold appear on a hanger, and a note says that I will not be freed until I put them on and perform a humiliating pose!",
@@ -36,25 +40,21 @@
   },
   "Forced Fitting Room - Lingerie and Blindfold: Go Against Instructions": {
     "parent": "Forced Fitting Room - Lingerie and Blindfold",
-    "description": "I struggle to break out of the fitting room.",
     "results": [
       { "name": "need-for-bathroom", "value": 10 },
       {
         "type": "accident-check",
         "value": 300,
-        "saving-throw": "STR",
-        "results": "Forced Fitting Room - Lingerie and Blindfold: Accident"
+        "results": [
+          { "type": "saving-throw", "saving-throw": "STR", "DC": 20 },
+          "Forced Fitting Room - Lingerie and Blindfold: Accident"
+        ]
       },
       {
         "type": "saving-throw",
         "saving-throw": "Force",
-        "results": [
-          {
-            "type": "message",
-            "message": "My mirrored prison still resists my efforts to break free."
-          },
-          "Forced Fitting Room - Lingerie and Blindfold"
-        ]
+        "DC": 35,
+        "results": "Forced Fitting Room - Lingerie and Blindfold: Go Against Instructions"
       },
       {
         "type": "message",
@@ -64,41 +64,62 @@
   },
   "Forced Fitting Room - Lingerie and Blindfold: Accident": {
     "parent": "Forced Fitting Room - Lingerie and Blindfold",
-    "description": {
-      "en-US": {
-        "pee": "I rub my thighs together, but can’t hold it any longer. A shameful pool spreads in the little room, and my hand between my legs makes me feel good.",
-        "poo": "I squeeze my cheeks together, but can’t hold it any longer. A shameful bulge spreads in the seat of my panties.",
-        "both": "I rub my thighs together and squeeze my cheeks together, but can’t hold it any longer. A shameful pool spreads in the little room and even more shameful bulge spreads in the seat of my panties, and my hand between my legs makes me feel good."
-      },
-      "ja-JP": "内股を摺り合わせ、耐えていたが……。羞恥で半べそになりながら失禁して、気持ちよさそうに股間をヒクつかせてしまった！　　小部屋の中に羞恥の水溜まりが広がっていく。"
-    },
     "results": [
       {
         "type": "accident",
-        "name": "need-to-pee",
-        "results": [
+        "pee": [
+          {
+            "type": "message",
+            "message": {
+              "en-US": "I rub my thighs together, but can’t hold it any longer. A shameful pool spreads in the little room, and my hand between my legs makes me feel good.",
+              "ja-JP": "内股を摺り合わせ、耐えていたが……。羞恥で半べそになりながら失禁して、気持ちよさそうに股間をヒクつかせてしまった！　　小部屋の中に羞恥の水溜まりが広がっていく。"
+            }
+          },
           { "name": "urination", "value": true },
           { "name": "humiliation", "value": 200 },
+          { "name": "horniness", "value": 100 }
+        ],
+        "poo": [
+          {
+            "type": "message",
+            "message": "I squeeze my cheeks together, but can’t hold it any longer. A shameful bulge spreads in the seat of my panties."
+          },
+          { "name": "defecation", "value": true },
+          { "name": "humiliation", "value": 300 }
+        ],
+        "both": [
+          {
+            "type": "message",
+            "message": "I rub my thighs together and squeeze my cheeks together, but can’t hold it any longer. A shameful pool spreads in the little room and even more shameful bulge spreads in the seat of my panties, and my hand between my legs makes me feel good."
+          },
+          { "name": "urination", "value": true },
+          { "name": "defecation", "value": true },
+          { "name": "humiliation", "value": 500 },
           { "name": "horniness", "value": 100 }
         ]
       },
       {
-        "type": "accident",
-        "name": "need-to-poo",
-        "results": [
-          { "name": "defecation", "value": true },
-          { "name": "humiliation", "value": 300 }
-        ]
-      },
-      {
-        "type": "saving-throw",
-        "save": "Force",
-        "results": "Forced Fitting Room - Lingerie and Blindfold",
-        "message": "My mirrored prison still resists my efforts to break free."
-      },
-      {
         "type": "message",
-        "message": "I finally manage to break out of the fitting room."
+        "message": "Keep trying to escape, or follow the instructions?"
+      },
+      {
+        "type": "choice",
+        "choices": [
+          {
+            "description": {
+              "en-US": "Follow Instructions",
+              "ja-JP": "指示に従う"
+            },
+            "results": "Forced Fitting Room - Lingerie and Blindfold: Follow Instructions"
+          },
+          {
+            "description": {
+              "en-US": "Go Against Instructions",
+              "ja-JP": "指示に逆らう"
+            },
+            "results": "Forced Fitting Room - Lingerie and Blindfold: Go Against Instructions"
+          }
+        ]
       }
     ]
   },
@@ -151,7 +172,7 @@
     },
     "results": [
       { "name": "urination", "value": true },
-      { "name": "horniness", "value": 700 },
+      { "name": "humiliation", "value": 700 },
       { "name": "panties", "value": true }
     ]
   },
@@ -205,6 +226,16 @@
       }
     ]
   },
+  "Nopan-Only Toilet: Already Nopan": {
+    "parent": "Nopan-Only Toilet",
+    "description": {
+      "en-US": "I sit down on the toilet seat and let myself go, bracing myself for the trap to go off. Surprisingly, nothing happens! As far as I know..."
+    },
+    "results": [
+      { "name": "urination", "value": true },
+      { "name": "defecation", "value": true }
+    ]
+  },
   "Nopan-Only Toilet: Used": {
     "parent": "Nopan-Only Toilet",
     "description": {
@@ -217,6 +248,53 @@
       { "name": "defecation", "value": true },
       { "name": "panties", "value": true },
       { "name": "wedgie", "value": true }
+    ]
+  },
+  "Pantsing Trap": {
+    "original": "ズリパントラップだ！　歩行中にパンツを下げられ、素っ転んでしまった！　……なかなかパンツを取り戻せない！　剥きだしの股間に視線が集まってくる！　顔が熱い！　尿意+10%　開発度+50\n\n《分岐条件：ズボン》\nお尻を見られながら頑張ったが、取り戻せず、下半身丸だしで逃げ出す羽目になった。尿意+50% 開発度+200。　染みパンを残してきたなら、開発度+500。",
+    "description": {
+      "en-US": "I casually walked into a pantsing trap!",
+      "ja-JP": "ズリパントラップだ！"
+    },
+    "results": [
+      {
+        "type": "stat-check",
+        "name": "trousers",
+        "value": false,
+        "results": [
+          {
+            "type": "message",
+            "message": {
+              "en-US": "My panties were lowered while I was walking and I fell down! ...I can't get my panties back up! Everyone is staring at my bare crotch! My face is hot!",
+              "ja-JP": "歩行中にパンツを下げられ、素っ転んでしまった！　……なかなかパンツを取り戻せない！　剥きだしの股間に視線が集まってくる！　顔が熱い！　尿意+10%　開発度+50"
+            }
+          },
+          { "name": "need-for-bathroom", "value": 10 },
+          { "name": "humiliation", "value": 50 },
+          "End"
+        ]
+      },
+      {
+        "type": "message",
+        "message": {
+          "en-US": "I tried my best with everyone looking at my butt, but I couldn't get my trousers back, so I started running away with my lower body exposed. Urine intention + 50% Development level +200. If you have left the stain bread, the development level is +500.",
+          "ja-JP": "お尻を見られながら頑張ったが、取り戻せず、下半身丸だしで逃げ出す羽目になった。尿意+50% 開発度+200。　染みパンを残してきたなら、開発度+500。"
+        }
+      },
+      { "name": "need-for-bathroom", "value": 50 },
+      { "name": "humiliation", "value": 200 },
+      {
+        "type": "stat-check",
+        "name": "wet-panties",
+        "value": true,
+        "results": [{ "name": "humiliation", "value": 300 }]
+      },
+      {
+        "type": "stat-check",
+        "name": "soiled-panties",
+        "value": true,
+        "results": [{ "name": "humiliation", "value": 500 }]
+      }
     ]
   }
 }
