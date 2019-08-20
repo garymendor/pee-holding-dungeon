@@ -1,9 +1,9 @@
+import RunResultCollection from "./run-result-collection";
+
 /**
  * @typedef {import('../models/character/character').default} Character
  * @typedef {import('../models/event/event-collection').default} EventCollection
  * @typedef {import('../models/status/status-collection').default} StatusCollection
- * @typedef {import('../models/result/result-collection').default} ResultCollection
- * @typedef {import('./execute-event').default} ExecuteEvent
  * @typedef {import('../models/result/accident-check-result').default} AccidentCheckResult
  * @typedef {Object} RunAccidentCheckResultData
  * @property {Character} character
@@ -12,7 +12,6 @@
  * @property {string} eventId
  * @property {string} localeId
  * @property {Console} output
- * @property {ExecuteEvent} executeEventCommand
  * @property {AccidentCheckResult} result
  */
 
@@ -32,15 +31,17 @@ class RunAccidentCheckResult {
    * @returns {import('./execute-event').ExecuteEventData}
    */
   run() {
-    const { result, character, executeEventCommand } = this.data;
+    const { result, ...data } = this.data;
+    const { character } = data;
     const accident = result.compare(character);
     if (accident) {
-      return executeEventCommand.runResults(result.results(), {
-        ...this.data,
+      return new RunResultCollection({
+        ...data,
+        results: result.results(),
         accident
-      });
+      }).run();
     }
-    return { ...this.data, continue: true };
+    return { ...data, continue: true };
   }
 }
 

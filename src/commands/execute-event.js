@@ -1,4 +1,4 @@
-import RunResult from "./run-result";
+import RunResultCollection from "./run-result-collection";
 
 /**
  * @typedef {import('../models/character/character').default} Character
@@ -47,7 +47,10 @@ class ExecuteEvent {
     if (description) {
       this.data.output.log(description);
     }
-    let data = this.runResults(event.results(), this.data);
+    let data = new RunResultCollection({
+      ...this.data,
+      results: event.results()
+    }).run();
     if (data.continue) {
       // Execute floor-end status events
       for (const statusId in data.character.data.status) {
@@ -56,32 +59,16 @@ class ExecuteEvent {
           for (const effectIndex in status.effect()) {
             const effect = status.effect()[effectIndex];
             if (effect.event === "floor-end") {
-              data = this.runResults(effect.results, data);
+              data = new RunResultCollection({
+                ...data,
+                results: effect.results
+              }).run();
             }
           }
         }
       }
     }
     return data;
-  }
-
-  /**
-   * Runs a collection of events.
-   * @param {ResultCollection} results
-   */
-  runResults(results, data) {
-    let newData = data;
-    for (const result of results.items()) {
-      newData = new RunResult({
-        ...newData,
-        result,
-        executeEventCommand: this
-      }).run();
-      if (!newData.continue) {
-        return newData;
-      }
-    }
-    return newData;
   }
 }
 

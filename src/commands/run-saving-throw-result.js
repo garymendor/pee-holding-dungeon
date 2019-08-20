@@ -1,9 +1,9 @@
+import RunResultCollection from "./run-result-collection";
+
 /**
  * @typedef {import('../models/character/character').default} Character
  * @typedef {import('../models/event/event-collection').default} EventCollection
  * @typedef {import('../models/status/status-collection').default} StatusCollection
- * @typedef {import('../models/result/result-collection').default} ResultCollection
- * @typedef {import('./execute-event').default} ExecuteEvent
  * @typedef {import('../models/result/stat-check-result').default} SavingThrowResult
  * @typedef {Object} RunSavingThrowResultData
  * @property {Character} character
@@ -12,7 +12,6 @@
  * @property {string} eventId
  * @property {string} localeId
  * @property {Console} output
- * @property {ExecuteEvent} executeEventCommand
  * @property {SavingThrowResult} result
  */
 
@@ -32,14 +31,18 @@ class RunSavingThrowResult {
    * @returns {import('./execute-event').ExecuteEventData}
    */
   run() {
-    const { result, executeEventCommand, character } = this.data;
+    const { result, ...data } = this.data;
+    const { character } = data;
     const saveValue = character.get(result.savingThrow());
     const d20 = 1 + Math.floor(Math.random() * 20);
     if (saveValue + d20 < result.dc()) {
-      return executeEventCommand.runResults(result.results(), this.data);
+      return new RunResultCollection({
+        ...data,
+        results: result.results()
+      }).run();
     }
     return {
-      ...this.data,
+      ...data,
       continue: true
     };
   }

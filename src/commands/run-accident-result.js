@@ -1,9 +1,9 @@
+import RunResultCollection from "./run-result-collection";
+
 /**
  * @typedef {import('../models/character/character').default} Character
  * @typedef {import('../models/event/event-collection').default} EventCollection
  * @typedef {import('../models/status/status-collection').default} StatusCollection
- * @typedef {import('../models/result/result-collection').default} ResultCollection
- * @typedef {import('./execute-event').default} ExecuteEvent
  * @typedef {import('../models/result/accident-result').default} AccidentResult
  * @typedef {Object} RunAccidentResultData
  * @property {Character} character
@@ -12,7 +12,6 @@
  * @property {string} eventId
  * @property {string} localeId
  * @property {Console} output
- * @property {ExecuteEvent} executeEventCommand
  * @property {AccidentResult} result
  */
 
@@ -32,30 +31,28 @@ class RunAccidentResult {
    * @returns {import('./execute-event').ExecuteEventData}
    */
   run() {
-    const { result, accident, executeEventCommand } = this.data;
-    let results = null;
-    switch (accident) {
-      case "pee":
-        results = result.pee();
-        break;
-      case "poo":
-        results = result.poo();
-        break;
-      case "both":
-        results = result.both();
-        break;
-    }
+    const { result, accident, ...data } = this.data;
+    const results = this.getAccidentResults(result, accident);
     if (results) {
-      return executeEventCommand.runResults(results, {
-        ...this.data,
-        accident: null
-      });
+      return new RunResultCollection({ ...data, results }).run();
     }
     return {
-      ...this.data,
-      accident: null,
+      ...data,
       continue: true
     };
+  }
+
+  getAccidentResults(result, accident) {
+    switch (accident) {
+      case "pee":
+        return result.pee();
+      case "poo":
+        return result.poo();
+      case "both":
+        return result.both();
+      default:
+        return null;
+    }
   }
 }
 

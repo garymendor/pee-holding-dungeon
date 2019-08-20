@@ -11,8 +11,6 @@ import RunSavingThrowResult from "./run-saving-throw-result";
  * @typedef {import('../models/character/character').default} Character
  * @typedef {import('../models/event/event-collection').default} EventCollection
  * @typedef {import('../models/status/status-collection').default} StatusCollection
- * @typedef {import('../models/result/result-collection').default} ResultCollection
- * @typedef {import('./execute-event').default} ExecuteEvent
  * @typedef {import('../models/result/result').default} Result
  * @typedef {Object} RunResultData
  * @property {Character} character
@@ -21,7 +19,6 @@ import RunSavingThrowResult from "./run-saving-throw-result";
  * @property {string} eventId
  * @property {string} localeId
  * @property {Console} output
- * @property {ExecuteEvent} executeEventCommand
  * @property {Result} result
  */
 

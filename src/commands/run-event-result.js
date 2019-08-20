@@ -3,8 +3,6 @@ import ExecuteEvent from "./execute-event";
  * @typedef {import('../models/character/character').default} Character
  * @typedef {import('../models/event/event-collection').default} EventCollection
  * @typedef {import('../models/status/status-collection').default} StatusCollection
- * @typedef {import('../models/result/result-collection').default} ResultCollection
- * @typedef {import('./execute-event').default} ExecuteEvent
  * @typedef {import('../models/result/event-result').default} EventResult
  * @typedef {Object} RunEventResultData
  * @property {Character} character
@@ -13,7 +11,6 @@ import ExecuteEvent from "./execute-event";
  * @property {string} eventId
  * @property {string} localeId
  * @property {Console} output
- * @property {ExecuteEvent} executeEventCommand
  * @property {EventResult} result
  */
 
@@ -36,12 +33,13 @@ class RunEventResult {
    * Runs the command.
    */
   run() {
-    const nextEvent = new ExecuteEvent({
-      ...this.data,
-      eventId: this.data.result.event()
-    });
+    const { result, ...data } = this.data;
+    const nextData = new ExecuteEvent({
+      ...data,
+      eventId: result.event()
+    }).run();
     return {
-      ...nextEvent.run(),
+      ...nextData,
       continue: false
     };
   }

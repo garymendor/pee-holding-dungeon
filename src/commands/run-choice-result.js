@@ -1,10 +1,10 @@
 import readlineSync from "readline-sync";
+import RunResultCollection from "./run-result-collection";
+
 /**
  * @typedef {import('../models/character/character').default} Character
  * @typedef {import('../models/event/event-collection').default} EventCollection
  * @typedef {import('../models/status/status-collection').default} StatusCollection
- * @typedef {import('../models/result/result-collection').default} ResultCollection
- * @typedef {import('./execute-event').default} ExecuteEvent
  * @typedef {import('../models/result/choice-result').default} ChoiceResult
  * @typedef {Object} RunChoiceResultData
  * @property {Character} character
@@ -13,7 +13,6 @@ import readlineSync from "readline-sync";
  * @property {string} eventId
  * @property {string} localeId
  * @property {Console} output
- * @property {ExecuteEvent} executeEventCommand
  * @property {ChoiceResult} result
  */
 
@@ -34,13 +33,14 @@ class RunChoiceResult {
    * @returns {import('./execute-event').ExecuteEventData}
    */
   run() {
+    const { result, ...data } = this.data;
+    const { output, localeId } = data;
     const choices = [];
-    const { result, output, executeEventCommand } = this.data;
     // TODO: Localize
     output.log("Choose one of the following actions:");
     for (const choiceIndex in result.choices()) {
       const choice = result.choices()[choiceIndex];
-      choices.push(choice.description(this.data.localeId));
+      choices.push(choice.description(localeId));
     }
     // TODO: Make this more general and async-friendly
     do {
@@ -49,10 +49,10 @@ class RunChoiceResult {
       });
       const selectedChoice = result.choices()[response];
       if (selectedChoice) {
-        return executeEventCommand.runResults(
-          selectedChoice.results(),
-          this.data
-        );
+        return new RunResultCollection({
+          ...data,
+          results: selectedChoice.results()
+        }).run();
       }
     } while (true);
   }

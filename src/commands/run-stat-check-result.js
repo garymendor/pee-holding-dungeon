@@ -1,9 +1,9 @@
+import RunResultCollection from "./run-result-collection";
+
 /**
  * @typedef {import('../models/character/character').default} Character
  * @typedef {import('../models/event/event-collection').default} EventCollection
  * @typedef {import('../models/status/status-collection').default} StatusCollection
- * @typedef {import('../models/result/result-collection').default} ResultCollection
- * @typedef {import('./execute-event').default} ExecuteEvent
  * @typedef {import('../models/result/stat-check-result').default} StatCheckResult
  * @typedef {Object} RunStatCheckResultData
  * @property {Character} character
@@ -12,7 +12,6 @@
  * @property {string} eventId
  * @property {string} localeId
  * @property {Console} output
- * @property {ExecuteEvent} executeEventCommand
  * @property {StatCheckResult} result
  */
 
@@ -33,13 +32,17 @@ class RunStatCheckResult {
    * @returns {import('./execute-event').ExecuteEventData}
    */
   run() {
-    const { result, executeEventCommand } = this.data;
-    const actualValue = this.data.character.get(result.name());
+    const { result, ...data } = this.data;
+    const { character } = data;
+    const actualValue = character.get(result.name());
     if (result.compare(actualValue)) {
-      return executeEventCommand.runResults(result.results(), this.data);
+      return new RunResultCollection({
+        ...data,
+        results: result.results()
+      }).run();
     }
     return {
-      ...this.data,
+      ...data,
       continue: true
     };
   }

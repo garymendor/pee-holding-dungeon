@@ -1,9 +1,9 @@
+import RunResultCollection from "./run-result-collection";
+
 /**
  * @typedef {import('../models/character/character').default} Character
  * @typedef {import('../models/event/event-collection').default} EventCollection
  * @typedef {import('../models/status/status-collection').default} StatusCollection
- * @typedef {import('../models/result/result-collection').default} ResultCollection
- * @typedef {import('./execute-event').default} ExecuteEvent
  * @typedef {import('../models/result/effect-result').default} EffectResult
  * @typedef {Object} RunEffectResultData
  * @property {Character} character
@@ -12,7 +12,6 @@
  * @property {string} eventId
  * @property {string} localeId
  * @property {Console} output
- * @property {ExecuteEvent} executeEventCommand
  * @property {EffectResult} result
  */
 
@@ -37,20 +36,24 @@ class RunEffectResult {
      * @type {{name:string,value:any}[]}
      */
     const events = [];
-    const { result, character, executeEventCommand } = this.data;
+    const { result, ...originalData } = this.data;
+    const { character, statusCollection } = originalData;
     let data = {
-      ...this.data,
+      ...originalData,
       character: character.apply(result.data.name, result.data.value, events)
     };
     for (const index in events) {
       const event = events[index];
       // Execute apply events for the newly applied status
-      const status = this.data.statusCollection.get(event.name);
+      const status = statusCollection.get(event.name);
       if (status) {
         for (const effectIndex in status.effect()) {
           const effect = status.effect()[effectIndex];
           if (effect.event === "apply") {
-            data = executeEventCommand.runResults(effect.results, data);
+            data = new RunResultCollection({
+              ...data,
+              results: effect.results
+            }).run();
           }
         }
       }
@@ -60,7 +63,10 @@ class RunEffectResult {
         const onStatus = onStatusList[onStatusIndex];
         // TODO: Use expression comparison
         if (event.value === onStatus.value) {
-          data = executeEventCommand.runResults(onStatus.results, data);
+          data = new RunResultCollection({
+            ...data,
+            results: onStatus.results
+          }).run();
         }
       }
     }
