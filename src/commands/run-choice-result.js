@@ -1,4 +1,4 @@
-import readlineSync from "readline-sync";
+import readline from "readline";
 import RunResultCollection from "./run-result-collection";
 
 /**
@@ -42,12 +42,33 @@ class RunChoiceResult {
       const choice = result.choices()[choiceIndex];
       choices.push(choice.description(localeId));
     }
-    // TODO: Make this more general and async-friendly
     do {
-      const response = readlineSync.keyInSelect(choices, "Choice> ", {
-        cancel: false
+      choices.forEach((choice, index) =>
+        output.log(`[${index + 1}] ${choice}`)
+      );
+      // TODO: Standardize on using streams instead of process.stdin/stdout/stderr
+      // and Console separately.
+      const rl = readline.createInterface({
+        input: process.stdin,
+        output: process.stdout
       });
-      const selectedChoice = result.choices()[response];
+      let response;
+      try {
+        response = await new Promise(resolve =>
+          rl.question("> ", answer => resolve(answer))
+        );
+      } finally {
+        rl.close();
+      }
+      const responseNum = parseInt(response);
+      if (
+        responseNum === NaN ||
+        responseNum < 1 ||
+        responseNum > result.choices().length
+      ) {
+        continue;
+      }
+      const selectedChoice = result.choices()[responseNum - 1];
       if (selectedChoice) {
         return new RunResultCollection({
           ...data,
