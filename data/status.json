@@ -9,8 +9,7 @@
       "ja-JP": "重要な場面で視界を封じてくる一対のゴーストハンド。霊体なので取り外せず、暗闇の中で行動しなければならない。周囲が見えずに全身の感度が上がってしまい、開発度の増加量が2倍に。"
     },
     "effect": {
-      "trigger": "floor-start",
-      "results": {
+      "floor-start": {
         "type": "tag-check",
         "tag": "vision",
         "results": { "name": "double-humiliation", "value": 1 }
@@ -28,8 +27,7 @@
       "ja-JP": "我慢中に敏感な場所を擽って決壊を促す霊体。尿意100%以上でチビってしまい、開発度+100"
     },
     "effect": {
-      "trigger": "floor-end",
-      "results": {
+      "floor-end": {
         "type": "stat-check",
         "expression": {
           "$or": [
@@ -50,19 +48,13 @@
     "description": {
       "ja-JP": "階層ごとに開発度+100。判定時、尿意+100%で計算"
     },
-    "effect": [
-      {
-        "trigger": "floor-end",
-        "results": { "name": "horniness", "value": 100 }
-      },
-      {
-        "trigger": "apply",
-        "results": [
-          { "name": "pee-incontinence", "value": 100 },
-          { "name": "poo-incontinence", "value": 100 }
-        ]
-      }
-    ],
+    "effect": {
+      "floor-end": { "name": "horniness", "value": 100 },
+      "apply": [
+        { "name": "pee-incontinence", "value": 100 },
+        { "name": "poo-incontinence", "value": 100 }
+      ]
+    },
     "tags": "breast-touching",
     "saving-throw": "Holy"
   },
@@ -74,16 +66,10 @@
     "description": {
       "en-US": "A ghost hand that fondles your crotch and keeps you from pressing on your pee hole. Adds +100 [Horniness] per level, and increases [Need to pee] by 100% during an accident check."
     },
-    "effect": [
-      {
-        "trigger": "apply",
-        "results": { "name": "pee-incontinence", "value": 100 }
-      },
-      {
-        "trigger": "floor-end",
-        "results": { "name": "horniness", "value": 100 }
-      }
-    ],
+    "effect": {
+      "apply": { "name": "pee-incontinence", "value": 100 },
+      "floor-end": { "name": "horniness", "value": 100 }
+    },
     "tags": "crotch-touching",
     "saving-throw": "Holy"
   },
@@ -96,16 +82,10 @@
       "en-US": "A ghost hand that fondles your crotch. Adds +100 [Horniness] per level, but reduces [Need to pee] by 50% during an accident check.",
       "ja-JP": "本人の代わりに股間を抑えてくれるゴーストハンド。いやらしく揉み解されて階層ごとに開発度+100。分岐時、尿意-50%で計算"
     },
-    "effect": [
-      {
-        "trigger": "apply",
-        "results": { "name": "pee-incontinence", "value": 100 }
-      },
-      {
-        "trigger": "floor-end",
-        "targets": { "name": "horniness", "value": 100 }
-      }
-    ],
+    "effect": {
+      "apply": { "name": "pee-incontinence", "value": 100 },
+      "floor-end": { "name": "horniness", "value": 100 }
+    },
     "tags": "crotch-touching",
     "saving-throw": "Holy"
   },
@@ -117,16 +97,10 @@
     "description": {
       "en-US": "A pair of ghost hands that massage your buttcheeks and hold them together. Adds +50 [Horniness] per level, but reduces [Need to poo] by 50% during an accident check."
     },
-    "effect": [
-      {
-        "trigger": "apply",
-        "targets": { "name": "poo-incontinence", "value": -50 }
-      },
-      {
-        "trigger": "floor-end",
-        "targets": { "name": "horniness", "value": 50 }
-      }
-    ],
+    "effect": {
+      "apply": { "name": "poo-incontinence", "value": -50 },
+      "floor-end": { "name": "horniness", "value": 50 }
+    },
     "tags": "butt-touching",
     "saving-throw": "Holy"
   },
@@ -139,16 +113,10 @@
       "en-US": "A pair of ghost hands that massage your buttcheeks and spread them apart. Adds +50 [Horniness] per level, and increases [Need to poo] by 100% during an accident check.",
       "ja-JP": "を取得(尻頬に取り憑いた一対のゴーストハンド。霊体なので取り外せない。探索中にネチッこく揉みしだかれたり、恥ずかしい場所を広げられたり、ほじられたりして、階層ごとにイかされ開発度+50。"
     },
-    "effect": [
-      {
-        "trigger": "apply",
-        "results": { "name": "poo-incontinence", "value": 100 }
-      },
-      {
-        "trigger": "floor-end",
-        "results": { "name": "horniness", "value": 50 }
-      }
-    ],
+    "effect": {
+      "apply": { "name": "poo-incontinence", "value": 100 },
+      "floor-end": { "name": "horniness", "value": 50 }
+    },
     "tags": "butt-touching",
     "saving-throw": "Holy"
   },
@@ -201,29 +169,23 @@
       "en-US": "When holding your crotch, you unconsciously masturbate, adding +100 to [Horniness].",
       "ja-JP": "「股間を押えた」際、無意識に弄ってしまい、開発度+100"
     },
-    "effect": [
-      {
-        "//TODO": "Need to think of a good model for tags",
-        "trigger": true,
+    "effect": {
+      "tag": {
+        "//TODO": "Need to think of a good model for things that trigger on tags",
+        "type": "tag-check",
+        "tag": "crotch-touching",
         "results": {
-          "type": "tag-check",
-          "tag": "crotch-touching",
-          "results": {
-            "name": "horniness",
-            "value": 100
-          }
+          "name": "horniness",
+          "value": 100
         }
       },
-      {
-        "trigger": "floor-end",
-        "results": {
-          "type": "accident-check",
-          "name": "need-to-pee",
-          "value": 100,
-          "results": { "name": "horniness", "value": 100 }
-        }
+      "floor-end": {
+        "type": "accident-check",
+        "name": "need-to-pee",
+        "value": 100,
+        "results": { "name": "horniness", "value": 100 }
       }
-    ],
+    },
     "saving-throw": "Healing"
   },
   "desperation-fetish": {
@@ -235,53 +197,50 @@
       "en-US": "You feel pleasure from needing to go to the bathroom. If your [Need to pee] or [Need to poo] exceeds 100% at the end of a floor, add the difference to [Horniness].",
       "ja-JP": "括約筋を締めることに快感を感じてしまう体質。内股に力を入れると気持ち良い。階を進むとき尿意100%以上なら、その数値分、開発度にも加算する。"
     },
-    "effect": [
-      {
-        "trigger": "floor-end",
-        "results": {
-          "type": "accident-check",
-          "value": 100,
-          "results": [
-            {
-              "type": "accident",
-              "name": "need-to-pee",
-              "results": {
-                "name": "horniness",
-                "value": {
-                  "$sub": [
-                    {
-                      "$sum": [
-                        { "$val": "need-to-pee" },
-                        { "$val": "pee-incontinence" }
-                      ]
-                    },
-                    100
-                  ]
-                }
-              }
-            },
-            {
-              "type": "accident",
-              "name": "need-to-poo",
-              "results": {
-                "name": "horniness",
-                "value": {
-                  "$sub": [
-                    {
-                      "$sum": [
-                        { "$val": "need-to-poo" },
-                        { "$val": "poo-incontinence" }
-                      ]
-                    },
-                    100
-                  ]
-                }
+    "effect": {
+      "floor-end": {
+        "type": "accident-check",
+        "value": 100,
+        "results": [
+          {
+            "type": "accident",
+            "name": "need-to-pee",
+            "results": {
+              "name": "horniness",
+              "value": {
+                "$sub": [
+                  {
+                    "$sum": [
+                      { "$val": "need-to-pee" },
+                      { "$val": "pee-incontinence" }
+                    ]
+                  },
+                  100
+                ]
               }
             }
-          ]
-        }
+          },
+          {
+            "type": "accident",
+            "name": "need-to-poo",
+            "results": {
+              "name": "horniness",
+              "value": {
+                "$sub": [
+                  {
+                    "$sum": [
+                      { "$val": "need-to-poo" },
+                      { "$val": "poo-incontinence" }
+                    ]
+                  },
+                  100
+                ]
+              }
+            }
+          }
+        ]
       }
-    ],
+    },
     "saving-throw": "Willpower"
   },
   "topless-hypnosis": {
@@ -292,8 +251,7 @@
       "en-US": "You've been hypnotized into thinking it's a good idea to expose your breasts. Add +50 [Humiliation] when in public."
     },
     "effect": {
-      "trigger": true,
-      "results": {
+      "tag": {
         "type": "tag-check",
         "tag": "public",
         "results": { "name": "humiliation", "value": 50 }
@@ -309,8 +267,7 @@
       "en-US": "Your upper-body clothing is torn or missing so that you cannot cover your breasts. Add +50 [Humiliation] when in public."
     },
     "effect": {
-      "trigger": true,
-      "results": {
+      "tag": {
         "type": "tag-check",
         "tag": "public",
         "results": { "name": "humiliation", "value": 50 }
@@ -328,8 +285,7 @@
       "ja-JP": "パンツが良く見えるようにスカートを捲りあげてしまう催眠暗示。人前で開発度+50。お漏らしパンツなら開発度+200"
     },
     "effect": {
-      "trigger": true,
-      "results": {
+      "tag": {
         "type": "tag-check",
         "tag": "public",
         "results": [
@@ -361,8 +317,7 @@
       "ja-JP": "人前で開発度+50。お漏らしパンツなら開発度+200"
     },
     "effect": {
-      "trigger": true,
-      "results": {
+      "tag": {
         "type": "tag-check",
         "tag": "public",
         "results": [
@@ -398,22 +353,16 @@
       "value": null,
       "results": { "name": "wedgie", "value": null }
     },
-    "effect": [
-      {
-        "trigger": "apply",
-        "results": { "name": "pee-incontinence", "value": 50 }
-      },
-      {
-        "trigger": "floor-end",
-        "results": [
-          {
-            "type": "message",
-            "message": "My tight panties dig deep into my slit, and I let out a soft gasp of pleasure."
-          },
-          { "name": "horniness", "value": 20 }
-        ]
-      }
-    ],
+    "effect": {
+      "apply": { "name": "pee-incontinence", "value": 50 },
+      "floor-end": [
+        {
+          "type": "message",
+          "message": "My tight panties dig deep into my slit, and I let out a soft gasp of pleasure."
+        },
+        { "name": "horniness", "value": 20 }
+      ]
+    },
     "saving-throw": false
   },
   "cursed-panties": {
@@ -425,16 +374,10 @@
       "en-US": "Your underwear cannot be removed, and constantly molests your crotch. +100 [Horniness] added per floor.",
       "ja-JP": "呪いの装備に股間を責められ、階層を進むごとに開発度+100"
     },
-    "effect": [
-      {
-        "trigger": "apply",
-        "results": { "name": "stuck-panties", "value": true }
-      },
-      {
-        "trigger": "floor-end",
-        "results": { "name": "horniness", "value": 100 }
-      }
-    ],
+    "effect": {
+      "apply": { "name": "stuck-panties", "value": true },
+      "floor-end": { "name": "horniness", "value": 100 }
+    },
     "saving-throw": "Uncurse"
   },
   "stained-panties": {
@@ -465,16 +408,10 @@
       "value": null,
       "results": { "name": "wet-panties", "value": null }
     },
-    "effect": [
-      {
-        "trigger": "apply",
-        "results": { "name": "stained-panties", "value": true }
-      },
-      {
-        "trigger": "floor-end",
-        "results": { "name": "humiliation", "value": 100 }
-      }
-    ],
+    "effect": {
+      "apply": { "name": "stained-panties", "value": true },
+      "floor-end": { "name": "humiliation", "value": 100 }
+    },
     "saving-throw": false
   },
   "skidmarked-panties": {
@@ -505,16 +442,10 @@
       "value": null,
       "results": { "name": "soiled-panties", "value": null }
     },
-    "effect": [
-      {
-        "trigger": "apply",
-        "results": { "name": "skidmarked-panties", "value": true }
-      },
-      {
-        "trigger": "floor-end",
-        "results": { "name": "humiliation", "value": 200 }
-      }
-    ],
+    "effect": {
+      "apply": { "name": "skidmarked-panties", "value": true },
+      "floor-end": { "name": "humiliation", "value": 200 }
+    },
     "saving-throw": false
   }
 }

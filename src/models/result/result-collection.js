@@ -1,6 +1,11 @@
 import resultCreate from "./result-create";
 import Result from "./result";
 
+/**
+ * @typedef {import('./result').ResultData} ResultData
+ * @typedef {ResultData[]|ResultData} ResultDataCollection
+ */
+
 class ResultCollection {
   constructor(data = []) {
     if (Array.isArray(data)) {

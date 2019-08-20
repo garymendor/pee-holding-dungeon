@@ -50,19 +50,19 @@ class TriggerStatusEvent {
         continue;
       }
       const status = statusCollection.get(statusId);
-      if (status) {
-        // TODO: Refacter status effect triggers as a dictionary
-        for (const effectIndex in status.effect()) {
-          const effect = status.effect()[effectIndex];
-          if (effect.trigger === triggerId) {
-            const runResult = await new RunResultCollection({
-              ...request,
-              results: effect.results
-            }).run();
-            newCharacter = runResult.character;
-          }
-        }
+      if (!status) {
+        continue;
       }
+      const effect = status.effect()[triggerId];
+      if (!effect) {
+        continue;
+      }
+
+      const runResult = await new RunResultCollection({
+        ...request,
+        results: effect.results
+      }).run();
+      newCharacter = runResult.character;
     }
 
     return { character: newCharacter };

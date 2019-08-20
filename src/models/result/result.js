@@ -1,3 +1,7 @@
+/**
+ * @typedef {{type:string}} ResultData
+ */
+
 class Result {
   constructor(data) {
     this.data = data;

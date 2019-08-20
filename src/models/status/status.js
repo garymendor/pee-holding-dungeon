@@ -1,6 +1,10 @@
 import LocalizableString from "../localizable-string";
 import ResultCollection from "../result/result-collection";
 
+/**
+ * @typedef {import('../result/result-collection').ResultDataCollection} ResultDataCollection
+ */
+
 class Status {
   constructor(data) {
     this.data = {
@@ -33,7 +37,7 @@ class Status {
   }
 
   /**
-   * @returns {{event:string,results:ResultCollection}[]}
+   * @returns {Object<string,ResultDataCollection>}
    */
   effect() {
     return this.data.effect;
