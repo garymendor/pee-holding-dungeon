@@ -1,8 +1,11 @@
-import readlineSync from "readline-sync";
 import RunEffectResult from "./run-effect-result";
 import RunEventResult from "./run-event-result";
 import RunMessageResult from "./run-message-result";
 import RunChoiceResult from "./run-choice-result";
+import RunStatCheckResult from "./run-stat-check-result";
+import RunAccidentCheckResult from "./run-accident-check-result";
+import RunAccidentResult from "./run-accident-result";
+import RunSavingThrowResult from "./run-saving-throw-result";
 
 /**
  * @typedef {import('../models/character/character').default} Character
@@ -10,14 +13,6 @@ import RunChoiceResult from "./run-choice-result";
  * @typedef {import('../models/status/status-collection').default} StatusCollection
  * @typedef {import('../models/result/result-collection').default} ResultCollection
  * @typedef {import('../models/result/result').default} Result
- * @typedef {import('../models/result/event-result').default} EventResult
- * @typedef {import('../models/result/effect-result').default} EffectResult
- * @typedef {import('../models/result/message-result').default} MessageResult
- * @typedef {import('../models/result/choice-result').default} ChoiceResult
- * @typedef {import('../models/result/stat-check-result').default} StatCheckResult
- * @typedef {import('../models/result/accident-check-result').default} AccidentCheckResult
- * @typedef {import('../models/result/accident-result').default} AccidentResult
- * @typedef {import('../models/result/saving-throw-result').default} SavingThrowResult
  */
 
 /**
@@ -127,94 +122,52 @@ class ExecuteEvent {
   }
 
   /**
-   * @param {EffectResult} result
+   * @param {ExecuteEventData} data
    */
   runEffect(data) {
     return new RunEffectResult(data).run();
   }
 
   /**
-   * @param {MessageResult} result
+   * @param {ExecuteEventData} data
    */
   runMessage(data) {
     return new RunMessageResult(data).run();
   }
 
   /**
-   * @param {ChoiceResult} result
+   * @param {ExecuteEventData} data
    */
   runChoice(data) {
     return new RunChoiceResult(data).run();
   }
 
   /**
-   * @param {StatCheckResult} result
+   * @param {ExecuteEventData} data
    */
   runStatCheck(data) {
-    const { result } = data;
-    const actualValue = data.character.get(result.name());
-    if (result.compare(actualValue)) {
-      return this.runResults(result.results(), data);
-    }
-    return {
-      ...this.data,
-      continue: true
-    };
+    return new RunStatCheckResult(data).run();
   }
 
   /**
-   * @param {AccidentCheckResult} result
+   * @param {ExecuteEventData} data
    */
   runAccidentCheck(data) {
-    const { result } = data;
-    const accident = result.compare(data.character);
-    if (accident) {
-      return this.runResults(result.results(), { ...data, accident });
-    }
-    return { ...data, continue: true };
+    return new RunAccidentCheckResult(data).run();
   }
 
   /**
-   * @param {AccidentResult} result
+   * @param {ExecuteEventData} data
    */
   runAccident(data) {
-    const { result } = data;
-    let results = null;
-    switch (data.accident) {
-      case "pee":
-        results = result.pee();
-        break;
-      case "poo":
-        results = result.poo();
-        break;
-      case "both":
-        results = result.both();
-        break;
-    }
-    if (results) {
-      return this.runResults(results, { ...data, accident: null });
-    }
-    return {
-      ...data,
-      accident: null,
-      continue: true
-    };
+    return new RunAccidentResult(data).run();
   }
 
   /**
-   * @param {SavingThrowResult} result
+   * @param {ExecuteEventData} data
    */
   runSavingThrow(data) {
-    const { result } = data;
-    const saveValue = data.character.get(result.savingThrow());
-    const d20 = 1 + Math.floor(Math.random() * 20);
-    if (saveValue + d20 < result.dc()) {
-      return this.runResults(result.results(), data);
-    }
-    return {
-      ...data,
-      continue: true
-    };
+    return new RunSavingThrowResult(data).run();
   }
 }
 
