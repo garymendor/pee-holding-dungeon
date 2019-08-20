@@ -1,4 +1,5 @@
 import RunResultCollection from "./run-result-collection";
+import ApplyCharacterChange from "./apply-character-change";
 
 /**
  * @typedef {import('../models/character/character').default} Character
@@ -32,18 +33,22 @@ class RunEffectResult {
    * @returns {Promise<import('./execute-event').ExecuteEventData>}
    */
   async run() {
-    /**
-     * @type {{name:string,value:any}[]}
-     */
-    const events = [];
     const { result, ...originalData } = this.data;
     const { character, statusCollection } = originalData;
+    const {
+      character: newCharacter,
+      statusChanges
+    } = new ApplyCharacterChange().run({
+      character,
+      name: result.data.name,
+      value: result.data.value
+    });
     let data = {
       ...originalData,
-      character: character.apply(result.data.name, result.data.value, events)
+      character: newCharacter
     };
-    for (const index in events) {
-      const event = events[index];
+    for (const index in statusChanges) {
+      const event = statusChanges[index];
       // Execute apply events for the newly applied status
       const status = statusCollection.get(event.name);
       if (status) {
