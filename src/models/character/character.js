@@ -56,7 +56,7 @@ class Character {
    * @returns {Character}
    */
   apply(name, value, events) {
-    const newCharacter = new Character(this.data);
+    let newCharacter = new Character(this.data);
     switch (name) {
       // Numeric values
       case "need-to-pee":
@@ -87,14 +87,14 @@ class Character {
         newCharacter.data.values["need-to-pee"] = 0;
         events.push({ name, value: true });
         if (newCharacter.data.clothes.panties) {
-          this.apply("wet-panties", true, events);
+          newCharacter = newCharacter.apply("wet-panties", true, events);
         }
         break;
       case "defecation":
         newCharacter.data.values["need-to-poo"] = 0;
         events.push({ name, value: true });
         if (newCharacter.data.clothes.panties) {
-          this.apply("soiled-panties", true, events);
+          newCharacter = newCharacter.apply("soiled-panties", true, events);
         }
         break;
       default:

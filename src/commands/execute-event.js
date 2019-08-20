@@ -2,6 +2,7 @@ import readlineSync from "readline-sync";
 import RunEffectResult from "./run-effect-result";
 import RunEventResult from "./run-event-result";
 import RunMessageResult from "./run-message-result";
+import RunChoiceResult from "./run-choice-result";
 
 /**
  * @typedef {import('../models/character/character').default} Character
@@ -58,40 +59,44 @@ class ExecuteEvent {
     if (description) {
       this.data.output.log(description);
     }
-    if (this.runResults(event.results())) {
+    let data = this.runResults(event.results(), this.data);
+    if (data.continue) {
       // Execute floor-end status events
-      for (const statusId in this.data.character.data.status) {
-        const status = this.data.statusCollection.get(statusId);
+      for (const statusId in data.character.data.status) {
+        const status = data.statusCollection.get(statusId);
         if (status) {
           for (const effectIndex in status.effect()) {
             const effect = status.effect()[effectIndex];
             if (effect.event === "floor-end") {
-              this.runResults(effect.results);
+              data = this.runResults(effect.results, data);
             }
           }
         }
       }
     }
-    return this.data;
+    return data;
   }
 
   /**
    * Runs a collection of events.
    * @param {ResultCollection} results
    */
-  runResults(results) {
+  runResults(results, data) {
+    let newData = data;
     for (const result of results.items()) {
-      if (!this.runResult(result)) {
-        return false;
+      newData = this.runResult(result, newData);
+      if (!newData.continue) {
+        return newData;
       }
     }
-    return true;
+    return newData;
   }
 
   /**
    * @param {Result} result
+   * @param {ExecuteEventData} data
    */
-  runResult(result) {
+  runResult(result, data) {
     const resultTypeMap = {
       event: this.runEvent,
       effect: this.runEffect,
@@ -105,98 +110,77 @@ class ExecuteEvent {
     const runResultMethod = resultTypeMap[result.type()];
     if (!runResultMethod) {
       this.data.output.error(`Not supported: ${result.type()}`);
-      return true;
+      return this.data;
     }
-    return runResultMethod.call(this, result);
+    return runResultMethod.call(this, {
+      ...data,
+      result,
+      executeEventCommand: this
+    });
   }
 
   /**
-   *
-   * @param {EventResult} result
+   * @param {ExecuteEventData} data
    */
-  runEvent(result) {
-    this.data = new RunEventResult({ ...this.data, result }).run();
-    return this.data.continue;
+  runEvent(data) {
+    return new RunEventResult(data).run();
   }
 
   /**
    * @param {EffectResult} result
    */
-  runEffect(result) {
-    this.data = new RunEffectResult({
-      ...this.data,
-      result,
-      executeEventCommand: this
-    }).run();
-    return this.data.continue;
+  runEffect(data) {
+    return new RunEffectResult(data).run();
   }
 
   /**
    * @param {MessageResult} result
    */
-  runMessage(result) {
-    this.data = new RunMessageResult({ ...this.data, result }).run();
-    return this.data.continue;
+  runMessage(data) {
+    return new RunMessageResult(data).run();
   }
 
   /**
    * @param {ChoiceResult} result
    */
-  runChoice(result) {
-    const choices = [];
-    // TODO: Localize
-    this.data.output.log("Choose one of the following actions:");
-    for (const choiceIndex in result.choices()) {
-      const choice = result.choices()[choiceIndex];
-      choices.push(choice.description(this.data.localeId));
-    }
-    // TODO: Make this more general and async-friendly
-    do {
-      const response = readlineSync.keyInSelect(choices, "Choice> ", {
-        cancel: false
-      });
-      const selectedChoice = result.choices()[response];
-      if (selectedChoice) {
-        if (!this.runResults(selectedChoice.results())) {
-          return false;
-        }
-        return true;
-      }
-    } while (true);
+  runChoice(data) {
+    return new RunChoiceResult(data).run();
   }
 
   /**
    * @param {StatCheckResult} result
    */
-  runStatCheck(result) {
-    const actualValue = this.data.character.get(result.name());
+  runStatCheck(data) {
+    const { result } = data;
+    const actualValue = data.character.get(result.name());
     if (result.compare(actualValue)) {
-      if (!this.runResults(result.results())) {
-        return false;
-      }
+      return this.runResults(result.results(), data);
     }
-    return true;
+    return {
+      ...this.data,
+      continue: true
+    };
   }
 
   /**
    * @param {AccidentCheckResult} result
    */
-  runAccidentCheck(result) {
-    this.data.accident = result.compare(this.data.character);
-    if (this.data.accident) {
-      if (!this.runResults(result.results())) {
-        return false;
-      }
+  runAccidentCheck(data) {
+    const { result } = data;
+    const accident = result.compare(data.character);
+    if (accident) {
+      return this.runResults(result.results(), { ...data, accident });
     }
-    return true;
+    return { ...data, continue: true };
   }
 
   /**
    * @param {AccidentResult} result
    */
-  runAccident(result) {
+  runAccident(data) {
+    const { result } = data;
     let results = null;
-    switch (this.data.accident) {
+    switch (data.accident) {
       case "pee":
         results = result.pee();
         break;
@@ -207,27 +191,30 @@ class ExecuteEvent {
         results = result.both();
         break;
     }
-    delete this.data.accident;
     if (results) {
-      if (!this.runResults(results)) {
-        return false;
-      }
+      return this.runResults(results, { ...data, accident: null });
     }
-    return true;
+    return {
+      ...data,
+      accident: null,
+      continue: true
+    };
   }
 
   /**
    * @param {SavingThrowResult} result
    */
-  runSavingThrow(result) {
-    const saveValue = this.data.character.get(result.savingThrow());
+  runSavingThrow(data) {
+    const { result } = data;
+    const saveValue = data.character.get(result.savingThrow());
     const d20 = 1 + Math.floor(Math.random() * 20);
     if (saveValue + d20 < result.dc()) {
-      if (!this.runResults(result.results())) {
-        return false;
-      }
+      return this.runResults(result.results(), data);
     }
-    return true;
+    return {
+      ...data,
+      continue: true
+    };
   }
 }
 

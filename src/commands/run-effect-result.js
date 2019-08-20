@@ -38,7 +38,7 @@ class RunEffectResult {
      */
     const events = [];
     const { result, character, executeEventCommand } = this.data;
-    this.data = {
+    let data = {
       ...this.data,
       character: character.apply(result.data.name, result.data.value, events)
     };
@@ -50,7 +50,7 @@ class RunEffectResult {
         for (const effectIndex in status.effect()) {
           const effect = status.effect()[effectIndex];
           if (effect.event === "apply") {
-            executeEventCommand.runResults(effect.results);
+            data = executeEventCommand.runResults(effect.results, data);
           }
         }
       }
@@ -60,12 +60,12 @@ class RunEffectResult {
         const onStatus = onStatusList[onStatusIndex];
         // TODO: Use expression comparison
         if (event.value === onStatus.value) {
-          executeEventCommand.runResults(onStatus.results);
+          data = executeEventCommand.runResults(onStatus.results, data);
         }
       }
     }
     return {
-      ...this.data,
+      ...data,
       continue: true
     };
   }
