@@ -296,5 +296,225 @@
         "results": [{ "name": "humiliation", "value": 500 }]
       }
     ]
+  },
+  "Fairy Tea Party": {
+    "original": "御茶会妖精だ！\n\n《招待を断る》\n妖精達の機嫌を損ねてしまった！　魔法で拘束されて全身を擽られる！　鼻先に粉薬を撒かれ、笑えば笑うほど敏感に。くしゃみも止まらない！尿意+150%。【敏感】を獲得\n\n《招待を受ける》\n美味しい紅茶とお菓子を振る舞われた。……何度飲み干しても次々におかわりを注がれてしまう！　尿意+50%。もう飲めなければ上に戻って擽りの刑。飲み続ければ尿意+200%\n\n《分岐：尿意300%以上》\nこれ以上は、もう…！　幸せそうな声を堪えながら失禁し開放感にゾクゾクしてしまった！　妖精達にからかわれ、俯いてしまった。尿意を0に。開発度+1100",
+    "description": {
+      "en-US": "A fairy tea party!",
+      "ja-JP": "御茶会妖精だ！"
+    },
+    "results": {
+      "type": "choice",
+      "choices": [
+        {
+          "description": {
+            "en-US": "Reject the invitation",
+            "ja-JP": "招待を断る"
+          },
+          "results": "Fairy Tea Party: Rejected"
+        },
+        {
+          "description": {
+            "en-US": "Accept the invitation"
+          },
+          "results": [
+            {
+              "type": "message",
+              "message": {
+                "en-US": "Delicious tea and sweets were served. ...No matter how many times I drink my tea, they serve me more, again and again! [Need to pee] +50%.",
+                "ja-JP": "美味しい紅茶とお菓子を振る舞われた。……何度飲み干しても次々におかわりを注がれてしまう！　尿意+50%。",
+                "foo": "もう飲めなければ上に戻って擽りの刑。飲み続ければ尿意+200%"
+              }
+            },
+            { "name": "need-for-bathroom", "value": 50 },
+            {
+              "type": "choice",
+              "choices": [
+                {
+                  "description": {
+                    "en-US": "Tell them \"No thanks, I've had enough.\""
+                  },
+                  "results": "Fairy Tea Party: Rejected"
+                },
+                {
+                  "description": {
+                    "en-US": "Accept everything they offer"
+                  },
+                  "results": [
+                    { "name": "need-for-bathroom", "value": 200 },
+                    {
+                      "type": "accident-check",
+                      "value": 300,
+                      "results": "Fairy Tea Party: Accident"
+                    },
+                    {
+                      "type": "message",
+                      "message": "At long last, the fairies grow bored of feeding me, and I walk away holding myself desperately."
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "Fairy Tea Party: Rejected": {
+    "parent": "Fairy Tea Party",
+    "description": {
+      "en-US": "The fairies' mood turns against me! They bind me with magic and tickle me all over! They spray powder on the tip of my nose, and the more I laugh, the more sensitive I become. And I can't stop sneezing! [Need to pee] +150%, gained [Sensitive].",
+      "ja-JP": "妖精達の機嫌を損ねてしまった！　魔法で拘束されて全身を擽られる！　鼻先に粉薬を撒かれ、笑えば笑うほど敏感に。くしゃみも止まらない！尿意+150%。【敏感】を獲得"
+    },
+    "results": [
+      { "name": "need-for-bathroom", "value": 150 },
+      {
+        "name": "sensitive",
+        "value": true,
+        "//": "Still looking for what 敏感 means mechanically"
+      },
+      "Fairy Tea Party: Accident"
+    ]
+  },
+  "Fairy Tea Party: Accident": {
+    "parent": "Fairy Tea Party",
+    "results": [
+      {
+        "type": "accident-check",
+        "value": 300,
+        "results": [
+          {
+            "type": "message",
+            "message": {
+              "en-US": "No more, no more... I cried out in a blissful sigh of sweet release as I have an accident! The fairies teased me, and I hung my head. +1100 Humiliation.",
+              "ja-JP": "これ以上は、もう…！　幸せそうな声を堪えながら失禁し開放感にゾクゾクしてしまった！　妖精達にからかわれ、俯いてしまった。尿意を0に。開発度+1100"
+            }
+          },
+          {
+            "type": "accident",
+            "pee": { "name": "urination", "value": true },
+            "poo": { "name": "defecation", "value": true },
+            "both": [
+              { "name": "urination", "value": true },
+              { "name": "defecation", "value": true }
+            ]
+          },
+          { "name": "humiliation", "value": 1100 }
+        ]
+      }
+    ]
+  },
+  "Forced Into Waitressing": {
+    "description": {
+      "en-US": "Since there is not enough man who arrived at the resting place in the dungeon, it became a helper halfway. Interact with other adventurers in a waitress style. ... the customer's feet are constantly ceased and it is difficult to return to the back. The urine started to fill and secretly slid thighs in the skirt. Urine urge +120",
+      "ja-JP": "人手が足りず、半ば強引に助っ人に。ウェイトレスの格好で他の冒険者と接する。…客足が途絶えず、なかなか奥に戻れない。尿意が満ち始め、スカートの中でこっそりと太股を摺り合わせた。尿意+120"
+    },
+    "results": [
+      { "name": "need-for-bathroom", "value": 120 },
+      {
+        "type": "accident-check",
+        "value": 250,
+        "results": [
+          {
+            "type": "accident",
+            "pee": [
+              {
+                "type": "message",
+                "message": {
+                  "en-US": "A strong urge to pee rushed in and I held my crotch! I stuck out my butt unsteadily. ... I can't move one more step! Hiding my front with the silver tray ... \"Kuo ... ♡\" I shamefully wet myself while clenching my teeth! Warmth and steam rise from my feet. I was embarrassed in front of a lot of colleagues.",
+                  "ja-JP": "強烈な波が押し寄せ、股間を抑えてしまった！お尻を突きだして、そわそわ。…もう一歩も動けない！銀盆で前を隠し……、「くぅ…♡」歯を食いしばりながら悔しそうに失禁してしまった！　足元からホカホカと湯気が立ち上る。大勢の同業者に恥ずかしい姿を晒した…。尿意を0%に。開発度+350。"
+                }
+              },
+              { "name": "urination", "value": true }
+            ],
+            "poo": [
+              {
+                "type": "message",
+                "en-US": "A strong urge to poo rushed in and I held my rear! I stuck out my butt unsteadily. ... I can't move one more step! Hiding my back with the silver tray ... \"Kuo ... ♡\" I shamefully soiled myself while clenching my teeth! Little brown lumps ooze down the back of my legs. I was embarrassed in front of a lot of colleagues."
+              },
+              { "name": "defecation", "value": true }
+            ],
+            "both": [
+              {
+                "type": "message",
+                "message": {
+                  "en-US": "A strong urge to pee rushed in and I held my crotch! I stuck out my butt unsteadily. ... I can't move one more step! Hiding my front with the silver tray ... \"Kuo ... ♡\" I shamefully wet and soiled myself while clenching my teeth! Warmth and steam rise from my feet, and little brown lumps ooze down the back of my legs. I was embarrassed in front of a lot of colleagues."
+                }
+              },
+              { "name": "urination", "value": true },
+              { "name": "defecation", "value": true }
+            ]
+          },
+          { "name": "humiliation", "value": 350 }
+        ]
+      }
+    ]
+  },
+  "Child Prisoners: Pantsing": {
+    "original": "囚われた子供達を発見した！　安全な場所まで引率する。…なかなか進めず、尿意が溜まっていく。…信頼に満ちた無垢な視線を受けて、前を抑えられない。尿意+100%\n\n《分岐条件：ズボン&パンツ》\n悪戯っ子に不意を突かれた！　豪快に穿き物をズリ降ろされてしまう！　慌ててしゃがみ込むと、膀胱に甘い振動が加わった……！　尿意+150% 開発度+50 \n\n《分岐条件：尿意280%以上》\nピュッ♡とチビった一滴が呼び水になる。滝のような勢いで漏らしてしまい、恥ずかしさのあまり泣いてしまった！　子供達の目の前で盛大に痴態を見せ、散々囃し立てられた！　尿意を0%に。開発度+800",
+    "description": {
+      "en-US": "I found some child prisoners! I lead them toward a safe place. ...I can't go on easily, and my need for the bathroom is growing. ...I can't hold my crotch with those innocent eyes watching me. Need to pee +100% ",
+      "ja-JP": "囚われた子供達を発見した！　安全な場所まで引率する。…なかなか進めず、尿意が溜まっていく。…信頼に満ちた無垢な視線を受けて、前を抑えられない。尿意+100%"
+    },
+    "results": [
+      { "name": "need-for-bathroom", "value": 100 },
+      {
+        "type": "stat-check",
+        "name": "trousers",
+        "value": true,
+        "results": [
+          {
+            "type": "message",
+            "message": {
+              "en-US": "A mischievous child took me by surprise! She pulled down my pants with a delighted squeal! When I crouched down to pull them back up, my bladder trembled...! Need to pee +150, Humiliation +50.",
+              "ja-JP": "悪戯っ子に不意を突かれた！　豪快に穿き物をズリ降ろされてしまう！　慌ててしゃがみ込むと、膀胱に甘い振動が加わった……！　尿意+150% 開発度+50"
+            }
+          },
+          { "name": "need-for-bathroom", "value": 150 },
+          { "name": "humiliation", "value": 50 }
+        ]
+      },
+      {
+        "type": "accident-check",
+        "value": 280,
+        "results": [
+          {
+            "type": "accident",
+            "pee": [
+              {
+                "type": "message",
+                "message": {
+                  "en-US": "Plip♡ and a little drop breaches the dam. Pee ran down my legs like a waterfall, and I sobbed in humiliation! I made a fool of myself in front of the kids, and I was devastated! Humiliation +800",
+                  "ja-JP": "ピュッ♡とチビった一滴が呼び水になる。滝のような勢いで漏らしてしまい、恥ずかしさのあまり泣いてしまった！　子供達の目の前で盛大に痴態を見せ、散々囃し立てられた！　尿意を0%に。開発度+800"
+                }
+              },
+              { "name": "urination", "value": true }
+            ],
+            "poo": [
+              {
+                "type": "message",
+                "message": {
+                  "en-US": "Ping♡ and a little pebble begins the avalanche. A squelching sound, and poo filled my panties like a mudslide, and I sobbed in humiliation! I made a fool of myself in front of the kids, and I was devastated! Humiliation +800",
+                  "ja-JP": "ピュッ♡とチビった一滴が呼び水になる。滝のような勢いで漏らしてしまい、恥ずかしさのあまり泣いてしまった！　子供達の目の前で盛大に痴態を見せ、散々囃し立てられた！　尿意を0%に。開発度+800"
+                }
+              },
+              { "name": "defecation", "value": true }
+            ],
+            "both": [
+              {
+                "type": "message",
+                "message": {
+                  "en-US": "Plip♡ and a little drop breaches the dam. Pee ran down my legs like a waterfall, poo filled my panties like a landslide, and I sobbed in humiliation! I made a fool of myself in front of the kids, and I was devastated! Humiliation +800",
+                  "ja-JP": "ピュッ♡とチビった一滴が呼び水になる。滝のような勢いで漏らしてしまい、恥ずかしさのあまり泣いてしまった！　子供達の目の前で盛大に痴態を見せ、散々囃し立てられた！　尿意を0%に。開発度+800"
+                }
+              },
+              { "name": "urination", "value": true },
+              { "name": "defecation", "value": true }
+            ]
+          },
+          { "name": "humiliation", "value": 800 }
+        ]
+      }
+    ]
   }
 }

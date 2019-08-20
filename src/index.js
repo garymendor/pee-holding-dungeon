@@ -25,19 +25,33 @@ console.log(character.toString());
 console.log("---");
 console.log("");
 
-const command = new ExecuteEvent({
-  character,
-  eventCollection,
-  statusCollection,
-  localeId,
-  eventId
-});
-command.run().then(newData => {
-  if (newData.character !== character) {
+let floorCount = 0;
+
+async function fullRun() {
+  let data = {
+    character,
+    eventCollection,
+    statusCollection,
+    localeId,
+    eventId
+  };
+  while (floorCount < 15 && data.character.data.values.humiliation < 10000) {
+    floorCount++;
+    console.log(`--- Floor ${floorCount} ---`);
+    data.eventId = eventCollection.getRandomEventId();
+    const command = new ExecuteEvent(data);
+    data = await command.run();
     console.log("");
     console.log("---");
     console.log("");
-    console.log("New character state:");
-    console.log(newData.character.toString());
+    console.log(data.character.toString());
+    console.log("");
   }
-});
+  console.log(`Highest floor reached: ${floorCount}`);
+  console.log("");
+  console.log("Final character state:");
+  console.log("");
+  console.log(data.character.toString());
+}
+
+fullRun();

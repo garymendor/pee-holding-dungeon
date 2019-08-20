@@ -58,7 +58,7 @@ class Character {
    * @returns {Character}
    */
   apply(name, value, events) {
-    let newCharacter = new Character(this.data);
+    let newCharacterData = { ...this.data };
     switch (name) {
       // Numeric values
       case "need-to-pee":
@@ -69,11 +69,11 @@ class Character {
       case "poo-incontinence":
       case "wetting-counter":
       case "soiling-counter":
-        newCharacter.data.values[name] += value;
+        newCharacterData.values[name] += value;
         break;
       case "need-for-bathroom":
-        newCharacter.data.values["need-to-pee"] += value;
-        newCharacter.data.values["need-to-poo"] += value / 2;
+        newCharacterData.values["need-to-pee"] += value;
+        newCharacterData.values["need-to-poo"] += value / 2;
         break;
       // Clothing
       case "panties":
@@ -81,42 +81,42 @@ class Character {
       case "skirt":
         events.push({ name, value });
         if (value === null) {
-          delete newCharacter.data.clothes[name];
+          delete newCharacterData.clothes[name];
         } else {
-          newCharacter.data.clothes[name] = value;
+          newCharacterData.clothes[name] = value;
         }
         break;
       // Special cases
       case "urination":
-        newCharacter.data.values["need-to-pee"] = 0;
+        newCharacterData.values["need-to-pee"] = 0;
         events.push({ name, value: true });
-        if (newCharacter.data.clothes.panties) {
-          newCharacter = newCharacter.apply("wet-panties", true, events);
-          newCharacter = newCharacter.apply("wetting-counter", 1, events);
+        if (newCharacterData.clothes.panties) {
+          newCharacterData.status["wet-panties"] = true;
+          newCharacterData.values["wetting-counter"]++;
         }
         break;
       case "defecation":
-        newCharacter.data.values["need-to-poo"] = 0;
+        newCharacterData.values["need-to-poo"] = 0;
         events.push({ name, value: true });
-        if (newCharacter.data.clothes.panties) {
-          newCharacter = newCharacter.apply("soiled-panties", true, events);
-          newCharacter = newCharacter.apply("soiling-counter", 1, events);
+        if (newCharacterData.clothes.panties) {
+          newCharacterData.status["soiled-panties"] = true;
+          newCharacterData.values["soiling-counter"]++;
         }
         break;
       default:
         events.push({ name, value });
         if (typeof value === "boolean") {
           if (value === true) {
-            newCharacter.data.status[name] = true;
+            newCharacterData.status[name] = true;
           } else if (value === false) {
-            delete newCharacter.data.status[name];
+            delete newCharacterData.status[name];
           }
         } else {
           console.error(`Name not supported: ${name}`);
         }
     }
 
-    return newCharacter;
+    return new Character(newCharacterData);
   }
 
   toString() {
