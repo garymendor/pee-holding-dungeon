@@ -1,4 +1,6 @@
 import readlineSync from "readline-sync";
+import RunMessageResult from "./run-message-result";
+import RunEventResult from "./run-event-result";
 
 /**
  * @typedef {import('../models/character/character').default} Character
@@ -24,6 +26,7 @@ import readlineSync from "readline-sync";
  * @property {string} eventId
  * @property {string} localeId
  * @property {Console} output
+ * @property {boolean} continue
  */
 
 class ExecuteEvent {
@@ -32,16 +35,22 @@ class ExecuteEvent {
    * @param {ExecuteEventData} data
    */
   constructor(data) {
+    /**
+     * @type {ExecuteEventData}
+     */
     this.data = {
       output: console,
       ...data
     };
   }
 
+  /**
+   * @returns {ExecuteEventData}
+   */
   run() {
     const event = this.data.eventCollection.get(this.data.eventId);
     if (!event) {
-      return;
+      return this.data;
     }
 
     const description = event.description(this.data.localeId);
@@ -105,12 +114,8 @@ class ExecuteEvent {
    * @param {EventResult} result
    */
   runEvent(result) {
-    const nextEvent = new ExecuteEvent({
-      ...this.data,
-      eventId: result.event()
-    });
-    this.data = nextEvent.run();
-    return false;
+    this.data = new RunEventResult({ ...this.data, result }).run();
+    return this.data.continue;
   }
 
   /**
@@ -152,8 +157,8 @@ class ExecuteEvent {
    * @param {MessageResult} result
    */
   runMessage(result) {
-    this.data.output.log(result.message(this.data.localeId));
-    return true;
+    this.data = new RunMessageResult({ ...this.data, result }).run();
+    return this.data.continue;
   }
 
   /**
