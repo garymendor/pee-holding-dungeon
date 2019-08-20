@@ -29,9 +29,9 @@ class RunEffectResult {
 
   /**
    * Runs the command.
-   * @returns {import('./execute-event').ExecuteEventData}
+   * @returns {Promise<import('./execute-event').ExecuteEventData>}
    */
-  run() {
+  async run() {
     /**
      * @type {{name:string,value:any}[]}
      */
@@ -50,7 +50,7 @@ class RunEffectResult {
         for (const effectIndex in status.effect()) {
           const effect = status.effect()[effectIndex];
           if (effect.event === "apply") {
-            data = new RunResultCollection({
+            data = await new RunResultCollection({
               ...data,
               results: effect.results
             }).run();
@@ -62,8 +62,8 @@ class RunEffectResult {
       for (const onStatusIndex in onStatusList) {
         const onStatus = onStatusList[onStatusIndex];
         // TODO: Use expression comparison
-        if (event.value === onStatus.value) {
-          data = new RunResultCollection({
+        if (character.get(onStatus.name) && event.value === onStatus.value) {
+          data = await new RunResultCollection({
             ...data,
             results: onStatus.results
           }).run();

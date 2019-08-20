@@ -35,9 +35,9 @@ class ExecuteEvent {
   }
 
   /**
-   * @returns {ExecuteEventData}
+   * @returns {Promise<ExecuteEventData>}
    */
-  run() {
+  async run() {
     const event = this.data.eventCollection.get(this.data.eventId);
     if (!event) {
       return this.data;
@@ -47,7 +47,7 @@ class ExecuteEvent {
     if (description) {
       this.data.output.log(description);
     }
-    let data = new RunResultCollection({
+    let data = await new RunResultCollection({
       ...this.data,
       results: event.results()
     }).run();
@@ -59,7 +59,7 @@ class ExecuteEvent {
           for (const effectIndex in status.effect()) {
             const effect = status.effect()[effectIndex];
             if (effect.event === "floor-end") {
-              data = new RunResultCollection({
+              data = await new RunResultCollection({
                 ...data,
                 results: effect.results
               }).run();

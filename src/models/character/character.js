@@ -3,14 +3,16 @@ class Character {
     name = "Sample Character",
     stats = { STR: 11, DEX: 11, INT: 11, WIS: 11 },
     values = {
-      "need-to-pee": 120,
-      "need-to-poo": 50,
+      "need-to-pee": 0,
+      "need-to-poo": 0,
       humiliation: 0,
       horniness: 0,
-      "pee-incontinence": 100,
-      "poo-incontinence": 0
+      "pee-incontinence": 0,
+      "poo-incontinence": 0,
+      "wetting-counter": 0,
+      "soiling-counter": 0
     },
-    status = { "sensitive-urethra": true },
+    status = {},
     clothes = { skirt: true, panties: true }
   }) {
     this.data = {
@@ -65,6 +67,8 @@ class Character {
       case "horniness":
       case "pee-incontinence":
       case "poo-incontinence":
+      case "wetting-counter":
+      case "soiling-counter":
         newCharacter.data.values[name] += value;
         break;
       case "need-for-bathroom":
@@ -88,6 +92,7 @@ class Character {
         events.push({ name, value: true });
         if (newCharacter.data.clothes.panties) {
           newCharacter = newCharacter.apply("wet-panties", true, events);
+          newCharacter = newCharacter.apply("wetting-counter", 1, events);
         }
         break;
       case "defecation":
@@ -95,6 +100,7 @@ class Character {
         events.push({ name, value: true });
         if (newCharacter.data.clothes.panties) {
           newCharacter = newCharacter.apply("soiled-panties", true, events);
+          newCharacter = newCharacter.apply("soiling-counter", 1, events);
         }
         break;
       default:
@@ -120,8 +126,11 @@ class Character {
       `Need to pee: ${this.data.values["need-to-pee"]}\tNeed to poo: ${
         this.data.values["need-to-poo"]
       }\tHorniness:${this.data.values.horniness}`,
-      `Pee weakness ${this.data.values["pee-incontinence"]}\tPoo weakness: ${
+      `Pee weakness: ${this.data.values["pee-incontinence"]}\tPoo weakness: ${
         this.data.values["poo-incontinence"]
+      }`,
+      `Wet times: ${this.data.values["wetting-counter"]}\tSoiled times: ${
+        this.data.values["soiling-counter"]
       }`,
       `Humiliation: ${this.data.values.humiliation}`,
       `Clothes: ${Object.keys(this.data.clothes).filter(

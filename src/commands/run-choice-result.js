@@ -30,9 +30,9 @@ class RunChoiceResult {
 
   /**
    * Runs the command.
-   * @returns {import('./execute-event').ExecuteEventData}
+   * @returns {Promise<import('./execute-event').ExecuteEventData>}
    */
-  run() {
+  async run() {
     const { result, ...data } = this.data;
     const { output, localeId } = data;
     const choices = [];

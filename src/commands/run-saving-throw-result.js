@@ -28,9 +28,9 @@ class RunSavingThrowResult {
 
   /**
    * Runs the command.
-   * @returns {import('./execute-event').ExecuteEventData}
+   * @returns {Promise<import('./execute-event').ExecuteEventData>}
    */
-  run() {
+  async run() {
     const { result, ...data } = this.data;
     const { character } = data;
     const saveValue = character.get(result.savingThrow());

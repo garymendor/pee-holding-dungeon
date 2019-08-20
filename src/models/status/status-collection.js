@@ -11,9 +11,10 @@ class StatusCollection {
     this.onStatus = {};
     toPairs(data)
       .filter(([, value]) => value["on-status"])
-      .map(([, { "on-status": { name, value, results } }]) => [
+      .map(([key, { "on-status": { name, value, results } }]) => [
         name,
         {
+          name: key,
           value,
           results: new ResultCollection(results)
         }

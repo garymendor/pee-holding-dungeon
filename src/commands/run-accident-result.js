@@ -28,9 +28,9 @@ class RunAccidentResult {
 
   /**
    * Runs the command.
-   * @returns {import('./execute-event').ExecuteEventData}
+   * @returns {Promise<import('./execute-event').ExecuteEventData>}
    */
-  run() {
+  async run() {
     const { result, accident, ...data } = this.data;
     const results = this.getAccidentResults(result, accident);
     if (results) {

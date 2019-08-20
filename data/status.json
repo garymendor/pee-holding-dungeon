@@ -181,7 +181,13 @@
     "on-status": {
       "name": "urination",
       "value": true,
-      "results": { "name": "horniness", "value": 100 }
+      "results": [
+        {
+          "type": "message",
+          "message": "It feels really good to pee! My body feels hot..."
+        },
+        { "name": "horniness", "value": 100 }
+      ]
     },
     "saving-throw": "Healing"
   },
@@ -397,7 +403,13 @@
       },
       {
         "event": "floor-end",
-        "results": { "name": "horniness", "value": 20 }
+        "results": [
+          {
+            "type": "message",
+            "message": "My tight panties dig deep into my slit, and I let out a soft gasp of pleasure."
+          },
+          { "name": "horniness", "value": 20 }
+        ]
       }
     ],
     "saving-throw": false

@@ -28,13 +28,13 @@ class RunResultCollection {
 
   /**
    * Runs the command.
-   * @returns {import('./execute-event').ExecuteEventData}
+   * @returns {Promise<import('./execute-event').ExecuteEventData>}
    */
-  run() {
+  async run() {
     const { results, ...baseData } = this.data;
     let newData = baseData;
     for (const result of results.items()) {
-      newData = new RunResult({
+      newData = await new RunResult({
         ...newData,
         result
       }).run();

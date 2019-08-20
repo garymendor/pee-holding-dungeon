@@ -35,9 +35,9 @@ class RunResult {
 
   /**
    * Runs the command.
-   * @returns {import('./execute-event').ExecuteEventData}
+   * @returns {Promise<import('./execute-event').ExecuteEventData>}
    */
-  run() {
+  async run() {
     const { output, result } = this.data;
     const resultTypeMap = {
       event: RunEventResult,

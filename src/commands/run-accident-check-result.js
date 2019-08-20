@@ -28,9 +28,9 @@ class RunAccidentCheckResult {
 
   /**
    * Runs the command.
-   * @returns {import('./execute-event').ExecuteEventData}
+   * @returns {Promise<import('./execute-event').ExecuteEventData>}
    */
-  run() {
+  async run() {
     const { result, ...data } = this.data;
     const { character } = data;
     const accident = result.compare(character);

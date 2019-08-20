@@ -31,10 +31,11 @@ class RunEventResult {
 
   /**
    * Runs the command.
+   * @returns {Promise<import('./execute-event').ExecuteEventData>}
    */
-  run() {
+  async run() {
     const { result, ...data } = this.data;
-    const nextData = new ExecuteEvent({
+    const nextData = await new ExecuteEvent({
       ...data,
       eventId: result.event()
     }).run();
