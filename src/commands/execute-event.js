@@ -1,6 +1,7 @@
 import readlineSync from "readline-sync";
-import RunMessageResult from "./run-message-result";
+import RunEffectResult from "./run-effect-result";
 import RunEventResult from "./run-event-result";
+import RunMessageResult from "./run-message-result";
 
 /**
  * @typedef {import('../models/character/character').default} Character
@@ -122,35 +123,12 @@ class ExecuteEvent {
    * @param {EffectResult} result
    */
   runEffect(result) {
-    const events = [];
-    this.data.character = this.data.character.apply(
-      result.data.name,
-      result.data.value,
-      events
-    );
-    for (const index in events) {
-      const event = events[index];
-      // Execute apply events for the newly applied status
-      const status = this.data.statusCollection.get(event.name);
-      if (status) {
-        for (const effectIndex in status.effect()) {
-          const effect = status.effect()[effectIndex];
-          if (effect.event === "apply") {
-            this.runResults(effect.results);
-          }
-        }
-      }
-      // Execute onStatus events
-      const onStatusList = this.data.statusCollection.getOnStatus(event.name);
-      for (const onStatusIndex in onStatusList) {
-        const onStatus = onStatusList[onStatusIndex];
-        // TODO: Use expression comparison
-        if (event.value === onStatus.value) {
-          this.runResults(onStatus.results);
-        }
-      }
-    }
-    return true;
+    this.data = new RunEffectResult({
+      ...this.data,
+      result,
+      executeEventCommand: this
+    }).run();
+    return this.data.continue;
   }
 
   /**
