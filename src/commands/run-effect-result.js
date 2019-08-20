@@ -1,4 +1,5 @@
 import RunResultCollection from "./run-result-collection";
+import TriggerStatusEvent from "./trigger-status-event";
 import ApplyCharacterChange from "./apply-character-change";
 
 /**
@@ -34,7 +35,7 @@ class RunEffectResult {
    */
   async run() {
     const { result, ...originalData } = this.data;
-    const { character, statusCollection } = originalData;
+    const { character } = originalData;
     const {
       character: newCharacter,
       statusChanges
@@ -47,21 +48,15 @@ class RunEffectResult {
       ...originalData,
       character: newCharacter
     };
+
+    ({ character: data.character } = await new TriggerStatusEvent().run({
+      ...data,
+      statusIds: statusChanges,
+      triggerId: "apply"
+    }));
+
     for (const index in statusChanges) {
       const event = statusChanges[index];
-      // Execute apply events for the newly applied status
-      const status = statusCollection.get(event.name);
-      if (status) {
-        for (const effectIndex in status.effect()) {
-          const effect = status.effect()[effectIndex];
-          if (effect.event === "apply") {
-            data = await new RunResultCollection({
-              ...data,
-              results: effect.results
-            }).run();
-          }
-        }
-      }
       // Execute onStatus events
       const onStatusList = this.data.statusCollection.getOnStatus(event.name);
       for (const onStatusIndex in onStatusList) {

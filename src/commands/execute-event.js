@@ -1,4 +1,5 @@
 import RunResultCollection from "./run-result-collection";
+import TriggerStatusEvent from "./trigger-status-event";
 
 /**
  * @typedef {import('../models/character/character').default} Character
@@ -53,20 +54,10 @@ class ExecuteEvent {
     }).run();
     if (data.continue) {
       // Execute floor-end status events
-      for (const statusId in data.character.data.status) {
-        const status = data.statusCollection.get(statusId);
-        if (status) {
-          for (const effectIndex in status.effect()) {
-            const effect = status.effect()[effectIndex];
-            if (effect.event === "floor-end") {
-              data = await new RunResultCollection({
-                ...data,
-                results: effect.results
-              }).run();
-            }
-          }
-        }
-      }
+      ({ character: data.character } = await new TriggerStatusEvent().run({
+        ...data,
+        triggerId: "floor-end"
+      }));
     }
     return data;
   }

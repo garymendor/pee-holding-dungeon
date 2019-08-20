@@ -9,7 +9,7 @@
       "ja-JP": "重要な場面で視界を封じてくる一対のゴーストハンド。霊体なので取り外せず、暗闇の中で行動しなければならない。周囲が見えずに全身の感度が上がってしまい、開発度の増加量が2倍に。"
     },
     "effect": {
-      "event": "floor-start",
+      "trigger": "floor-start",
       "results": {
         "type": "tag-check",
         "tag": "vision",
@@ -28,7 +28,7 @@
       "ja-JP": "我慢中に敏感な場所を擽って決壊を促す霊体。尿意100%以上でチビってしまい、開発度+100"
     },
     "effect": {
-      "event": "floor-end",
+      "trigger": "floor-end",
       "results": {
         "type": "stat-check",
         "expression": {
@@ -52,11 +52,11 @@
     },
     "effect": [
       {
-        "event": "floor-end",
+        "trigger": "floor-end",
         "results": { "name": "horniness", "value": 100 }
       },
       {
-        "event": "apply",
+        "trigger": "apply",
         "results": [
           { "name": "pee-incontinence", "value": 100 },
           { "name": "poo-incontinence", "value": 100 }
@@ -76,11 +76,11 @@
     },
     "effect": [
       {
-        "event": "apply",
+        "trigger": "apply",
         "results": { "name": "pee-incontinence", "value": 100 }
       },
       {
-        "event": "floor-end",
+        "trigger": "floor-end",
         "results": { "name": "horniness", "value": 100 }
       }
     ],
@@ -98,11 +98,11 @@
     },
     "effect": [
       {
-        "event": "apply",
+        "trigger": "apply",
         "results": { "name": "pee-incontinence", "value": 100 }
       },
       {
-        "event": "floor-end",
+        "trigger": "floor-end",
         "targets": { "name": "horniness", "value": 100 }
       }
     ],
@@ -119,11 +119,11 @@
     },
     "effect": [
       {
-        "event": "apply",
+        "trigger": "apply",
         "targets": { "name": "poo-incontinence", "value": -50 }
       },
       {
-        "event": "floor-end",
+        "trigger": "floor-end",
         "targets": { "name": "horniness", "value": 50 }
       }
     ],
@@ -141,11 +141,11 @@
     },
     "effect": [
       {
-        "event": "apply",
+        "trigger": "apply",
         "results": { "name": "poo-incontinence", "value": 100 }
       },
       {
-        "event": "floor-end",
+        "trigger": "floor-end",
         "results": { "name": "horniness", "value": 50 }
       }
     ],
@@ -161,8 +161,9 @@
       "en-US": "Your constitution is weakened, causing you to become incontinent when you cum.",
       "ja-JP": "絶頂する度に失禁してしまう恥ずかしい体質。開発度の増加量2倍"
     },
-    "effect": {
-      "event": "climax",
+    "on-status": {
+      "name": "climax",
+      "value": true,
       "results": [
         { "name": "urination", "value": true },
         { "name": "defecation", "value": true }
@@ -202,7 +203,8 @@
     },
     "effect": [
       {
-        "event": true,
+        "//TODO": "Need to think of a good model for tags",
+        "trigger": true,
         "results": {
           "type": "tag-check",
           "tag": "crotch-touching",
@@ -213,7 +215,7 @@
         }
       },
       {
-        "event": "floor-end",
+        "trigger": "floor-end",
         "results": {
           "type": "accident-check",
           "name": "need-to-pee",
@@ -235,7 +237,7 @@
     },
     "effect": [
       {
-        "event": "floor-end",
+        "trigger": "floor-end",
         "results": {
           "type": "accident-check",
           "value": 100,
@@ -290,7 +292,7 @@
       "en-US": "You've been hypnotized into thinking it's a good idea to expose your breasts. Add +50 [Humiliation] when in public."
     },
     "effect": {
-      "event": true,
+      "trigger": true,
       "results": {
         "type": "tag-check",
         "tag": "public",
@@ -307,7 +309,7 @@
       "en-US": "Your upper-body clothing is torn or missing so that you cannot cover your breasts. Add +50 [Humiliation] when in public."
     },
     "effect": {
-      "event": true,
+      "trigger": true,
       "results": {
         "type": "tag-check",
         "tag": "public",
@@ -326,7 +328,7 @@
       "ja-JP": "パンツが良く見えるようにスカートを捲りあげてしまう催眠暗示。人前で開発度+50。お漏らしパンツなら開発度+200"
     },
     "effect": {
-      "event": true,
+      "trigger": true,
       "results": {
         "type": "tag-check",
         "tag": "public",
@@ -359,7 +361,7 @@
       "ja-JP": "人前で開発度+50。お漏らしパンツなら開発度+200"
     },
     "effect": {
-      "event": true,
+      "trigger": true,
       "results": {
         "type": "tag-check",
         "tag": "public",
@@ -398,11 +400,11 @@
     },
     "effect": [
       {
-        "event": "apply",
+        "trigger": "apply",
         "results": { "name": "pee-incontinence", "value": 50 }
       },
       {
-        "event": "floor-end",
+        "trigger": "floor-end",
         "results": [
           {
             "type": "message",
@@ -425,11 +427,11 @@
     },
     "effect": [
       {
-        "event": "apply",
+        "trigger": "apply",
         "results": { "name": "stuck-panties", "value": true }
       },
       {
-        "event": "floor-end",
+        "trigger": "floor-end",
         "results": { "name": "horniness", "value": 100 }
       }
     ],
@@ -465,11 +467,11 @@
     },
     "effect": [
       {
-        "event": "apply",
+        "trigger": "apply",
         "results": { "name": "stained-panties", "value": true }
       },
       {
-        "event": "floor-end",
+        "trigger": "floor-end",
         "results": { "name": "humiliation", "value": 100 }
       }
     ],
@@ -505,11 +507,11 @@
     },
     "effect": [
       {
-        "event": "apply",
+        "trigger": "apply",
         "results": { "name": "skidmarked-panties", "value": true }
       },
       {
-        "event": "floor-end",
+        "trigger": "floor-end",
         "results": { "name": "humiliation", "value": 200 }
       }
     ],
