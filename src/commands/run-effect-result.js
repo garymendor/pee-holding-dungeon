@@ -3,18 +3,9 @@ import TriggerStatusEvent from "./trigger-status-event";
 import ApplyCharacterChange from "./apply-character-change";
 
 /**
- * @typedef {import('../models/character/character').default} Character
- * @typedef {import('../models/event/event-collection').default} EventCollection
- * @typedef {import('../models/status/status-collection').default} StatusCollection
+ * @typedef {import('./execute-event').ExecuteEventData} ExecuteEventData
  * @typedef {import('../models/result/effect-result').default} EffectResult
- * @typedef {Object} RunEffectResultData
- * @property {Character} character
- * @property {EventCollection} eventCollection
- * @property {StatusCollection} statusCollection
- * @property {string} eventId
- * @property {string} localeId
- * @property {Console} output
- * @property {EffectResult} result
+ * @typedef {ExecuteEventData & {result:EffectResult}} RunEffectResultData
  */
 
 class RunEffectResult {

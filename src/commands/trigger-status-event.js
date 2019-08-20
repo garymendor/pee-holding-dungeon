@@ -1,27 +1,22 @@
 import RunResultCollection from "./run-result-collection";
 
 /**
- * @typedef {import('../models/character/character').default} Character
- * @typedef {import('../models/event/event-collection').default} EventCollection
- * @typedef {import('../models/status/status-collection').default} StatusCollection
+ * @typedef {import('./execute-event').ExecuteEventData} ExecuteEventData
  */
 
 /**
- * @typedef {Object} TriggerStatusEventRequest
- * @property {Character} character
- * The character whose status effects are being triggered.
- * @property {EventCollection} eventCollection
- * @property {StatusCollection} statusCollection
- * The status effect configuration.
- * @property {string} localeId
- * @property {Console} output
- * @property {{name:string,value:boolean?}} statusIds
+ * @typedef {Object} TriggerStatusEventFields
+ * @property {Object<string,boolean>} statusIds
  * The set of status IDs to check and their values. If null, will use the character's current status.
  * @property {string} triggerId
  * The gameplay flow event trigger:
  * * `"floor-start"` - Triggers when a floor starts. Also triggers in reverse when a floor ends.
  * * `"floor-end"` - Triggers when a floor ends.
  * * `"apply"` - Triggers when a status effect is first applied.
+ */
+
+/**
+ * @typedef {ExecuteEventData & TriggerStatusEventFields} TriggerStatusEventRequest
  */
 
 /**
@@ -53,14 +48,14 @@ class TriggerStatusEvent {
       if (!status) {
         continue;
       }
-      const effect = status.effect()[triggerId];
-      if (!effect) {
+      const results = status.effect()[triggerId];
+      if (!results) {
         continue;
       }
 
       const runResult = await new RunResultCollection({
         ...request,
-        results: effect.results
+        results
       }).run();
       newCharacter = runResult.character;
     }

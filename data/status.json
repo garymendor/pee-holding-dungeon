@@ -49,7 +49,13 @@
       "ja-JP": "階層ごとに開発度+100。判定時、尿意+100%で計算"
     },
     "effect": {
-      "floor-end": { "name": "horniness", "value": 100 },
+      "floor-end": [
+        {
+          "type": "message",
+          "message": "> Ghostly hands keep rubbing my chest..."
+        },
+        { "name": "horniness", "value": 100 }
+      ],
       "apply": [
         { "name": "pee-incontinence", "value": 100 },
         { "name": "poo-incontinence", "value": 100 }
@@ -153,7 +159,7 @@
       "results": [
         {
           "type": "message",
-          "message": "It feels really good to pee! My body feels hot..."
+          "message": "> It feels really good to pee! My body feels hot..."
         },
         { "name": "horniness", "value": 100 }
       ]
@@ -179,12 +185,18 @@
           "value": 100
         }
       },
-      "floor-end": {
-        "type": "accident-check",
-        "name": "need-to-pee",
-        "value": 100,
-        "results": { "name": "horniness", "value": 100 }
-      }
+      "floor-end": [
+        {
+          "type": "message",
+          "message": "> I need to pee! ...I hold my crotch, and find myself rubbing between my legs..."
+        },
+        {
+          "type": "accident-check",
+          "name": "need-to-pee",
+          "value": 100,
+          "results": { "name": "horniness", "value": 100 }
+        }
+      ]
     },
     "saving-throw": "Healing"
   },
@@ -358,7 +370,7 @@
       "floor-end": [
         {
           "type": "message",
-          "message": "My tight panties dig deep into my slit, and I let out a soft gasp of pleasure."
+          "message": "> My tight panties dig deep into my slit, and I let out a soft gasp of pleasure."
         },
         { "name": "horniness", "value": 20 }
       ]
@@ -410,7 +422,13 @@
     },
     "effect": {
       "apply": { "name": "stained-panties", "value": true },
-      "floor-end": { "name": "humiliation", "value": 100 }
+      "floor-end": [
+        {
+          "type": "message",
+          "message": "> Ugh, my wet panties feel gross..."
+        },
+        { "name": "humiliation", "value": 100 }
+      ]
     },
     "saving-throw": false
   },
@@ -444,7 +462,13 @@
     },
     "effect": {
       "apply": { "name": "skidmarked-panties", "value": true },
-      "floor-end": { "name": "humiliation", "value": 200 }
+      "floor-end": [
+        {
+          "type": "message",
+          "message": "> EWWWWW! The mess in the seat of my panties feels disgusting!"
+        },
+        { "name": "humiliation", "value": 200 }
+      ]
     },
     "saving-throw": false
   }

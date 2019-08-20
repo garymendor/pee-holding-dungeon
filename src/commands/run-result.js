@@ -8,18 +8,9 @@ import RunAccidentResult from "./run-accident-result";
 import RunSavingThrowResult from "./run-saving-throw-result";
 
 /**
- * @typedef {import('../models/character/character').default} Character
- * @typedef {import('../models/event/event-collection').default} EventCollection
- * @typedef {import('../models/status/status-collection').default} StatusCollection
+ * @typedef {import('./execute-event').ExecuteEventData} ExecuteEventData
  * @typedef {import('../models/result/result').default} Result
- * @typedef {Object} RunResultData
- * @property {Character} character
- * @property {EventCollection} eventCollection
- * @property {StatusCollection} statusCollection
- * @property {string} eventId
- * @property {string} localeId
- * @property {Console} output
- * @property {Result} result
+ * @typedef {ExecuteEventData & {result:Result}} RunResultData
  */
 
 class RunResult {

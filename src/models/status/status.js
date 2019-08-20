@@ -1,5 +1,6 @@
 import LocalizableString from "../localizable-string";
 import ResultCollection from "../result/result-collection";
+import mapValues from "lodash/mapValues";
 
 /**
  * @typedef {import('../result/result-collection').ResultDataCollection} ResultDataCollection
@@ -12,20 +13,10 @@ class Status {
       name: new LocalizableString(data.name),
       description: new LocalizableString(data.description)
     };
-    // TODO: Effect and EffectCollection
-    if (Array.isArray(this.data.effect)) {
-      this.data.effect = this.data.effect.map(effect => ({
-        ...effect,
-        results: new ResultCollection(effect.results)
-      }));
-    } else if (this.data.effect) {
-      this.data.effect = [
-        {
-          ...this.data.effect,
-          results: new ResultCollection(this.data.effect.results)
-        }
-      ];
-    }
+    this.data.effect = mapValues(
+      this.data.effect,
+      results => new ResultCollection(results)
+    );
   }
 
   name(localeId) {

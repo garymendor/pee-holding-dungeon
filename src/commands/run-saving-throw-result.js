@@ -1,18 +1,9 @@
 import RunResultCollection from "./run-result-collection";
 
 /**
- * @typedef {import('../models/character/character').default} Character
- * @typedef {import('../models/event/event-collection').default} EventCollection
- * @typedef {import('../models/status/status-collection').default} StatusCollection
- * @typedef {import('../models/result/stat-check-result').default} SavingThrowResult
- * @typedef {Object} RunSavingThrowResultData
- * @property {Character} character
- * @property {EventCollection} eventCollection
- * @property {StatusCollection} statusCollection
- * @property {string} eventId
- * @property {string} localeId
- * @property {Console} output
- * @property {SavingThrowResult} result
+ * @typedef {import('./execute-event').ExecuteEventData} ExecuteEventData
+ * @typedef {import('../models/result/saving-throw-result').default} SavingThrowResult
+ * @typedef {ExecuteEventData & {result:SavingThrowResult}} RunSavingThrowResultData
  */
 
 class RunSavingThrowResult {

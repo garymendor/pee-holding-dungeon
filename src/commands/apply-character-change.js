@@ -21,7 +21,7 @@ import Character from "../models/character/character";
  * @typedef {Object} ApplyCharacterChangeResponse
  * @property {Character} character
  * The modified version of the requested character.
- * @property {{name:string,value:any}} statusChanges
+ * @property {Object<string,boolean>} statusChanges
  * A collection of additional property changes that were made.
  * (This may be later rolled into the status change system.)
  */
@@ -42,7 +42,7 @@ class ApplyCharacterChange {
    */
   run(request) {
     const { character, name, value: inputValue, invert } = request;
-    const response = { statusChanges: [] };
+    const response = { statusChanges: {} };
     let newCharacterData = { ...character.data };
     const value = invert ? this.invert(inputValue) : inputValue;
 
@@ -66,7 +66,7 @@ class ApplyCharacterChange {
       case "panties":
       case "trousers":
       case "skirt":
-        response.statusChanges.push({ name, value });
+        response.statusChanges[name] = value;
         if (value === null) {
           delete newCharacterData.clothes[name];
         } else {
@@ -76,22 +76,24 @@ class ApplyCharacterChange {
       // Special cases
       case "urination":
         newCharacterData.values["need-to-pee"] = 0;
-        response.statusChanges.push({ name, value: true });
+        response.statusChanges[name] = true;
         if (newCharacterData.clothes.panties) {
+          response.statusChanges["wet-panties"] = true;
           newCharacterData.status["wet-panties"] = true;
           newCharacterData.values["wetting-counter"]++;
         }
         break;
       case "defecation":
         newCharacterData.values["need-to-poo"] = 0;
-        response.statusChanges.push({ name, value: true });
+        response.statusChanges[name] = true;
         if (newCharacterData.clothes.panties) {
+          response.statusChanges["soiled-panties"] = true;
           newCharacterData.status["soiled-panties"] = true;
           newCharacterData.values["soiling-counter"]++;
         }
         break;
       default:
-        response.statusChanges.push({ name, value });
+        response.statusChanges[name] = value;
         if (typeof value === "boolean") {
           if (value === true) {
             newCharacterData.status[name] = true;

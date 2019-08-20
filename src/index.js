@@ -19,6 +19,7 @@ const statusCollection = new StatusCollection(statusData);
 const eventCollection = new EventCollection(eventsData);
 const localeId = process.env.APP_LOCALE;
 const eventId = process.env.APP_EVENT_ID || eventCollection.getRandomEventId();
+const maxFloorCount = parseInt(process.env.APP_FLOORS) || 15;
 
 console.log("Starting character state:");
 console.log(character.toString());
@@ -35,12 +36,15 @@ async function fullRun() {
     localeId,
     eventId
   };
-  while (floorCount < 15 && data.character.data.values.humiliation < 10000) {
+  while (
+    floorCount < maxFloorCount &&
+    data.character.data.values.humiliation < 10000
+  ) {
     floorCount++;
     console.log(`--- Floor ${floorCount} ---`);
-    data.eventId = eventCollection.getRandomEventId();
     const command = new ExecuteEvent(data);
     data = await command.run();
+    data.eventId = eventCollection.getRandomEventId();
     console.log("");
     console.log("---");
     console.log("");

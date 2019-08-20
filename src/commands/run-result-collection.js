@@ -1,18 +1,9 @@
 import RunResult from "./run-result";
 
 /**
- * @typedef {import('../models/character/character').default} Character
- * @typedef {import('../models/event/event-collection').default} EventCollection
- * @typedef {import('../models/status/status-collection').default} StatusCollection
+ * @typedef {import('./execute-event').ExecuteEventData} ExecuteEventData
  * @typedef {import('../models/result/result-collection').default} ResultCollection
- * @typedef {Object} RunResultCollectionData
- * @property {Character} character
- * @property {EventCollection} eventCollection
- * @property {StatusCollection} statusCollection
- * @property {string} eventId
- * @property {string} localeId
- * @property {Console} output
- * @property {ResultCollection} results
+ * @typedef {ExecuteEventData & {results:ResultCollection}} RunResultCollectionData
  */
 
 class RunResultCollection {
