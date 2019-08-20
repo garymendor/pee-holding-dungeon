@@ -1,11 +1,4 @@
-import RunEffectResult from "./run-effect-result";
-import RunEventResult from "./run-event-result";
-import RunMessageResult from "./run-message-result";
-import RunChoiceResult from "./run-choice-result";
-import RunStatCheckResult from "./run-stat-check-result";
-import RunAccidentCheckResult from "./run-accident-check-result";
-import RunAccidentResult from "./run-accident-result";
-import RunSavingThrowResult from "./run-saving-throw-result";
+import RunResult from "./run-result";
 
 /**
  * @typedef {import('../models/character/character').default} Character
@@ -79,95 +72,16 @@ class ExecuteEvent {
   runResults(results, data) {
     let newData = data;
     for (const result of results.items()) {
-      newData = this.runResult(result, newData);
+      newData = new RunResult({
+        ...newData,
+        result,
+        executeEventCommand: this
+      }).run();
       if (!newData.continue) {
         return newData;
       }
     }
     return newData;
-  }
-
-  /**
-   * @param {Result} result
-   * @param {ExecuteEventData} data
-   */
-  runResult(result, data) {
-    const resultTypeMap = {
-      event: this.runEvent,
-      effect: this.runEffect,
-      message: this.runMessage,
-      choice: this.runChoice,
-      "stat-check": this.runStatCheck,
-      "accident-check": this.runAccidentCheck,
-      accident: this.runAccident,
-      "saving-throw": this.runSavingThrow
-    };
-    const runResultMethod = resultTypeMap[result.type()];
-    if (!runResultMethod) {
-      this.data.output.error(`Not supported: ${result.type()}`);
-      return this.data;
-    }
-    return runResultMethod.call(this, {
-      ...data,
-      result,
-      executeEventCommand: this
-    });
-  }
-
-  /**
-   * @param {ExecuteEventData} data
-   */
-  runEvent(data) {
-    return new RunEventResult(data).run();
-  }
-
-  /**
-   * @param {ExecuteEventData} data
-   */
-  runEffect(data) {
-    return new RunEffectResult(data).run();
-  }
-
-  /**
-   * @param {ExecuteEventData} data
-   */
-  runMessage(data) {
-    return new RunMessageResult(data).run();
-  }
-
-  /**
-   * @param {ExecuteEventData} data
-   */
-  runChoice(data) {
-    return new RunChoiceResult(data).run();
-  }
-
-  /**
-   * @param {ExecuteEventData} data
-   */
-  runStatCheck(data) {
-    return new RunStatCheckResult(data).run();
-  }
-
-  /**
-   * @param {ExecuteEventData} data
-   */
-  runAccidentCheck(data) {
-    return new RunAccidentCheckResult(data).run();
-  }
-
-  /**
-   * @param {ExecuteEventData} data
-   */
-  runAccident(data) {
-    return new RunAccidentResult(data).run();
-  }
-
-  /**
-   * @param {ExecuteEventData} data
-   */
-  runSavingThrow(data) {
-    return new RunSavingThrowResult(data).run();
   }
 }
 
