@@ -3,8 +3,8 @@
  * @typedef {import('../models/event/event-collection').default} EventCollection
  * @typedef {import('../models/status/status-collection').default} StatusCollection
  * @typedef {import('../models/result/result-collection').default} ResultCollection
- * @typedef {import('../models/result/effect-result').default} EffectResult
  * @typedef {import('./execute-event').default} ExecuteEvent
+ * @typedef {import('../models/result/effect-result').default} EffectResult
  * @typedef {Object} RunEffectResultData
  * @property {Character} character
  * @property {EventCollection} eventCollection

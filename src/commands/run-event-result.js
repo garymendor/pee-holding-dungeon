@@ -4,6 +4,7 @@ import ExecuteEvent from "./execute-event";
  * @typedef {import('../models/event/event-collection').default} EventCollection
  * @typedef {import('../models/status/status-collection').default} StatusCollection
  * @typedef {import('../models/result/result-collection').default} ResultCollection
+ * @typedef {import('./execute-event').default} ExecuteEvent
  * @typedef {import('../models/result/event-result').default} EventResult
  * @typedef {Object} RunEventResultData
  * @property {Character} character
@@ -12,6 +13,7 @@ import ExecuteEvent from "./execute-event";
  * @property {string} eventId
  * @property {string} localeId
  * @property {Console} output
+ * @property {ExecuteEvent} executeEventCommand
  * @property {EventResult} result
  */
 
