@@ -8,7 +8,7 @@ class EventCollection {
       toPairs(data).map(([key, value]) => [key, new Event(value)])
     );
     this.rootKeysValue = toPairs(this.data)
-      .filter(([, value]) => !value.parent())
+      .filter(([, value]) => value.type() === "floor")
       .map(([key]) => key);
   }
 

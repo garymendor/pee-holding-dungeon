@@ -6,6 +6,7 @@ import StatusCollection from "./models/status/status-collection";
 import EventCollection from "./models/event/event-collection";
 import Character from "./models/character/character";
 import ExecuteEvent from "./commands/execute-event";
+import UserInput from "./ui/cli/user-input";
 
 const character = new Character({
   stats: {
@@ -56,6 +57,12 @@ async function fullRun() {
     console.log("");
     console.log(data.character.toString());
     console.log("");
+    const response = await new UserInput().prompt(
+      "Type Enter to continue or Q to quit> "
+    );
+    if (response === "q" || response === "Q") {
+      break;
+    }
   }
   console.log(`Highest floor reached: ${floorCount}`);
   console.log("");

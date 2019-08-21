@@ -1,4 +1,5 @@
 import readline from "readline";
+import UserInput from "../ui/cli/user-input";
 import RunResultCollection from "./run-result-collection";
 
 /**
@@ -37,40 +38,12 @@ class RunChoiceResult {
       const choice = result.choices()[choiceIndex];
       choices.push(choice.description(localeId));
     }
-    do {
-      choices.forEach((choice, index) =>
-        output.log(`[${index + 1}] ${choice}`)
-      );
-      // TODO: Standardize on using streams instead of process.stdin/stdout/stderr
-      // and Console separately.
-      const rl = readline.createInterface({
-        input: process.stdin,
-        output: process.stdout
-      });
-      let response;
-      try {
-        response = await new Promise(resolve =>
-          rl.question("> ", answer => resolve(answer))
-        );
-      } finally {
-        rl.close();
-      }
-      const responseNum = parseInt(response);
-      if (
-        responseNum === NaN ||
-        responseNum < 1 ||
-        responseNum > result.choices().length
-      ) {
-        continue;
-      }
-      const selectedChoice = result.choices()[responseNum - 1];
-      if (selectedChoice) {
-        return new RunResultCollection({
-          ...data,
-          results: selectedChoice.results()
-        }).run();
-      }
-    } while (true);
+    const responseNum = await new UserInput().requestChoice(output, choices);
+    const selectedChoice = result.choices()[responseNum];
+    return new RunResultCollection({
+      ...data,
+      results: selectedChoice.results()
+    }).run();
   }
 }
 

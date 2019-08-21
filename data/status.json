@@ -522,7 +522,7 @@
     "on-status": {
       "name": "panties",
       "value": null,
-      "results": { "name": "stained-panties", "value": null }
+      "results": { "name": "stained-panties", "value": false }
     },
     "saving-throw": false
   },
@@ -537,7 +537,7 @@
     "on-status": {
       "name": "panties",
       "value": null,
-      "results": { "name": "wet-panties", "value": null }
+      "results": { "name": "wet-panties", "value": false }
     },
     "effect": {
       "apply": { "name": "stained-panties", "value": true },
@@ -562,7 +562,7 @@
     "on-status": {
       "name": "panties",
       "value": null,
-      "results": { "name": "skidmarked-panties", "value": null }
+      "results": { "name": "skidmarked-panties", "value": false }
     },
     "saving-throw": false
   },
@@ -577,7 +577,7 @@
     "on-status": {
       "name": "panties",
       "value": null,
-      "results": { "name": "soiled-panties", "value": null }
+      "results": { "name": "soiled-panties", "value": false }
     },
     "effect": {
       "apply": { "name": "skidmarked-panties", "value": true },

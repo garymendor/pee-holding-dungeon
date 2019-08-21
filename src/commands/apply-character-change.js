@@ -1,4 +1,6 @@
-import Character from "../models/character/character";
+import Character, {
+  DEFAULT_CLOTHING_TYPES
+} from "../models/character/character";
 import evaluateExpression from "./evaluate-expression";
 
 /**
@@ -65,14 +67,20 @@ class ApplyCharacterChange {
         newCharacterData.values["need-to-poo"] += value / 2;
         break;
       // Clothing
+      case "shirt":
       case "panties":
       case "trousers":
       case "skirt":
-        response.statusChanges[name] = value;
+        response.statusChanges[name] = !!value;
         if (value === null) {
           delete newCharacterData.clothes[name];
+          delete newCharacterData.clothingTypes[name];
         } else {
-          newCharacterData.clothes[name] = value;
+          newCharacterData.clothes[name] = !!value;
+          if (value) {
+            newCharacterData.clothingTypes[name] =
+              typeof value === "string" ? value : DEFAULT_CLOTHING_TYPES[name];
+          }
         }
         break;
       // Special cases
@@ -108,10 +116,10 @@ class ApplyCharacterChange {
         break;
       default:
         response.statusChanges[name] = value;
-        if (typeof value === "boolean") {
+        if (typeof value === "boolean" || value === null) {
           if (value === true) {
             newCharacterData.status[name] = true;
-          } else if (value === false) {
+          } else {
             delete newCharacterData.status[name];
           }
         } else {

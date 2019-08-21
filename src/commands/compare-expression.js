@@ -4,7 +4,7 @@ class CompareExpression {
   }
 
   static run(actualValue, condition) {
-    if (typeof condition !== "object") {
+    if (typeof condition !== "object" || condition === null) {
       if (!actualValue) {
         return !condition;
       }

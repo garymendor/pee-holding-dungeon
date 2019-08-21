@@ -55,6 +55,14 @@ class RunResult {
       accident: RunAccidentResult,
       "saving-throw": RunSavingThrowResult
     };
+    if (result.data.log) {
+      output.debug(
+        "Current state: character",
+        this.data.character,
+        "result object",
+        result
+      );
+    }
     const RunSpecificResult = resultTypeMap[result.type()];
     if (!RunSpecificResult) {
       output.error(`Not supported: ${result.type()}`);

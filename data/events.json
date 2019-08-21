@@ -1,9 +1,10 @@
 {
   "End": {
-    "parent": "End",
+    "type": "special",
     "comment": "A dummy event that does nothing, allowing other events to short-circuit execution without doing anything."
   },
   "Forced Fitting Room - Lingerie and Blindfold": {
+    "type": "floor",
     "description": {
       "en-US": "Forced fitting room! I am surrounded by mirrors on all sides! A perverted outfit and blindfold appear on a hanger, and a note says that I will not be freed until I put them on and perform a humiliating pose!",
       "ja-JP": "強制試着室だ！　鏡に四方を囲まれてしまった！　用意されたアイマスクとエッチな服を着て、恥ずかしいポーズをしないと解放されない！"
@@ -124,6 +125,7 @@
     ]
   },
   "Herd of Cats": {
+    "type": "floor",
     "description": {
       "en-US": "Cats are swarming around my waist.",
       "ja-JP": "腰の高さに猫じゃらしが群生している。"
@@ -206,6 +208,7 @@
     ]
   },
   "Nopan-Only Toilet": {
+    "type": "floor",
     "description": {
       "en-US": "I found a toilet as I went through the stone dungeon! A sign on the door says \"No Panties\".",
       "ja-JP": "石造りのダンジョンを進んでいると、トイレを発見した！　ドアの文字を解読すると『下半身裸』でなければ開かないらしい。"
@@ -249,6 +252,7 @@
     ]
   },
   "Pantsing Trap": {
+    "type": "floor",
     "original": "ズリパントラップだ！　歩行中にパンツを下げられ、素っ転んでしまった！　……なかなかパンツを取り戻せない！　剥きだしの股間に視線が集まってくる！　顔が熱い！　尿意+10%　開発度+50\n\n《分岐条件：ズボン》\nお尻を見られながら頑張ったが、取り戻せず、下半身丸だしで逃げ出す羽目になった。尿意+50% 開発度+200。　染みパンを残してきたなら、開発度+500。",
     "description": {
       "en-US": "I casually walked into a pantsing trap!",
@@ -296,6 +300,7 @@
     ]
   },
   "Fairy Tea Party": {
+    "type": "floor",
     "original": "御茶会妖精だ！\n\n《招待を断る》\n妖精達の機嫌を損ねてしまった！　魔法で拘束されて全身を擽られる！　鼻先に粉薬を撒かれ、笑えば笑うほど敏感に。くしゃみも止まらない！尿意+150%。【敏感】を獲得\n\n《招待を受ける》\n美味しい紅茶とお菓子を振る舞われた。……何度飲み干しても次々におかわりを注がれてしまう！　尿意+50%。もう飲めなければ上に戻って擽りの刑。飲み続ければ尿意+200%\n\n《分岐：尿意300%以上》\nこれ以上は、もう…！　幸せそうな声を堪えながら失禁し開放感にゾクゾクしてしまった！　妖精達にからかわれ、俯いてしまった。尿意を0に。開発度+1100",
     "description": {
       "en-US": "A fairy tea party!",
@@ -428,6 +433,7 @@
     ]
   },
   "Forced Into Waitressing": {
+    "type": "floor",
     "description": {
       "en-US": "Since there is not enough man who arrived at the resting place in the dungeon, it became a helper halfway. Interact with other adventurers in a waitress style. ... the customer's feet are constantly ceased and it is difficult to return to the back. The urine started to fill and secretly slid thighs in the skirt. Urine urge +120",
       "ja-JP": "人手が足りず、半ば強引に助っ人に。ウェイトレスの格好で他の冒険者と接する。…客足が途絶えず、なかなか奥に戻れない。尿意が満ち始め、スカートの中でこっそりと太股を摺り合わせた。尿意+120"
@@ -454,7 +460,9 @@
             "poo": [
               {
                 "type": "message",
-                "en-US": "A strong urge to poo rushed in and I held my rear! I stuck out my butt unsteadily. ... I can't move one more step! Hiding my back with the silver tray ... \"Kuo ... ♡\" I shamefully soiled myself while clenching my teeth! Little brown lumps ooze down the back of my legs. I was embarrassed in front of a lot of colleagues."
+                "message": {
+                  "en-US": "A strong urge to poo rushed in and I held my rear! I stuck out my butt unsteadily. ... I can't move one more step! Hiding my back with the silver tray ... \"Kuo ... ♡\" I shamefully soiled myself while clenching my teeth! Little brown lumps ooze down the back of my legs. I was embarrassed in front of a lot of colleagues."
+                }
               },
               { "name": "defecation", "value": true }
             ],
@@ -475,6 +483,7 @@
     ]
   },
   "Child Prisoners: Pantsing": {
+    "type": "floor",
     "original": "囚われた子供達を発見した！　安全な場所まで引率する。…なかなか進めず、尿意が溜まっていく。…信頼に満ちた無垢な視線を受けて、前を抑えられない。尿意+100%\n\n《分岐条件：ズボン&パンツ》\n悪戯っ子に不意を突かれた！　豪快に穿き物をズリ降ろされてしまう！　慌ててしゃがみ込むと、膀胱に甘い振動が加わった……！　尿意+150% 開発度+50 \n\n《分岐条件：尿意280%以上》\nピュッ♡とチビった一滴が呼び水になる。滝のような勢いで漏らしてしまい、恥ずかしさのあまり泣いてしまった！　子供達の目の前で盛大に痴態を見せ、散々囃し立てられた！　尿意を0%に。開発度+800",
     "description": {
       "en-US": "I found some child prisoners! I lead them toward a safe place. ...I can't go on easily, and my need for the bathroom is growing. ...I can't hold my crotch with those innocent eyes watching me. Need to pee +100% ",
@@ -543,6 +552,7 @@
     ]
   },
   "Unholy Church": {
+    "type": "floor",
     "original": "淫祀の教会だ！股間からゾクゾクッ♡と悪寒が込み上げ、理性が溶かされていく。尿意+100\n\n《分岐条件：状態異常あり》\n治療と引き替えに聖水の提供を要求される。大聖堂の真ん中でパンツを下げられ、冷たい瓶を押し当てられ……、「んふーっ♡」と色っぽく溜め息を吐きながら、尿意を解消する。淫魔のシスターに見られながら、なみなみと注いでいく。尿意0%に。開発度+250。状態異常1つ回復\n\n《分岐条件：状態異常なし》\nシスター服の淫魔に騙され、祝福を受けることに。【聖水サーバー】を取得（いつでも聖水を提供できる奇蹟の体質。尿意の初期値を100%に）",
     "description": {
       "en-US": "A depraved church! A chill runs down my crotch and my sanity flees. Need to pee +100",
@@ -584,6 +594,7 @@
     ]
   },
   "Summon Trap: Molestation": {
+    "type": "floor",
     "original": "召喚の罠だ！　自分の分身が３人も現れた！\n\n瞬く間に羽交い締めにされ、弱点を知り尽くした手捌きで愛撫され、こちょぐられる。\n\n我慢していることも見抜かれ、たっぷり揉み解されてしまった。尿意+200%　開発度+300pt。\n\n《分岐条件：開発度2000以上》\nおしっこ我慢が気持ちよくなりはじめていることを指摘され、否定できずに顔を赤くしてしまった。開発度+100pt。【我慢好き】を獲得。\n",
     "description": {
       "en-US": [
@@ -615,6 +626,164 @@
           },
           { "name": "desperation-fetish", "value": true },
           { "name": "humiliation", "value": 100 }
+        ]
+      }
+    ]
+  },
+  "Summon Trap: Lewd Behavior": {
+    "original": "召喚の罠だ！　自分の分身が３人も現れた！\n\n1人は服を脱ぎ捨てて逃げ去り、1人は近くに居た冒険者に恥ずかしい秘密を暴露し、1人は他の冒険者に逆セクハラして回る。\n\n真っ赤になりながら全員倒して回る頃には妙な噂を立てられてしまった。　尿意+180%　開発度+200pt。\n\n《分岐条件：開発度2000以上》\n酷い噂も、あながち嘘じゃないのが困りものだ。更に開発度+1000pt。",
+    "type": "floor",
+    "description": {
+      "en-US": [
+        "It's a summoning trap! Three images of myself have appeared!",
+        "One strips naked and runs away, one reveals an embarrassing secret about me to a nearby adventurer, and one begins sexually harrassing nearby male adventurers.",
+        "I defeat all of them while blushing, but around that time, some strange rumors about me started. Need to pee +180, Humiliation +200."
+      ],
+      "ja-JP": [
+        "召喚の罠だ！　自分の分身が３人も現れた！",
+        "1人は服を脱ぎ捨てて逃げ去り、1人は近くに居た冒険者に恥ずかしい秘密を暴露し、1人は他の冒険者に逆セクハラして回る。",
+        "真っ赤になりながら全員倒して回る頃には妙な噂を立てられてしまった。　尿意+180%　開発度+200pt。"
+      ]
+    },
+    "results": [
+      { "name": "need-for-bathroom", "value": 180 },
+      { "name": "humiliation", "value": 200 },
+      {
+        "type": "stat-check",
+        "name": "humiliation",
+        "value": { "$gt": 2000 },
+        "results": [
+          {
+            "type": "message",
+            "message": {
+              "en-US": "Though the rumors about me were cruel, I couldn't convince anyone that they were lies. Humiliation +1000.",
+              "ja-JP": "酷い噂も、あながち嘘じゃないのが困りものだ。更に開発度+1000pt。"
+            }
+          },
+          { "name": "humiliation", "value": 1000 }
+        ]
+      }
+    ]
+  },
+  "Pee-Prevention Amulet": {
+    "original": "アイテムテレポーターだ！秘所に禁止の呪符を張られてしまった！貼っている間はおしっこできず、自分では剥がせない！尿は限界より溜まらず、排泄欲だけが昂ぶっていく！尿意を999%に\n\n《分岐条件：開発度1700pt未満》\n赤面しながら休憩所に辿り着き、トイレで女性冒険者に剥がしてもらう。その瞬間、恥ずかしそう顔を伏せながら、お漏らしというゴールを受け入れてしまった！　尿意を0%に。開発度+700。\n\n《分岐条件：開発度1700pt以上》\n早く出したくて正気を失っている。股を開いてスライムを挑発してしまい、お尻の穴ばかりを責められる！9時間後に剥がされて大放尿！尿意を0%に。開発度+1800\n",
+    "type": "floor",
+    "description": {
+      "en-US": "Item teleporter! A cursed prevention amulet has been attached to the crotch of my panties! I can't pee while it's stuck there, and I can't remove it myself! My bladder is stretched beyond the limit, and I only want to pee! Need to pee set to 999%.",
+      "ja-JP": "アイテムテレポーターだ！秘所に禁止の呪符を張られてしまった！貼っている間はおしっこできず、自分では剥がせない！尿は限界より溜まらず、排泄欲だけが昂ぶっていく！尿意を999%に"
+    },
+    "results": [
+      { "name": "need-to-pee", "value": ["$sub", 999, "need-to-pee"] },
+      {
+        "type": "stat-check",
+        "name": "humiliation",
+        "value": { "$gt": 1700 },
+        "results": [
+          {
+            "type": "message",
+            "message": {
+              "en-US": "I go insane because I want to end it as soon as I can. I spread my legs and provoked a slime, but only my butthole is prodded! After 9 hours it's finally peeled off and I pee my panties intensely! Humiliation +1800.",
+              "ja-JP": "早く出したくて正気を失っている。股を開いてスライムを挑発してしまい、お尻の穴ばかりを責められる！9時間後に剥がされて大放尿！尿意を0%に。開発度+1800"
+            }
+          },
+          { "name": "urination", "value": true },
+          { "name": "humiliation", "value": 1800 }
+        ],
+        "elseResults": [
+          {
+            "type": "message",
+            "message": {
+              "en-US": "While blushing, I arrive at a rest area and have a female adventurer take it off in the bathroom. At that moment, while lowering my embarrassed face, I accepted that I was going to wet myself. Need to pee 0, +700 Humiliation.",
+              "ja-JP": "赤面しながら休憩所に辿り着き、トイレで女性冒険者に剥がしてもらう。その瞬間、恥ずかしそう顔を伏せながら、お漏らしというゴールを受け入れてしまった！　尿意を0%に。開発度+700。"
+            }
+          },
+          { "name": "urination", "value": true },
+          { "name": "humiliation", "value": 700 }
+        ]
+      }
+    ]
+  },
+  "Pop Quiz": {
+    "original": "強制着替えの罠だ！　超ミニなセーラー服を着せられてしまった！　……目の前の筆記問題を解けば元に戻るらしい。\n\n《分岐条件：尿意230%以上》\nちゃんと考えれば解けそうだが、……おしっこがしたくて集中できない。膝を摺り合わせたり、貧乏揺すりしながら耐える。しかし、「じょばばばば♡」と温かい汁をクロッチで暴れさせながら、恍惚としてしまった！　木製の椅子からおしっこが滴っていく。……その上時間切れで赤点になってしまった！　お仕置き罠が作動し、服の内側に呪いの玩具を仕込まれる。尿意0%に。開発度+400。【三点責め】を取得（乳首と淫核に振動クリップを付けられ、階層ごとにイかされて開発度+100）",
+    "type": "floor",
+    "description": {
+      "en-US": "Forced change of clothes! I'm now wearing a super-mini sailor suit! ...It seems that if I solve the test in front of me, I'll be changed back.",
+      "ja-JP": "強制着替えの罠だ！　超ミニなセーラー服を着せられてしまった！　……目の前の筆記問題を解けば元に戻るらしい。"
+    },
+    "results": [
+      { "name": "need-for-bathroom", "value": 100 },
+      {
+        "type": "stat-check",
+        "name": "panties",
+        "value": null,
+        "results": {
+          "type": "message",
+          "message": "At least the spell gave me some panties to wear... though if I can't solve the test quickly..."
+        }
+      },
+      {
+        "type": "stat-check",
+        "name": "wet-panties",
+        "value": true,
+        "results": {
+          "type": "message",
+          "message": "At least the spell gave me some clean panties to wear... well, clean for now..."
+        },
+        "elseResults": {
+          "type": "stat-check",
+          "name": "soiled-panties",
+          "value": true,
+          "results": {
+            "type": "message",
+            "message": "At least the spell gave me some clean panties to wear... well, clean for now..."
+          }
+        }
+      },
+      { "name": "panties", "value": "$Strawberry" },
+      { "name": "wet-panties", "value": false },
+      { "name": "soiled-panties", "value": false },
+      {
+        "type": "accident-check",
+        "value": 230,
+        "results": [
+          {
+            "type": "accident",
+            "pee": [
+              {
+                "type": "message",
+                "message": {
+                  "en-US": "It seems to be solvable if I could think properly, but ... I can't concentrate because I want to pee. I hold it while rubbing my knees together and shaking unconsciously. However, \"Jobababa...♡\" While violently flooding my crotch with warm liquid, I was in a blissful trance! Pee dripped from the wooden chair.",
+                  "ja-JP": "ちゃんと考えれば解けそうだが、……おしっこがしたくて集中できない。膝を摺り合わせたり、貧乏揺すりしながら耐える。しかし、「じょばばばば♡」と温かい汁をクロッチで暴れさせながら、恍惚としてしまった！　木製の椅子からおしっこが滴っていく。"
+                }
+              },
+              { "name": "urination", "value": true }
+            ],
+            "poo": [
+              {
+                "type": "message",
+                "message": {
+                  "en-US": "It seems to be solvable if I could think properly, but ... I can't concentrate because I want to poo. I hold it while pressing my butt against the chair and shaking unconsciously. However, \"Prprprpffft...♡\" While violently filling the seat of my panties with warm mud, I was in a blissful trance!",
+                  "ja-JP": "ちゃんと考えれば解けそうだが、……うんちがしたくて集中できない。???"
+                }
+              },
+              { "name": "defecation", "value": true }
+            ],
+            "both": [
+              {
+                "type": "message",
+                "message": {
+                  "en-US": "It seems to be solvable if I could think properly, but ... I can't concentrate because I want to pee and poo. I hold it while rubbing knees and shaking unconsciously. However, \"Jobababa...♡\" While violently flooding my crotch with warm liquid, and the seat of my panties with warm mud, I was in a blissful trance! Pee dripped from the wooden chair.",
+                  "ja-JP": "ちゃんと考えれば解けそうだが、……おしっことうんちがしたくて集中できない。膝を摺り合わせたり、貧乏揺すりしながら耐える。しかし、「じょばばばば♡」と温かい汁をクロッチで暴れさせながら、恍惚としてしまった！　木製の椅子からおしっこが滴っていく。"
+                }
+              },
+              { "name": "urination", "value": true },
+              { "name": "defecation", "value": true }
+            ]
+          },
+          { "name": "trousers", "value": null },
+          { "name": "shirt", "value": "$Too-Short Schoolgirl Blouse" },
+          { "name": "skirt", "value": "$Mini Schoolgirl Skirt" },
+          { "name": "humiliation", "value": 400 }
         ]
       }
     ]

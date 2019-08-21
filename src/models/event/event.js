@@ -13,6 +13,14 @@ class Event {
   }
 
   /**
+   * Gets the type for this event.
+   * @returns {string}
+   */
+  type() {
+    return this.data.type;
+  }
+
+  /**
    * Gets the parent event for this event.
    *
    * @returns {string}

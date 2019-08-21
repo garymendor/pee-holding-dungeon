@@ -13,6 +13,9 @@ const EvaluateExpression = {
 
 function evaluate(context, expression) {
   if (typeof expression === "string") {
+    if (expression.startsWith("$")) {
+      return expression.substring(1);
+    }
     return context[expression];
   }
   if (!Array.isArray(expression)) {

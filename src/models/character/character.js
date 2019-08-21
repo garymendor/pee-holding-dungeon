@@ -1,3 +1,10 @@
+export const DEFAULT_CLOTHING_TYPES = {
+  shirt: "Sorcerer's Blouse",
+  trousers: "Denim Jeans",
+  skirt: "Sorcerer's Dress",
+  panties: "White Cotton"
+};
+
 class Character {
   constructor({
     name = "Sample Character",
@@ -13,7 +20,12 @@ class Character {
       "soiling-counter": 0
     },
     status = {},
-    clothes = { skirt: true, panties: true }
+    clothes = { shirt: true, skirt: true, panties: true },
+    clothingTypes = {
+      shirt: "White Blouse",
+      skirt: "Sorcerer's Dress",
+      panties: "White Cotton"
+    }
   }) {
     this.data = {
       name,
@@ -21,6 +33,7 @@ class Character {
       values,
       status,
       clothes,
+      clothingTypes,
       savingThrows: {
         ...stats,
         Force: Math.max(stats.STR, stats.DEX),
@@ -51,6 +64,14 @@ class Character {
   }
 
   toString() {
+    let clothingString = "";
+    for (const clothing in this.data.clothes) {
+      clothingString =
+        clothingString + ` ${clothing}: ${this.data.clothingTypes[clothing]}`;
+      if (!this.data.clothes[clothing]) {
+        clothingString += " (removed)";
+      }
+    }
     return [
       `Name: ${this.data.name}`,
       `Stats: ${JSON.stringify(this.data.stats)}`,
@@ -64,9 +85,7 @@ class Character {
         this.data.values["soiling-counter"]
       }`,
       `Humiliation: ${this.data.values.humiliation}`,
-      `Clothes: ${Object.keys(this.data.clothes).filter(
-        clothes => this.data.clothes[clothes]
-      )}`,
+      `Clothes:${clothingString}`,
       `Status effects: ${Object.keys(this.data.status).filter(
         status => this.data.status[status]
       )}`
