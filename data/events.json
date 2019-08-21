@@ -73,7 +73,8 @@
             "type": "message",
             "message": {
               "en-US": "I rub my thighs together, but can’t hold it any longer. A shameful pool spreads in the little room, and my hand between my legs makes me feel good.",
-              "ja-JP": "内股を摺り合わせ、耐えていたが……。羞恥で半べそになりながら失禁して、気持ちよさそうに股間をヒクつかせてしまった！　　小部屋の中に羞恥の水溜まりが広がっていく。"
+              "ja-JP": "内股を摺り合わせ、耐えていたが……。羞恥で半べそになりながら失禁して、気持ちよさそうに股間をヒクつかせてしまった！　　小部屋の中に羞恥の水溜まりが広がっていく。",
+              "ja-J2": "内股を摺り合わせ、耐えていたが……。「ぢょろろろろ……♡」下着の中に情けなくお漏らしして気が抜けてしまった！　小部屋の中に羞恥の水溜まりが広がっていく。尿意を0に、開発度+300。再選択"
             }
           },
           { "name": "urination", "value": true },
@@ -123,6 +124,10 @@
         ]
       }
     ]
+  },
+  "Forced Fitting Room: Micro Bikini": {
+    "original": "強制試着室だ！　鏡に四方を囲まれてしまった！　用意されたマイクロビキニに着替え、恥ずかしいポーズをしないと解放されない！\n《選択分岐：指示に逆らう》\n尿意+10%。再選択\n\n《分岐条件：尿意300%以上》\n内股を摺り合わせ、耐えていたが……。赤面した顔を伏せながら恥ずかしそうに漏らしてしまった！　小部屋の中に羞恥の水溜まりが広がっていく。尿意を0に、開発度+300。再選択\n\n《選択分岐：指示に従う》\n30秒ポーズを維持すると、マジックミラーが消えて解放される。外には野次馬が何人も。……顔が真っ赤になってしまった！　開発度+100",
+    "//": "The forced fitting room, this time with a micro bikini."
   },
   "Herd of Cats": {
     "type": "floor",
@@ -207,6 +212,14 @@
       { "name": "horniness", "value": 700 }
     ]
   },
+  "Deep Bushes: Naughty Ivy": {
+    "original": "深い茂みを見つけた！　ここなら用を足せそうだ……。尿意+30%\n\n《分岐条件：尿意100%以上》\nガサガサと中に分け入って、気恥ずかしげにパンツを下ろす。そっとしゃがみ込み、「はぅぅ♡」気持ち良さそうな蕩け顔を伏せつつ、放尿を開始する。……その途端、ツタ触手の群れが正体を現し、誰にも見えないところで散々虐められ、おしっこしながらイかされてしまった！　尿意0%に。開発度+200",
+    "//": "You find some tall grass to pee in. If you use it, tentacles come and molest you. But at least you didn't have an accident. Pretty mild for this dungeon, really."
+  },
+  "Rest Area: Odd One Out": {
+    "original": "休憩所が設営されている！　仮設トイレは長蛇の列だが、よく見ると一つだけ誰も使ってないものがあった。少し怪しいが……\n\n《分岐条件：尿意100%以上》\n我慢しきれず中に飛び込んだ。和式トイレに跨がり、幸せそうな声を堪えながら放尿しはじめ、開放感にゾクゾクと震える。……その瞬間、回りの壁や便器が全て消えていく！　幻惑の罠だった！　休憩所に居た人達に好奇の目で見られながら、長々と野外放尿を披露してしまった！　尿意を0%に。開発度+350。\n\n《分岐条件：それ以外》\nその場で足踏みしながら列に耐えきり、尿意を0%に。開発度-100。",
+    "//": "A pleasant one, this. A bunch of public toilets, and one of them doesn't seem to be getting used. If you need to pee much at all, you'll use it anyway, and it'll disappear and expose you in mid-pee. If you're not too desperate, you get to use the toilet normally - probably one of the few places in the dungeon where this happens."
+  },
   "Nopan-Only Toilet": {
     "type": "floor",
     "description": {
@@ -250,6 +263,45 @@
       { "name": "defecation-nopan", "value": true },
       { "name": "wedgie", "value": true }
     ]
+  },
+  "Toilet in Use": {
+    "original": "トイレを発見した！　しかし使用中だった！　暫く待ってみる。　尿意+20。\n\n《分岐条件：尿意200%以上》\nなかなか開かないが、諦めきれない。その場でしゃがみ込み、踵を股間に押し当てて13分も我慢していたが、一向に開く気配がない。……ようやく鍵が回ったが、中から誰も出てこない。不思議に思って扉を開けてみると、ただの壁があるだけだった！　ダミートイレにまんまと騙されてしまった！　尿意+70。\n",
+    "//": "A toilet that is apparently in use. If you need to go badly enough, it eventually unlocks, only to turn out that there's no toilet in there."
+  },
+  "Puzzle Toilet": {
+    "original": "遺跡風のフロアを進んでいると、トイレを発見した！　扉を開くには一定の法則で石板を並び替えなければならない。足をクロスさせながら謎を解く\n\n《分岐条件：尿意200%以上》\nおしっこがしたくて集中できない！　……急に溢れたおしっこに「ふわぁぁぁ♡」と困惑しながら、盛大におパンツを汚してしまった！　開発度+230。\n\n《分岐条件：尿意200%未満》\nなんとか正解に辿り着いた！　トイレに屈み込んで、安堵の息を漏らしながら、滝のような勢いでおしっこしはじめる。……気の抜けた瞬間を狙って、こっそりと呪いが発動した。尿意を0%に。【ゆるゆる】を取得（おしっこを我慢しづらい恥ずかしい体質。分岐時、尿意+100%で計算）",
+    "//": "Solve the moving block puzzle to go to the bathroom! If you can't solve it, you go to the bathroom in your panties. If you do, though, you get hit with an incontinence curse..."
+  },
+  "Casino Toilet": {
+    "original": "カジノを発見した！…トイレを借りようとするとカジノ利用者しか使えないと言われ、少し遊ぶことに。……こんなときに大勝ちして、フロア中の注目を集めてしまう！　内股をプルプルさせながらポーカーフェイスで我慢した！　尿意+100%\n\n《分岐条件：尿意270%以上》\n大勢の観客に見守られていて「おトイレ」と言い出すのは恥ずかしい！　無情にもチップの山は増えていき……、気持ちよさを隠すように俯きながら、黄金水でクロッチを激しく震わせてしまった！　革張りの椅子に恥ずかしい水溜まりができていく。ホールをどよめかせてしまった！　尿意を0%に。開発度+350。",
+    "//": "The casino won't let you use the toilet unless you're a customer. If you already need to go badly enough, you end up having an accident."
+  },
+  "Toilet Trap: Orgasm Incontinence": {
+    "original": "機械仕掛けのフロアでトイレを発見した！　尿意+30\n\n《分岐条件：尿意150%以上》\n便座に腰掛けると、がっちり拘束されてしまった！　両胸にハンド触手が伸びてきて、いやらしく揉み解される！　モニターには『乳首アクメをキメながらお漏らしで解除』と書いてある！　……1回目の絶頂と同時に、恥ずかしさを綯い交ぜにした蕩け顔で気持ちよさそうにお漏らししてしまった！　敏感な先っぽを思い切り抓られ、仰け反ってイき続ける。……変な癖を付けられてしまった！　尿意を0%に。開発度+800。【お漏らし癖】を取得（絶頂する度に失禁してしまう恥ずかしい体質。開発度の増加量2倍）",
+    "//": "This delightful little number applies the [Orgasm Incontinence] debuff. Won't be as interesting until I start including some 'climax' events."
+  },
+  "Wooden Horse Trap: Whipping": {
+    "original": "キャスター付き三角木馬だ！　ギャグボールを付けられた上、亀甲縛りで拘束される！　前のめりの姿勢で鋭角にきゅんきゅん♡と食い込んでしまう！　利尿剤入りのローションが塗られていて腰を浮かせられないっ！　木馬は人の居る方へガタゴトと移動を開始する！　尿意+130%。開発度+800pt\n\n《分岐条件：尿意200%以上》\n股間の疼きが抑えられない…！　急に溢れたおしっこに「ふわぁぁぁ♡」と困惑しながら、盛大におパンツを汚してしまった！　衆目に曝されながら温かい物を漏らしてしまう！　　木馬は仕置きモードに移行。突きだしたお尻に何度も鞭が振われた。尿意を0%に。開発度+2200pt【ドM】を取得"
+  },
+  "Bear Trap": {
+    "original": "トラバサミだ！　バチンッと足を噛んだそれは強力なゴム製だった。しゃがんで抉じ開けようとすると、床から股間に目掛けてピューッ♡と利尿液が噴き出した！　避けられない！　尿意+180%\n\n《分岐条件：尿意220%以上》\nアソコに踵を押し付け、色っぽく呼吸を乱しながら我慢していたが……、悔しさを噛みしめながら「じゅわわ……♡」と漏らしてしまった！　ホカホカの尿溜まりを作っていく……。　尿意を0%に。開発度+250。",
+    "//": "A kinder and gentler bear trap - instead of breaking your ankles, it just sprays your crotch with diuretic drugs and almost guarantees you'll have an accident."
+  },
+  "Clothes-Eating Slime Trap": {
+    "original": "落とし穴だ！　腰まで埋まってしまった！　中には冷たいスライムが入っていて、ニュルニュルにされる……。何とか藻掻いて這い出すと、下半身がスースーする。装備を溶かされてしまった！　お腹が冷やされ、ぶるっと震えた。……新しい服を見つけなければ。　尿意+30。【ローション】を取得\n\n【ローション】全身ぬるぬるで性感が伝わりやすい状態。滑りが良く、あらゆる責めを受け入れやすい。開発度の増加量が2倍に。",
+    "//": "The classic clothes-eating slime trap, only this one gives you the [Lotion] debuff, which apparently makes you slippery, and makes you extra horny if you get your sensitive bits rubbed."
+  },
+  "Parasitic Slime: Bladder Invasion": {
+    "original": "落とし穴だ！　腰まで埋まってしまった！　中には生温いスライムが入っていて、３つの恥ずかしい穴をネチャネチャに弄られる。快感に悶えながら時間をかけて這い出すと、下半身が妙に重たい。スライムの一部に寄生されてしまったようだ。　尿意+50。開発度+100。【寄生スライム】【ゼリー】を取得\n\n【寄生スライム】膀胱の中にスライムが居着いてしまった。お腹を圧迫され、常に尿意を感じてしまう。尿意リセット時の初期値を+50%。\n【ゼリー】おしっこが半ゼリー状になり、排尿の度に尿道口を刺激される。柔らかくほぐされて、変なところが性感帯になってしまいそうだ。開発度の増加量が2倍に。",
+    "//": "This time the slime invades your bladder, and sets your bladder level to 50% instead of 0 when you pee."
+  },
+  "Parasitic Slime: Succubus Assistance": {
+    "original": "寄生スライムだ！　水滴のような存在が背中を伝って秘所に滑り込む。淫核に侵入され、包皮の奥の方から思い切り扱かれてしまう！　圧倒的な快感でイキっぱなしにされ、腰砕けに！　指ではうまく取り出せず、クリオナのようになってしまった！　…通りかかった妖しげなサキュバスに「吸い出してあげようか」と提案される\n\n《分岐条件：はい》\n淫魔に勃起したクリを舐め転がされ、「ヂューッ♡」と吸われる。『治療』はなかなか終わらず、尿道にも悪戯され…。尿意を0に、開発度+450\n\n《分岐条件：いいえ》\n【淫核責め】を取得（階を進む度に淫核でイかされ、開発度+100）",
+    "//": "A parasitic slime attaches to your crotch (naturally) and starts molesting you. A succubus offers to help, and of course molests you quite sweetly in the process. (It turns out that クリオナ is 'clit-onna', a girl who is obsessed with masturbating.)"
+  },
+  "Puppeteer Trap": {
+    "original": "闘技場に到達した。パペットマスターと戦闘。……人形と戦っている内に魔法の糸をつけられ、運動機能を支配された！　身体が勝手に動いて、観客にパンツを見せつけてしまう……！　顔を真っ赤にしながらエッチなポーズを取り続け、闘技場を大いに沸かせた！　開発度+70。お漏らしパンツなら+300。",
+    "//": "A doll monster turns you into a puppet and makes you show off your panties."
   },
   "Pantsing Trap": {
     "type": "floor",
@@ -298,6 +350,22 @@
         "results": [{ "name": "humiliation", "value": 500 }]
       }
     ]
+  },
+  "Monster: Aphrodisiac Slime": {
+    "original": "ピンクスライムが降ってきた！　頭に取り憑かれ、強引にスライムゼリーを飲まされてしまった！　アソコがむずむずしてくる……！　尿意+55。【催淫】を取得\n\n【催淫】いやらしい疼きが収まらず、エッチな妄想が止まらない。「股間を押えた」際、無意識に弄って気持ちよくなってしまい、開発度+100。",
+    "//": "Pink slime lands on you, and you have to drink it to keep from suffering. Turns out the jelly is an aphrodisiac, astonishingly enough."
+  },
+  "Monster: Electric Parasite": {
+    "original": "肉壁の横穴を這って進む。……電流寄生虫が現れた！　回避できず服の中に潜り込まれてしまった！\n\n秘所に取り付かれ、ビリビリした痛気持ち良い電撃を浴びせられる！　引き剥がせない……！　尿意+80%\n\n《分岐条件：尿意250%以上》\n下半身が甘く痺れ、力が入らない……！　「くぅ……♡」と可愛らしい声を抑えながら気持ちよさそうにお漏らししてしまった！　膀胱の奥まで快楽電流が遡り、排尿の性感が何十倍にも増幅する！　蕩けきった顔で痙攣し続けた！　尿意を0に【ドM】【ゆるゆる】【尿道性感】を取得",
+    "//": "An electric parasite that slips into your crotch and zaps you in the pussy. If it makes you pee, you also gain [Masochist], [Weak Bladder], and [Sensitive Urethra]. I may make an ass-invading parasite to give the number two package."
+  },
+  "Dungeon Maid: Stuck in Wall": {
+    "original": "抜け穴をくぐろうとして失敗し、壁尻状態になってしまった！　……ダンジョンメイドが通りかかり\n\n《分岐条件：お漏らし0回》\n脱出を手伝ってもらった！　……手付きが少しいやらしかったような。開発度+30\n\n《分岐条件：それ以外》\nいつも掃除させられている仕返しに、突きだしたお尻をスパンキングされてしまった！　尻頬に真っ赤な手形をつけられた。尿意+50%。開発度+50%。",
+    "//": "The dungeon maid ones took me a little figuring out, but apparently the dungeon has a cleaning staff that gets annoyed with the adventurers who keep leaving puddles everywhere, so if you've had any accidents, they punish you. In this installment, you're stuck in a wall; if you haven't had accidents, she helps you, but if you have, she just slaps you on the ass."
+  },
+  "Wind Fairy": {
+    "original": "風の妖精に遭遇した。耳元にふーっ♡と息を吹きかけられ、思わずエッチな声を上げてしまった！　妖精はクスクス笑い、つむじ風を纏って消えていく。尿意+30%\n\n《分岐条件：スカートを穿いている》\n突然足元から風が吹き上げ、ふわり♡とスカートが捲れてお尻が丸見えに！　慌てて撫でつけると、今度は前をフワッと捲られてしまう！　悪戯な妖精に気に入られ、油断するとスカートの中を晒されるようになった！　【下着暴露】を取得。（人前で発動して開発度+50。お漏らしパンツなら開発度+200）",
+    "//": "A wind fairy teases you - if you're wearing a skirt, she blows your skirt up and keeps it up."
   },
   "Fairy Tea Party": {
     "type": "floor",
@@ -432,7 +500,31 @@
       }
     ]
   },
-  "Forced Into Waitressing": {
+  "Trick or Treat": {
+    "original": "トリックオアトリート！　モンスターの着ぐるみを着た子供霊が沢山現れた！\n\n《分岐条件：お菓子を持ってる》\n1つ消費して、この判定をやり直す。\n\n《分岐条件：お菓子を持ってない》\n一斉にイタズラ魔法をかけられる！　胸がはち切れんばかりに大きくなり、敏感な場所がビンビンに立ち上がってしまった！　そこを振動クリップで摘ままれる！　ちゃぷっ♡とお腹が重くなった！　お股から力が抜ける！　ぬるぬるをぶっかけられ、衣服がスケスケに！　尿意+300%【催淫】【乳牛】【敏感】【三点責め】【歩く湧水】【ゆるゆる】【ローション】を取得",
+    "//": "Child spirits in monster costumes come trick-or-treating. If you don't have enough treats for all of them, you get 'tricked' with a veritable cornucopia of status effects. 'Walking Spring' looks promising - it should probably make your bladder fill up every level."
+  },
+  "Treasure Chest: Breast-Groping Hand": {
+    "original": "宝箱だ！　開くとゴーストハンドが飛びかかってきた！　服を擦り抜けて、胸を揉みしだかれてしまう！　……剥ぎ取ろうとしても触れない！　開発度+50。【乳揉みハンド】を取得。\n\n【乳揉みハンド】胸に取り憑いた一対のゴーストハンド。霊体なので取り外せない。探索中にいやらしくマッサージされ、先っぽを抓まれて、階層ごとにイかされ開発度+50。",
+    "//": "Pretty straightforward. Open a treasure chest, have invisible hands constantly fondling your boobs. This one goes GREAT with Dairy Cow <3"
+  },
+  "Treasure Bag: Tickling Hand": {
+    "original": "手封じの罠だ！　万歳の姿勢で拘束されてしまった！　ゴーストハンドが現れた！　無防備な腋の下や脇腹を擽られてしまう！　敏感な窪みをほじくられ、……執拗な責めに笑いを堪えきれない！　尿意+150 \n\n《分岐条件：尿意220%以上》\n身を捩らせて大笑い。必至に内股を締めて尿意に耐えていたが……長々とお漏らしし、癖なるほどのいけない快楽を味わってしまった！　温かい液体が足を伝っていく。まともに悔しがることすら許されず、擽られ続けた。尿意を0%に。開発度+400。【こちょばしハンド】を取得。（我慢中に敏感な場所を擽って決壊を促す霊体。尿意100%以上でチビってしまい、開発度+100）",
+    "//": "Open a sealed bag, get a hand that tickles you. If you need to go badly enough, it makes you have an accident and then stays with you."
+  },
+  "Treasure Chest: Cursed Panties": {
+    "original": "宝箱だ！　中には真新しい縞パンが入っていた！\n\n《分岐条件：お漏らしパンツ》\n濡れた下着を履き替える。…キュッ♡と締まり、脱げなくなってしまった！呪いの装備だったようだ。生温い舌を割れ目に這わされ、お豆を吸われる感触に身悶えする！瞬く間に恥ずかしいシミを作ってしまった！【憑依パンツ】を取得（呪いの装備に股間を責められ、階層を進むごとに開発度+100）},",
+    "//": "A treasure chest with a change of panties, such a tempting treat in this dungeon. Of course, you can't take them off and it starts molesting your crotch. Implementing this will be tricky, because it needs to disable any branches that involve removing panties."
+  },
+  "Banana Peel: Miniskirt": {
+    "original": "バナナの皮だ！　派手に転んで大開脚！　…カチリッ！　お尻で罠を作動させ、ミニスカメイド服を着せられた！　……こっそりと背中には『お漏らしXX回目♡』の張り紙が縫い付けられ、シルクのパンツが丸見えになっている。【下着暴露】を取得。\n\n【下着暴露】スカートが捲れあがり、パンチラしている状態。人前で開発度+50。お漏らしパンツなら開発度+200。",
+    "//": "You slip on a banana peel and get your clothes replaced with a maid uniform with a skirt that's way too short to hide your panties, plus a sign on your back saying [Wetting XXth]. A good use for the 'exposed-panties-damage' status."
+  },
+  "Cowgirl Trap": {
+    "original": "セルフ搾乳の罠だ！胸がたゆんっと大きく膨らみ、先っちょがビリビリと痺れだした！その上カウガール服を着せられている！…皮手袋を嵌めた両手が独りで動き、星条旗ビキニから溢れそうな巨乳を揉みしだく。自分のものとは思えない巧みな手付きで乳腺をマッサージされ、気持ちよくなってしまう！ビンビンに立ち上がった乳首をコリコリほぐされ、ビュビュッ♡とミルクを溢れさせてしまった！快楽に抗って手袋を脱ぐが、…中身が入っているかのように搾乳を続ける。【乳牛】【乳揉みハンド】を取得。（階層ごとに開発度+100。判定時、尿意+100%で計算）",
+    "//": "Speaking of Dairy Cow, this one gives you both Dairy Cow and ghost boob hands. Two lewd tastes that lewd great together!"
+  },
+  "Waitressing: Press-ganged": {
     "type": "floor",
     "description": {
       "en-US": "Since there is not enough man who arrived at the resting place in the dungeon, it became a helper halfway. Interact with other adventurers in a waitress style. ... the customer's feet are constantly ceased and it is difficult to return to the back. The urine started to fill and secretly slid thighs in the skirt. Urine urge +120",
@@ -481,6 +573,25 @@
         ]
       }
     ]
+  },
+  "Waitressing: Spilled Milk": {
+    "original": "休憩所を手伝うことに。ウェイトレスの格好で他の冒険者と接する。…蒐集品を運ぼうとして手を滑らせ、白濁した薬品を被ってしまった！…その瞬間、おっぱいがバインッと膨らみ、前ボタンをはちきった！…どうやってもシャツに収められない！…その上、先っぽからミルクが滲み出す様子を大勢に見られてしまった！開発度+200。【乳牛】を取得\n\n《分岐条件：【下着暴露】あり》\nスカートを椅子に引っかけたり、大股開きで転んだりして、何度もパンチラしてしまった！…次を期待するような視線が突き刺さり落ち着かない。尿意+50%。開発度+150。",
+    "//": "While doing the waitress thing, you spill a cloudy chemical on yourself and your boobs swell up and burst your top. Good ol' Dairy Cow."
+  },
+  "Waitressing: Busty Barmaid Curse": {
+    "original": "ドリンクサーバーの呪いだ！胸がたゆんっと大きく膨らみ、先っちょがビリビリと痺れだした！その上ビールの売り子の服を着せられている！尋常じゃない速度で尿意が込み上げ、決壊寸前だ！　尿意+200% 【乳牛】を取得。\n\n《分岐条件：尿意300%以上》\n尿意を堪えるのに必死で、寄ってくる淫魔を追い払えない！ジョッキを見せられると、そこに液体を注がなければいけない気がしてくる。…注文されるがまま、手ずから注ぐが、列は伸びる一方だ。痺れを切らした淫魔達に群がられ、直飲みされてしまった！　尿意を100%に。開発度+2000。",
+    "//": "A curse dresses you as a barmaid and gives you [Dairy Cow], and makes your bladder fill unnaturally fast. If it's bad enough, incubi line up to drink from the steins you fill with pee, and eventually start drinking right from the tap."
+  },
+  "Rodeo Trap: Squelching": {
+    "original": "真下からロデオマシンが飛び出してきた！　無理やり騎乗させられ、足を固定される！　うねんうねんと揺さぶられ、膀胱をシェイクされる！　股間をほぐされ、蕩けるほど気持ちいい……！　尿意+30 開発度+30 \n\n《分岐条件：尿意180%以上》\n甘やかに呼吸を乱しながら、革張りのロデオマシンの上で致してしまった……。濡れた淫唇が擦れ合わさり、グチュグチュと卑猥な音を立てながら、トラップは暫く動き続けた。尿意を0%に。開発度+450。",
+    "//": "Riding the mechanical bull. In this variant, it keeps bucking after you wet yourself, making a lewd squishing sound."
+  },
+  "Rodeo Trap: Relaxed": {
+    "original": "拘束ロデオマシンだ！　無理やり騎乗させられ、足を固定された！　暴れ馬を模した動きに翻弄される！　ローションまみれのイボイボで股間を無茶苦茶に擦られ、気持ちよくなってしまう……！　尿意+90 開発度+100 \n\n《分岐条件：尿意200%以上》\n息を荒げながら耐えていたが……、消え入りそうなほど顔を赤らめ「ぷしゃぁぁぁ……♡」とお漏らししてしまった！　それと同時に暴れ馬は動きを緩めていく。クチュクチュと緩やかに股間を嬲られながら、揶揄われるように揺られ続けた。尿意を0%に。開発度+900。"
+  },
+  "Restraint Trap: ?": {
+    "original": "晒し台に架けられた！　90度のお辞儀をする姿勢で首と両手を一緒に拘束され、突き出したお尻をサキュバスにくすぐられる！　パンツを下ろされ、おしっこ穴まで丁寧にこちょられ……、寸止めで解放された！　尿意を299%に。開発度+100。\n\n《分岐条件：尿意限界300%未満》\n手加減されてたのに、顔を真っ赤に染めながら盛大に漏らしてしまった！　遠慮なく揶揄われ、開発度+300。尿意を0%に。",
+    "//": "Not sure what the deal is with this one."
   },
   "Child Prisoners: Pantsing": {
     "type": "floor",
@@ -551,7 +662,19 @@
       }
     ]
   },
-  "Unholy Church": {
+  "Child Prisoners: Kanchou": {
+    "original": "囚われた子供達を発見した！　安全な場所まで引率する。…懐かれてなかなか進めず、尿意が溜まっていく。…両手を繋がれて、前を抑えられない。尿意+100%\n\n《分岐条件：尿意150%以上》\n内股を摺り合わせ、もじもじ。扇情的にお尻を振って無意識に悪戯っ子を誘惑してしまう。……少し屈んだ瞬間、背後から思い切りカンチョーされた！　お尻を押さえて飛び上がる！　尿意+30% 開発度+100 \n\n《分岐条件：尿意250%以上》\n集中が途切れ…、「うぅぅ……♡」可愛らしい声を漏らしながら自らの痴態に頬を染めてしまった！　服に恥ずかしい染みが広がり、足元に湯気が立ち上る！子供たちに散々揶揄われた！尿意を0%に。開発度+800\n",
+    "//": "Just like the one above, except if you need to pee, your wriggling butt tempts a little girl to give you a kanchou."
+  },
+  "Child Prisoners: Skirt Flip": {
+    "original": "囚われた子供達を発見した！　安全な場所まで引率する。…なかなか進めず、尿意が溜まっていく。…信頼に満ちた無垢な視線を受けて、前を抑えられない。尿意+100%\n\n《分岐条件：スカート》\n悪戯っ子に不意を突かれた！　豪快にスカートを捲られ、大勢の前に下着を晒してしまう！　慌てて抑えるが、今度は手を離せなくなってしまった……！　尿意+50% 開発度+50（お漏らしパンツなら+300）\n\n《分岐条件：尿意250%以上》\nもう限界だ！　幸せそうに緩んだ顔を伏せながらお漏らししてしまった！　子供達の前で恥ずかしい水溜まりを作り、散々囃し立てられた！　尿意を0%に。開発度+700",
+    "//": "Same child-prisoners situation, but this time the little girl flips your skirt, with the bonus humiliation for if you've already had an accident."
+  },
+  "Overhead Ladder: Rushing Water": {
+    "original": "川に雲梯がかかっている。　両手でぶら下がり、渡り始めた。　……川のせせらぎに尿意を刺激される！　股間を押さえられず、もじもじと摺り合わせてしまう。　尿意+50% \n\n《分岐条件：尿意250%以上》\nあともう少し、というところで耐えきれず……。消え入りそうなほど顔を赤らめ「ぷしゃぁぁぁ……♡」とお漏らししてしまった！　ぶら下がったまま、恥ずかしいものをポタポタと垂らしていく！　尿意を0%に。開発度+350。",
+    "//": "It's hard crossing a river with an overhead ladder when you need the bathroom. In this case, the trickling of the river is what makes it even harder. I've seen a variant with mischievous fairies, too."
+  },
+  "Unholy Church: Holy Water": {
     "type": "floor",
     "original": "淫祀の教会だ！股間からゾクゾクッ♡と悪寒が込み上げ、理性が溶かされていく。尿意+100\n\n《分岐条件：状態異常あり》\n治療と引き替えに聖水の提供を要求される。大聖堂の真ん中でパンツを下げられ、冷たい瓶を押し当てられ……、「んふーっ♡」と色っぽく溜め息を吐きながら、尿意を解消する。淫魔のシスターに見られながら、なみなみと注いでいく。尿意0%に。開発度+250。状態異常1つ回復\n\n《分岐条件：状態異常なし》\nシスター服の淫魔に騙され、祝福を受けることに。【聖水サーバー】を取得（いつでも聖水を提供できる奇蹟の体質。尿意の初期値を100%に）",
     "description": {
@@ -592,6 +715,22 @@
         ]
       }
     ]
+  },
+  "Unholy Church: Confession": {
+    "original": "淫祀の教会だ！　中に入った瞬間、股間からゾクゾクゾクッと悪寒が込み上げてくる。尿意+100\n\n《分岐条件：お漏らし1回以上》\nシスター服の淫魔に唆され、恥ずかしい経験を赤裸々に告白してしまった！あとで我に返り、恥ずかしくなる…。開発度を1.5倍に\n\n《分岐条件：お漏らし0回》\n怪しいシスターに騙され、大勢の信徒の前で恥辱を共有することに。尿意で張ったお腹をいやらしい手付きで擦られ、服を着たままお漏らし処女を卒業してしまった！あとで正気に戻り、身悶えする…。尿意0%に。開発度+300。",
+    "//": "If you've had any accidents, the priestesses get you to tell all about it, and multiplies your current humiliation by 1.5. If you haven't had any accidents, they make you have one."
+  },
+  "Hypnotic Beholder: Butt Attack": {
+    "original": "催眠ビホルダーだ！　巨大なギョロ目と視線を合せてしまった！…頭がクラッとしたが、正気を保っている。\n\n…俯せに寝転がると、誘うようにお尻を振って攻撃！　アヌスに捻じ込まれたお団子状の触手を、懸命に締め付け、前後に引っ張る！\n\n《分岐条件：尿意300%以上》\n顔を真っ赤にして『攻撃』していたが、限界だ！…羞恥に頬を染めながら膀胱が空になるまで垂れ流してしまった！　触手から熱い粘液が追撃され、内も外もドロドロに染められる！『我慢勝負』に負けてしまった。開発度+900。\n\n《分岐条件：尿意300%未満》\nなかなか倒せない。尿意+50%　開発度+500で分岐を再判定。【お尻弱点】取得。",
+    "//": "A beholder hypnotizes into letting it buttrape you. With a game that allows pooping, there's some definite possibilities here."
+  },
+  "Hypnotic Beholder: Triple Clips": {
+    "original": "催眠ビホルダーだ！　巨大なギョロ目と視線を合せてしまった！…頭がクラッとしたが、正気を保って一気に倒した！…獲得したクリップを装備。【三点責め】を取得（乳首と淫核に振動クリップを装備し、階層ごとにイかされて開発度+100）\n\n《分岐条件：スカート》\n上衣を半脱ぎし、乳首クリップから伸びるワイヤーでスカートを吊り上げる。歩く度に乳首が引っ張られ、気持ち良い……。【下着暴露】を取得（パンツが良く見えるようにスカートを捲りあげてしまう催眠暗示。人前で開発度+50。お漏らしパンツなら開発度+200）",
+    "//": "The beholder hypnotizes you into putting vibrating clips on your nipples and clit, i.e. [Three-Point Attack]. If you're wearing a skirt, it also makes you tie a string to the front of your skirt so that it stays lifted. How lewd!"
+  },
+  "Hypnotic Beholder: Massager": {
+    "original": "催眠ビホルダーだ！　巨大なギョロ目と視線を合せてしまった！　……頭がクラッとしたが、正気を保って一気に倒した！　……獲得した電動マッサージ機を股間に押し当て、探索を再開する。【電マで探索】を取得\n\n【電マで探索】催眠により、冒険中はアソコに器具を押し当てるのが常識と思い込んでいる。気持ち良い場所を自分でグリグリしてしまい、階層ごとに開発度+100。尿意限界-50%。",
+    "//": "Good old beholder up to his old tricks. This time he hypnotizes you into carrying an electric massage machine around with you and humping it while you adventure."
   },
   "Summon Trap: Molestation": {
     "type": "floor",
@@ -665,7 +804,11 @@
       }
     ]
   },
-  "Pee-Prevention Amulet": {
+  "Crooked Merchant: Diaper": {
+    "original": "偽商人に出会った！　巧みな話術で『オムツ』を売りつけられ、ベッドの上で着付けられてしまう！　開発度+100。【オムツ】を取得。\n\n【オムツ】一度だけ失禁を防ぎ、開発度の上昇を無効化する。ただし、これはこれで高度なプレイなので、こっそりと開発度+150、【ゆるゆる】を取得。\n【ゆるゆる】おしっこを我慢しづらい恥ずかしい体質。尿意の限界-100%。",
+    "//": "A crooked merchant sells you a diaper. Which spares you one accident, but you get used to using a diaper and gain incontinence."
+  },
+  "Pee-Prevention Amulet: Female Adventurer or Slime": {
     "original": "アイテムテレポーターだ！秘所に禁止の呪符を張られてしまった！貼っている間はおしっこできず、自分では剥がせない！尿は限界より溜まらず、排泄欲だけが昂ぶっていく！尿意を999%に\n\n《分岐条件：開発度1700pt未満》\n赤面しながら休憩所に辿り着き、トイレで女性冒険者に剥がしてもらう。その瞬間、恥ずかしそう顔を伏せながら、お漏らしというゴールを受け入れてしまった！　尿意を0%に。開発度+700。\n\n《分岐条件：開発度1700pt以上》\n早く出したくて正気を失っている。股を開いてスライムを挑発してしまい、お尻の穴ばかりを責められる！9時間後に剥がされて大放尿！尿意を0%に。開発度+1800\n",
     "type": "floor",
     "description": {
@@ -703,7 +846,25 @@
       }
     ]
   },
-  "Pop Quiz": {
+  "Pee-Prevention Amulet: Alchemist or Succubus": {
+    "original": "アイテムテレポーターだ！淫唇に禁止の呪符を張られてしまった！貼っている間はおしっこできず、自分では剥がせない！尿は限界より溜まらず、排泄欲だけが昂ぶっていく！尿意を999%に\n\n《分岐条件：開発度2300pt未満》\n尿意に喘ぎ、通りがかった女錬金術師に剥がしてもらう。その瞬間、「んぁっ……♡」と息を漏らし、だらしない蕩け顔で失禁、全身の力が抜けてしまった！　…計量器で放尿を受け止められ、開発度+800%。尿意を0%に\n\n《分岐条件：開発度2300pt以上》\nお股がヒクついて堪らない！赤面しながら近くに居たサキュバスに頼んでしまい、半剥がし半張りを繰り返され、弄ばれた！尿意を0%に。開発度+2500",
+    "//": "Similar to the one above, except with different personages rescuing you from the no-peeing amulet."
+  },
+  "Illusionary Rain": {
+    "original": "ダンジョン内なのに土砂降りだ。雨に濡れて体が冷えてしまった！　尿意+70\n\n《分岐条件：尿意150%以上》\n…今漏らしてもバレないし、雨が洗い流してくれる、という悪魔のささやきが聞こえてくる。暫く耐えていたが、気持ちはどうしても緩んでしまう。……「じょっ、じょわわっ♡」と股間に熱いものが滲み出してきた。……その瞬間、雨がパッタリと止み、濡れていたはずの体が乾いている。幻覚フロアだったらしい。…恥ずかしそうに内股を締めながら、出しかけたものを必死で抑え込んだ！　尿意-50%。開発度+120。【染みパン】取得。",
+    "//": "You get soaked with rain, and it tempts you into peeing since the rain will wash it away. Only when you actually start peeing, it turns out the rain was an illusion, and you manage to stop, but not before putting a wet patch on your panties."
+  },
+  "Pee Meter": {
+    "original": "量水計の罠だ！　頭上に尿意と膀胱に溜まっている量が表示されてしまう！　【おしっこメーター】を取得\n\n《分岐条件：尿意100%以上》\n我慢していることを隠せなくなってしまった！　周囲の視線を刺さるように感じる！　好奇の目に晒され、顔を真っ赤にしながらもじもじと進む。開発度+50。",
+    "//": "The event gives it as a branch condition, but I think this pee meter should give you +50 humiliation every time you go up a floor with full bladder or bowels."
+  },
+  "Costume Change: School Swimsuit": {
+    "original": "強制着替えの罠だ！　スケスケの白スクール水着になってしまった！…目の前のプールを泳ぎ切れば元に戻るらしい。\n\n《分岐条件：尿意200%以上》\n冷たい水が下腹部に響く。内股を摺り合わせ、立ち泳ぎ進む。…中ほどで限界が来てしまった！　ぶるるっ、と震えたあと、恥ずかしい黄色が水面に広がっていく！　…お仕置き罠が作動した！　スクール水着の内側にみっちりと触手が生え、全身を可愛がられてしまった！　対岸に上がっても解けず、内側で蠢く触手が丸見えだ。　尿意70%に。開発度+1400。【触手服】を取得"
+  },
+  "Costume Change: Karaoke": {
+    "original": "強制着替えの罠だ！　扇情的なアイドルコスを着せられた！…カラオケで95点以上取れば元に戻るらしい。\n\n得意な曲を歌い始めると、服のあちこちが手の形に歪み、気持ち良い場所を揉み解される！　喘ぎ声を堪えながら歌い続けた！\n\n《分岐条件：開発度1000pt以上》\n呪いの衣装に蜜壺をクチュられ、胸を絞られて、マイクに嬌声を拾われてしまう！　当然クリアできず、罰ゲーム！　手袋を操られ、マイクを握りながら●●●ーする姿をカメラの前に晒し、そのまま生放送！　モニターに表示された恥ずかしい台本を読み終えるまで続く！　尿意+150%。開発度+1000。"
+  },
+  "Costume Change: Pop Quiz": {
     "original": "強制着替えの罠だ！　超ミニなセーラー服を着せられてしまった！　……目の前の筆記問題を解けば元に戻るらしい。\n\n《分岐条件：尿意230%以上》\nちゃんと考えれば解けそうだが、……おしっこがしたくて集中できない。膝を摺り合わせたり、貧乏揺すりしながら耐える。しかし、「じょばばばば♡」と温かい汁をクロッチで暴れさせながら、恍惚としてしまった！　木製の椅子からおしっこが滴っていく。……その上時間切れで赤点になってしまった！　お仕置き罠が作動し、服の内側に呪いの玩具を仕込まれる。尿意0%に。開発度+400。【三点責め】を取得（乳首と淫核に振動クリップを付けられ、階層ごとにイかされて開発度+100）",
     "type": "floor",
     "description": {
@@ -787,5 +948,13 @@
         ]
       }
     ]
+  },
+  "Flying Camera": {
+    "original": "呪いのカメラに触れてしまった！　独りでに浮き上がり、周囲を飛び回っている。　……我慢中の姿をパシャパシャッと撮られ、ポラロイド写真を紙吹雪のようにバラ撒かれてしまった！　回収しきれない！　【撮影】を取得。\n\n【撮影】常にカメラで撮られている状態。我慢からお漏らしまで、痴態の全てを写真にされダンジョン中にバラ撒かれてしまう。見られていることを意識して、開発度の増加量が2倍に。",
+    "//": "Good ol' voyeur camera drone"
+  },
+  "Pussy Picture Lock": {
+    "original": "閉じ込められた！カメラ付きの扉にパンツの内側を認証させないと開かないらしい。もじもじと逡巡してしまう。…従わずに長々と抵抗していたが、他に出る手段は無さそうだ。……渋々脱いだ下着をあやとりのように広げてクロッチを見せつける。……なかなか認証されず、顔を真っ赤にしながら恥ずかしいものを掲げ続けた。……その姿を正面と真下からも隠し撮りされ、アングラサイトで配信されてしまった！　尿意+100%。開発度+150。尿意200%以上なら黄色い染みを見られて+350。ぐしょぐしょのお漏らしパンツなら+700。",
+    "//": "Have to take a picture of your bare crotch to escape. Extra embarrassing if your panties are a mess."
   }
 }
