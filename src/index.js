@@ -34,14 +34,32 @@ console.log("");
 
 let floorCount = 0;
 
-async function fullRun() {
+/**
+ * Prints help.
+ * @param {Console} output
+ */
+function help(output) {
+  [
+    "Allowed commands:",
+    "",
+    "H - This help",
+    "N - Next floor(default)",
+    "C - Change panties",
+    "Q - Quit"
+  ].forEach(line => output.log(line));
+}
+
+async function fullRun(output = console) {
   let data = {
     character,
     eventCollection,
     statusCollection,
-    localeId
+    localeId,
+    output
   };
+  let quit = false;
   while (
+    !quit &&
     floorCount < maxFloorCount &&
     data.character.data.values.humiliation < 10000
   ) {
@@ -57,11 +75,32 @@ async function fullRun() {
     console.log("");
     console.log(data.character.toString());
     console.log("");
-    const response = await new UserInput().prompt(
-      "Type Enter to continue or Q to quit> "
-    );
-    if (response === "q" || response === "Q") {
-      break;
+    let nextFloor = false;
+    while (!nextFloor && !quit) {
+      const { responseIndex } = await new UserInput("Main Loop").requestCommand(
+        "Type command (H for help)> ",
+        ["n", "h", "?", "c", "q"],
+        {
+          caseInsensitive: true,
+          allowInvalid: true
+        }
+      );
+      switch (responseIndex) {
+        case 1:
+        case 2:
+          help(output);
+          break;
+        case 3:
+          output.log("Changing not yet supported.");
+          break;
+        case 4:
+          quit = true;
+          break;
+        case 0:
+        default:
+          nextFloor = true;
+          break;
+      }
     }
   }
   console.log(`Highest floor reached: ${floorCount}`);

@@ -1,6 +1,15 @@
 import readline from "readline";
 
 class UserInput {
+  /**
+   * Creates an instance of `UserInput`.
+   * @param {string} contextId
+   * The context in which this `UserInput` is requesting input. Used to facilitate mocking.
+   */
+  constructor(contextId) {
+    this.contextId = contextId;
+  }
+
   createReadline() {
     // TODO: Standardize on using streams instead of process.stdin/stdout/stderr
     // and Console separately.
@@ -34,6 +43,35 @@ class UserInput {
   }
 
   /**
+   * Request one of a set of commands.
+   * @param {string[]} commands
+   * The list of allowed commands.
+   * @param {string} prompt
+   * The string to print before asking for input.
+   * @param {{allowInvalid:boolean,caseInsensitive:boolean}} options
+   * @returns {{response:string,responseIndex:number}}
+   * The response submitted by the user, and the index if the response is
+   * in the list of commands.
+   */
+  async requestCommand(prompt, commands, options) {
+    const { allowInvalid, caseInsensitive } = options;
+    const parsedCommands = caseInsensitive
+      ? commands.map(cmd => cmd.toLowerCase())
+      : commands;
+    do {
+      const response = await this.prompt(prompt);
+      const parsedResponse = caseInsensitive
+        ? response.toLowerCase()
+        : response;
+      const responseIndex = parsedCommands.indexOf(parsedResponse);
+      if (responseIndex >= 0 || allowInvalid) {
+        return { response, responseIndex };
+      }
+    } while (!allowInvalid);
+  }
+
+  /**
+   * Intended for internal use only, because it doesn't handle mocking well.
    * @returns {Promise<string>}
    */
   async prompt(promptStr) {

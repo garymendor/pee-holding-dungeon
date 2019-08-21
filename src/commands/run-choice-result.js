@@ -38,7 +38,10 @@ class RunChoiceResult {
       const choice = result.choices()[choiceIndex];
       choices.push(choice.description(localeId));
     }
-    const responseNum = await new UserInput().requestChoice(output, choices);
+    const responseNum = await new UserInput(this.data.eventId).requestChoice(
+      output,
+      choices
+    );
     const selectedChoice = result.choices()[responseNum];
     return new RunResultCollection({
       ...data,
