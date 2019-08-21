@@ -18,8 +18,13 @@ const character = new Character({
 const statusCollection = new StatusCollection(statusData);
 const eventCollection = new EventCollection(eventsData);
 const localeId = process.env.APP_LOCALE;
-const eventId = process.env.APP_EVENT_ID || eventCollection.getRandomEventId();
+const eventIds =
+  process.env.APP_EVENT_ID && process.env.APP_EVENT_ID.split(",");
 const maxFloorCount = parseInt(process.env.APP_FLOORS) || 15;
+
+if (eventIds && eventIds.length) {
+  console.log("Event ID overrides:", eventIds);
+}
 
 console.log("Starting character state:");
 console.log(character.toString());
@@ -33,18 +38,19 @@ async function fullRun() {
     character,
     eventCollection,
     statusCollection,
-    localeId,
-    eventId
+    localeId
   };
   while (
     floorCount < maxFloorCount &&
     data.character.data.values.humiliation < 10000
   ) {
+    data.eventId =
+      (eventIds && eventIds.length > floorCount && eventIds[floorCount]) ||
+      eventCollection.getRandomEventId();
     floorCount++;
     console.log(`--- Floor ${floorCount} ---`);
     const command = new ExecuteEvent(data);
     data = await command.run();
-    data.eventId = eventCollection.getRandomEventId();
     console.log("");
     console.log("---");
     console.log("");

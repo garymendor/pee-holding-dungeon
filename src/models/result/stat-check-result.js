@@ -1,10 +1,12 @@
 import ResultCollection from "./result-collection";
 import Result from "./result";
+import compareExpression from "../../commands/compare-expression";
 
 class StatCheckResult extends Result {
   constructor(data) {
     super(data);
     this.data.results = new ResultCollection(this.data.results);
+    this.data.elseResults = new ResultCollection(this.data.elseResults);
   }
 
   /**
@@ -29,10 +31,7 @@ class StatCheckResult extends Result {
    * The character's value for the stat.
    */
   compare(value) {
-    if (!value) {
-      return !this.data.value;
-    }
-    return this.data.value === value;
+    return compareExpression(value, this.data.value);
   }
 
   /**
@@ -41,6 +40,14 @@ class StatCheckResult extends Result {
    */
   results() {
     return this.data.results;
+  }
+
+  /**
+   * Gets the results to execute if the comparison fails.
+   * @returns {ResultCollection}
+   */
+  elseResults() {
+    return this.data.elseResults;
   }
 }
 

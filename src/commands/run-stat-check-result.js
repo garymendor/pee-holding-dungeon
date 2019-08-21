@@ -27,10 +27,21 @@ class RunStatCheckResult {
     const { character } = data;
     const actualValue = character.get(result.name());
     if (result.compare(actualValue)) {
-      return new RunResultCollection({
-        ...data,
-        results: result.results()
-      }).run();
+      const results = result.results();
+      if (results.length()) {
+        return await new RunResultCollection({
+          ...data,
+          results
+        }).run();
+      }
+    } else {
+      const results = result.elseResults();
+      if (results.length()) {
+        return await new RunResultCollection({
+          ...data,
+          results
+        }).run();
+      }
     }
     return {
       ...data,

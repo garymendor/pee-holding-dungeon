@@ -243,10 +243,8 @@
       "ja-JP": "用意された籠に衣服を畳んで入れ、扉を開く。便座に腰掛けて、我慢の果ての開放感に、涎を垂らしながら恍惚として、幸せそうに息を漏らす。　……済ませて戻ってくると、パンツが一回り縮んでいるような…？"
     },
     "results": [
-      { "name": "panties", "value": false },
-      { "name": "urination", "value": true },
-      { "name": "defecation", "value": true },
-      { "name": "panties", "value": true },
+      { "name": "urination-nopan", "value": true },
+      { "name": "defecation-nopan", "value": true },
       { "name": "wedgie", "value": true }
     ]
   },
@@ -515,6 +513,83 @@
             ]
           },
           { "name": "humiliation", "value": 800 }
+        ]
+      }
+    ]
+  },
+  "Unholy Church": {
+    "original": "淫祀の教会だ！股間からゾクゾクッ♡と悪寒が込み上げ、理性が溶かされていく。尿意+100\n\n《分岐条件：状態異常あり》\n治療と引き替えに聖水の提供を要求される。大聖堂の真ん中でパンツを下げられ、冷たい瓶を押し当てられ……、「んふーっ♡」と色っぽく溜め息を吐きながら、尿意を解消する。淫魔のシスターに見られながら、なみなみと注いでいく。尿意0%に。開発度+250。状態異常1つ回復\n\n《分岐条件：状態異常なし》\nシスター服の淫魔に騙され、祝福を受けることに。【聖水サーバー】を取得（いつでも聖水を提供できる奇蹟の体質。尿意の初期値を100%に）",
+    "description": {
+      "en-US": "A depraved church! A chill runs down my crotch and my sanity flees. Need to pee +100",
+      "ja-JP": "淫祀の教会だ！股間からゾクゾクッ♡と悪寒が込み上げ、理性が溶かされていく。尿意+100"
+    },
+    "results": [
+      { "name": "need-for-bathroom", "value": 100 },
+      {
+        "//TODO": "Implement this result type. status-type-check checks if any of the player's current status effects have one of specified types of saving throw, and run results if so and elseResults if not",
+        "type": "status-type-check",
+        "saving-throw": ["Healing", "Willpower", "Holy"],
+        "results": [
+          {
+            "type": "message",
+            "message": {
+              "en-US": "The priestess asks for my \"holy water\" in exchange for treating me. I pull my panties down in the middle of the cathedral, and the cold bottle is pressed against my crotch... \"Ahh...\" While exhaling a lewd sigh, I relieve myself. Under the ogling gaze of the lewd priestess, I fill the bottle to the brim.",
+              "ja-JP": "治療と引き替えに聖水の提供を要求される。大聖堂の真ん中でパンツを下げられ、冷たい瓶を押し当てられ……、「んふーっ♡」と色っぽく溜め息を吐きながら、尿意を解消する。淫魔のシスターに見られながら、なみなみと注いでいく。尿意0%に。開発度+250。状態異常1つ回復"
+            }
+          },
+          { "name": "urination-nopan", "value": true },
+          { "name": "humiliation", "value": 250 },
+          {
+            "//TODO": "Implement this result type. make-saving-throw clears one status ailment if its saving throw is in the specified types",
+            "type": "make-saving-throw",
+            "saving-throw": ["Healing", "Willpower", "Holy"]
+          }
+        ],
+        "elseResults": [
+          {
+            "type": "message",
+            "message": {
+              "en-US": "Naively, I accept a blessing from a succubus dressed as a priestess.",
+              "ja-JP": "シスター服の淫魔に騙され、祝福を受けることに。"
+            }
+          },
+          { "name": "holy-water-dispenser", "value": true }
+        ]
+      }
+    ]
+  },
+  "Summon Trap: Molestation": {
+    "original": "召喚の罠だ！　自分の分身が３人も現れた！\n\n瞬く間に羽交い締めにされ、弱点を知り尽くした手捌きで愛撫され、こちょぐられる。\n\n我慢していることも見抜かれ、たっぷり揉み解されてしまった。尿意+200%　開発度+300pt。\n\n《分岐条件：開発度2000以上》\nおしっこ我慢が気持ちよくなりはじめていることを指摘され、否定できずに顔を赤くしてしまった。開発度+100pt。【我慢好き】を獲得。\n",
+    "description": {
+      "en-US": [
+        "It's a summoning trap! Three images of myself have appeared!",
+        "In the blink of an eye they held my arms behind my back, and knowing my weak points, they caressed me all over, and tickled me.",
+        "They could tell that I needed to use the bathroom, and massaged me thoroughly. Need to pee +200, Horniness +300."
+      ],
+      "ja-JP": [
+        "召喚の罠だ！　自分の分身が３人も現れた！",
+        "瞬く間に羽交い締めにされ、弱点を知り尽くした手捌きで愛撫され、こちょぐられる。",
+        "我慢していることも見抜かれ、たっぷり揉み解されてしまった。尿意+200%　開発度+300pt。"
+      ]
+    },
+    "tags": ["breast-touching", "crotch-touching", "butt-touching"],
+    "results": [
+      { "name": "need-for-bathroom", "value": 200 },
+      { "name": "horniness", "value": 300 },
+      {
+        "type": "stat-check",
+        "name": "humiliation",
+        "value": { "$gt": 2000 },
+        "results": [
+          {
+            "type": "message",
+            "message": {
+              "en-US": "They told me that holding it had started to feel good. I couldn't deny it, and my face was red. Gained [Desperation Fetish]. Humiliation +100.",
+              "ja-JP": "おしっこ我慢が気持ちよくなりはじめていることを指摘され、否定できずに顔を赤くしてしまった。開発度+100pt。【我慢好き】を獲得。"
+            }
+          },
+          { "name": "desperation-fetish", "value": true },
+          { "name": "humiliation", "value": 100 }
         ]
       }
     ]

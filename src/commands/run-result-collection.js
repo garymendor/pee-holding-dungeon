@@ -23,7 +23,7 @@ class RunResultCollection {
    */
   async run() {
     const { results, ...baseData } = this.data;
-    let newData = baseData;
+    let newData = { ...baseData, continue: true };
     for (const result of results.items()) {
       newData = await new RunResult({
         ...newData,

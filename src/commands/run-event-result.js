@@ -29,6 +29,7 @@ class RunEventResult {
     const { result, ...data } = this.data;
     const nextData = await new ExecuteEvent({
       ...data,
+      childEvent: true,
       eventId: result.event()
     }).run();
     return {

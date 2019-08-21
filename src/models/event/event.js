@@ -1,10 +1,12 @@
 import LocalizableString from "../localizable-string";
+import mapArrayOrSingle from "../map-array-or-single";
 import ResultCollection from "../result/result-collection";
 
 class Event {
   constructor(data) {
     this.data = {
       ...data,
+      tags: mapArrayOrSingle(data.tags),
       description: new LocalizableString(data.description),
       results: new ResultCollection(data.results)
     };
@@ -18,6 +20,14 @@ class Event {
    */
   parent() {
     return this.data.parent;
+  }
+
+  /**
+   * Gets the tags for this event.
+   * @returns {string[]}
+   */
+  tags() {
+    return this.data.tags;
   }
 
   /**

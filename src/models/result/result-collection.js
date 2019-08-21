@@ -1,5 +1,6 @@
 import resultCreate from "./result-create";
 import Result from "./result";
+import mapArrayOrSingle from "../map-array-or-single";
 
 /**
  * @typedef {import('./result').ResultData} ResultData
@@ -7,12 +8,13 @@ import Result from "./result";
  */
 
 class ResultCollection {
+  /**
+   * @param {ResultData[]|ResultData|null} data
+   */
   constructor(data = []) {
-    if (Array.isArray(data)) {
-      this.data = data.map(resultData => resultCreate(resultData));
-      return;
-    }
-    this.data = [resultCreate(data)];
+    this.data = mapArrayOrSingle(data).map(resultData =>
+      resultCreate(resultData)
+    );
   }
 
   /**
@@ -21,6 +23,10 @@ class ResultCollection {
    */
   items() {
     return this.data;
+  }
+
+  length() {
+    return this.data.length;
   }
 }
 

@@ -17,6 +17,10 @@ import TriggerStatusEvent from "./trigger-status-event";
  * @property {string} eventId
  * @property {string} localeId
  * @property {Console} output
+ * @property {boolean} childEvent
+ * True if this event was triggered by another event.
+ * @property {Object<string,boolean>} tags
+ * A collection of tags currently in effect.
  * @property {boolean} continue
  */
 
@@ -31,6 +35,7 @@ class ExecuteEvent {
      */
     this.data = {
       output: console,
+      tags: {},
       ...data
     };
   }
@@ -43,16 +48,48 @@ class ExecuteEvent {
     if (!event) {
       return this.data;
     }
+    const { character, statusCollection, output, localeId } = this.data;
+    let data = this.data;
 
-    const description = event.description(this.data.localeId);
-    if (description) {
-      this.data.output.log(description);
+    // Apply event tags
+    event.tags().forEach(tag => {
+      data.tags[tag] = true;
+    });
+
+    // Apply status effect tags
+    for (const statusId in character.data.status) {
+      statusCollection
+        .get(statusId)
+        .tags()
+        .forEach(tag => (data.tags[tag] = true));
     }
-    let data = await new RunResultCollection({
-      ...this.data,
+
+    if (!data.childEvent) {
+      // Floor start behavior
+      for (const statusId in character.data.status) {
+        const status = statusCollection.get(statusId);
+        for (const tag in data.tags) {
+          const tagResults = status.tagTriggers()[tag];
+          if (tagResults && tagResults.length()) {
+            data = await new RunResultCollection({
+              ...data,
+              results: tagResults
+            }).run();
+          }
+        }
+      }
+    }
+
+    const description = event.description(localeId);
+    if (description) {
+      output.log(description);
+    }
+    data = await new RunResultCollection({
+      ...data,
       results: event.results()
     }).run();
     if (data.continue) {
+      // Floor end behavior
       // Execute floor-end status events
       ({ character: data.character } = await new TriggerStatusEvent().run({
         ...data,

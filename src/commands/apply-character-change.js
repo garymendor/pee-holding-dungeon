@@ -1,4 +1,5 @@
 import Character from "../models/character/character";
+import evaluateExpression from "./evaluate-expression";
 
 /**
  * The request to change a character's value.
@@ -44,7 +45,8 @@ class ApplyCharacterChange {
     const { character, name, value: inputValue, invert } = request;
     const response = { statusChanges: {} };
     let newCharacterData = { ...character.data };
-    const value = invert ? this.invert(inputValue) : inputValue;
+    const evaluatedValue = evaluateExpression(character.flatData, inputValue);
+    const value = invert ? this.invert(evaluatedValue) : evaluatedValue;
 
     switch (name) {
       // Numeric values
@@ -75,6 +77,7 @@ class ApplyCharacterChange {
         break;
       // Special cases
       case "urination":
+        // Peeing, with a wetting accident if panties are on
         newCharacterData.values["need-to-pee"] = 0;
         response.statusChanges[name] = true;
         if (newCharacterData.clothes.panties) {
@@ -83,7 +86,13 @@ class ApplyCharacterChange {
           newCharacterData.values["wetting-counter"]++;
         }
         break;
+      case "urination-nopan":
+        // Peeing with panties pulled down.
+        newCharacterData.values["need-to-pee"] = 0;
+        response.statusChanges["urination"] = true;
+        break;
       case "defecation":
+        // Pooping, with a wetting accident if panties are on
         newCharacterData.values["need-to-poo"] = 0;
         response.statusChanges[name] = true;
         if (newCharacterData.clothes.panties) {
@@ -91,6 +100,11 @@ class ApplyCharacterChange {
           newCharacterData.status["soiled-panties"] = true;
           newCharacterData.values["soiling-counter"]++;
         }
+        break;
+      case "defecation-nopan":
+        // Pooping with panties pulled down.
+        newCharacterData.values["need-to-poo"] = 0;
+        response.statusChanges["defecation"] = true;
         break;
       default:
         response.statusChanges[name] = value;

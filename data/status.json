@@ -145,6 +145,12 @@
     },
     "saving-throw": "Healing"
   },
+  "sensitive": {
+    "name": {
+      "en-US": "Sensitive",
+      "ja-JP": "敏感"
+    }
+  },
   "sensitive-urethra": {
     "name": {
       "ja-JP": "尿道性感",
@@ -175,16 +181,13 @@
       "en-US": "When holding your crotch, you unconsciously masturbate, adding +100 to [Horniness].",
       "ja-JP": "「股間を押えた」際、無意識に弄ってしまい、開発度+100"
     },
+    "tagTriggers": {
+      "crotch-touching": {
+        "name": "horniness",
+        "value": 100
+      }
+    },
     "effect": {
-      "tag": {
-        "//TODO": "Need to think of a good model for things that trigger on tags",
-        "type": "tag-check",
-        "tag": "crotch-touching",
-        "results": {
-          "name": "horniness",
-          "value": 100
-        }
-      },
       "floor-end": [
         {
           "type": "message",
@@ -216,44 +219,48 @@
         "results": [
           {
             "type": "accident",
-            "name": "need-to-pee",
-            "results": {
+            "pee": {
               "name": "horniness",
-              "value": {
-                "$sub": [
-                  {
-                    "$sum": [
-                      { "$val": "need-to-pee" },
-                      { "$val": "pee-incontinence" }
-                    ]
-                  },
-                  100
-                ]
-              }
+              "value": ["$sub", ["need-to-pee", "pee-incontinence"], 100]
+            },
+            "poo": {
+              "name": "horniness",
+              "value": ["$sub", ["need-to-poo", "poo-incontinence"], 100]
+            },
+            "both": {
+              "name": "horniness",
+              "value": [
+                ["$sub", ["need-to-pee", "pee-incontinence"], 100],
+                ["$sub", ["need-to-poo", "poo-incontinence"], 100]
+              ]
             }
           },
           {
-            "type": "accident",
-            "name": "need-to-poo",
-            "results": {
-              "name": "horniness",
-              "value": {
-                "$sub": [
-                  {
-                    "$sum": [
-                      { "$val": "need-to-poo" },
-                      { "$val": "poo-incontinence" }
-                    ]
-                  },
-                  100
-                ]
-              }
-            }
+            "type": "message",
+            "message": "> I need the bathroom! It hurts so good..."
           }
         ]
       }
     },
     "saving-throw": "Willpower"
+  },
+  "holy-water-dispenser": {
+    "name": {
+      "en-US": "Holy Water Dispenser",
+      "ja-JP": "聖水サーバー"
+    },
+    "description": {
+      "en-US": "A miraculous condition that allows me to dispense holy water at any time, provided my need to pee is greater than 100%.",
+      "ja-JP": "いつでも聖水を提供できる奇蹟の体質。尿意の初期値を100%に"
+    },
+    "//TODO": [
+      "This one will be tons of fun to implement.",
+      "My first idea is that the player can cure any of Healing, Willpower, and Holy by peeing on herself, provided her bladder is over 100%.",
+      "She can cure herself at the end of a floor by peeing in her panties, but is that really worth it? Some status ailments like 'Dairy Cow', absolutely...",
+      "If she's in an event that gives her a toilet, she can take advantage of the opportunity to keep her panties clean.",
+      "Even trap toilets will generally give that option. I'll need to have some condition on 'toilet' events that indicate when it can be done."
+    ],
+    "saving-throw": false
   },
   "topless-hypnosis": {
     "name": {
@@ -262,12 +269,14 @@
     "description": {
       "en-US": "You've been hypnotized into thinking it's a good idea to expose your breasts. Add +50 [Humiliation] when in public."
     },
-    "effect": {
-      "tag": {
-        "type": "tag-check",
-        "tag": "public",
-        "results": { "name": "humiliation", "value": 50 }
-      }
+    "tagTriggers": {
+      "public": [
+        {
+          "type": "message",
+          "message": "> Everyone can see my breasts! If only there were some reason I could pull my top back down... (dizzy)"
+        },
+        { "name": "humiliation", "value": 50 }
+      ]
     },
     "saving-throw": "Willpower"
   },
@@ -278,12 +287,14 @@
     "description": {
       "en-US": "Your upper-body clothing is torn or missing so that you cannot cover your breasts. Add +50 [Humiliation] when in public."
     },
-    "effect": {
-      "tag": {
-        "type": "tag-check",
-        "tag": "public",
-        "results": { "name": "humiliation", "value": 50 }
-      }
+    "tagTriggers": {
+      "public": [
+        {
+          "type": "message",
+          "message": "> Everyone can see my breasts! I need to find a shirt to wear!"
+        },
+        { "name": "humiliation", "value": 50 }
+      ]
     },
     "saving-throw": false
   },
@@ -296,26 +307,66 @@
       "en-US": "You've been hypnotized into thinking it's a good idea to expose your panties. Add +50 [Humiliation] when in public, with an additional +150 [Humiliation] if you've wet your panties and +200 [Humiliation] if you've soiled your panties.",
       "ja-JP": "パンツが良く見えるようにスカートを捲りあげてしまう催眠暗示。人前で開発度+50。お漏らしパンツなら開発度+200"
     },
-    "effect": {
-      "tag": {
-        "type": "tag-check",
-        "tag": "public",
-        "results": [
-          { "name": "humiliation", "value": 50 },
-          {
+    "tagTriggers": {
+      "public": [
+        { "name": "humiliation", "value": 50 },
+        {
+          "type": "message",
+          "message": "> I'm in a public place! Everyone can see my panties!"
+        },
+        {
+          "type": "stat-check",
+          "name": "wet-panties",
+          "value": true,
+          "results": [
+            {
+              "type": "message",
+              "message": "> And worse, they can see I've wet my panties!"
+            },
+            { "name": "humiliation", "value": 150 }
+          ],
+          "elseResults": {
             "type": "stat-check",
-            "name": "wet-panties",
+            "name": "stained-panties",
             "value": true,
-            "results": { "name": "humiliation", "value": 150 }
-          },
-          {
-            "type": "stat-check",
-            "name": "soiled-panties",
-            "value": true,
-            "results": { "name": "humiliation", "value": 200 }
+            "results": [
+              {
+                "type": "message",
+                "message": "> And worse, they can see the yellow stain in my crotch!"
+              },
+              { "name": "humiliation", "value": 50 }
+            ]
           }
-        ]
-      }
+        },
+        {
+          "type": "stat-check",
+          "name": "soiled-panties",
+          "value": true,
+          "results": [
+            {
+              "type": "message",
+              "message": "> And even worse, they can see I've soiled my panties!"
+            },
+            { "name": "humiliation", "value": 200 }
+          ],
+          "elseResults": {
+            "type": "stat-check",
+            "name": "skidmarked-panties",
+            "value": true,
+            "results": [
+              {
+                "type": "message",
+                "message": "> And even worse, they can see the brown stain on my butt!"
+              },
+              { "name": "humiliation", "value": 50 }
+            ]
+          }
+        },
+        {
+          "type": "message",
+          "message": "> If only there were some reason I could stop holding my skirt up... (dizzy)"
+        }
+      ]
     },
     "saving-throw": "Willpower"
   },
@@ -328,26 +379,66 @@
       "en-US": "Your lower-body clothing has been damaged so that you cannot cover your panties. Add +50 [Humiliation] when in public, with an additional +150 [Humiliation] if you've wet your panties and +200 [Humiliation] if you've soiled your panties.",
       "ja-JP": "人前で開発度+50。お漏らしパンツなら開発度+200"
     },
-    "effect": {
-      "tag": {
-        "type": "tag-check",
-        "tag": "public",
-        "results": [
-          { "name": "humiliation", "value": 50 },
-          {
+    "tagTriggers": {
+      "public": [
+        { "name": "humiliation", "value": 50 },
+        {
+          "type": "message",
+          "message": "> I'm in a public place! Everyone can see my panties!"
+        },
+        {
+          "type": "stat-check",
+          "name": "wet-panties",
+          "value": true,
+          "results": [
+            {
+              "type": "message",
+              "message": "> And worse, they can see I've wet my panties!"
+            },
+            { "name": "humiliation", "value": 150 }
+          ],
+          "elseResults": {
             "type": "stat-check",
-            "name": "wet-panties",
+            "name": "stained-panties",
             "value": true,
-            "results": { "name": "humiliation", "value": 150 }
-          },
-          {
-            "type": "stat-check",
-            "name": "soiled-panties",
-            "value": true,
-            "results": { "name": "humiliation", "value": 200 }
+            "results": [
+              {
+                "type": "message",
+                "message": "> And worse, they can see the yellow stain in my crotch!"
+              },
+              { "name": "humiliation", "value": 50 }
+            ]
           }
-        ]
-      }
+        },
+        {
+          "type": "stat-check",
+          "name": "soiled-panties",
+          "value": true,
+          "results": [
+            {
+              "type": "message",
+              "message": "> And even worse, they can see I've soiled my panties!"
+            },
+            { "name": "humiliation", "value": 200 }
+          ],
+          "elseResults": {
+            "type": "stat-check",
+            "name": "skidmarked-panties",
+            "value": true,
+            "results": [
+              {
+                "type": "message",
+                "message": "> And even worse, they can see the brown stain on my butt!"
+              },
+              { "name": "humiliation", "value": 50 }
+            ]
+          }
+        },
+        {
+          "type": "message",
+          "message": "> I need a new skirt, or some pants, or something!"
+        }
+      ]
     },
     "saving-throw": false
   },
