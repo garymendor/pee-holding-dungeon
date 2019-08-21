@@ -3,7 +3,7 @@ import RunResult from "./run-result";
 /**
  * @typedef {import('./execute-event').ExecuteEventData} ExecuteEventData
  * @typedef {import('../models/result/result-collection').default} ResultCollection
- * @typedef {ExecuteEventData & {results:ResultCollection}} RunResultCollectionData
+ * @typedef {ExecuteEventData & {results:ResultCollection,invert:boolean}} RunResultCollectionData
  */
 
 class RunResultCollection {

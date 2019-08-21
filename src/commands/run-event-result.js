@@ -1,9 +1,13 @@
 import ExecuteEvent from "./execute-event";
 
 /**
- * @typedef {import('./execute-event').ExecuteEventData} ExecuteEventData
+ * @typedef {import('./run-result').BaseRunResultData<T>} BaseRunResultData
+ * @template T
+ */
+
+/**
  * @typedef {import('../models/result/event-result').default} EventResult
- * @typedef {ExecuteEventData & {result:EventResult}} RunEventResultData
+ * @typedef {BaseRunResultData<EventResult>} RunEventResultData
  */
 
 /**

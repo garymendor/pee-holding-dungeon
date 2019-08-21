@@ -10,7 +10,22 @@ import RunSavingThrowResult from "./run-saving-throw-result";
 /**
  * @typedef {import('./execute-event').ExecuteEventData} ExecuteEventData
  * @typedef {import('../models/result/result').default} Result
- * @typedef {ExecuteEventData & {result:Result}} RunResultData
+ */
+
+/**
+ * @typedef {Object} RunResultFields
+ * @property {T} result
+ * @property {boolean?} invert
+ * @template T
+ */
+
+/**
+ * @typedef {ExecuteEventData & RunResultFields<T>} BaseRunResultData
+ * @template T
+ */
+
+/**
+ * @typedef {BaseRunResultData<Result>} RunResultData
  */
 
 class RunResult {

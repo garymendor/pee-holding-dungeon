@@ -1,10 +1,13 @@
 import RunResultCollection from "./run-result-collection";
 
 /**
- * @typedef {import('../models/result/result-collection').default} ResultCollection
- * @typedef {import('./execute-event').ExecuteEventData} ExecuteEventData
+ * @typedef {import('./run-result').BaseRunResultData<T>} BaseRunResultData
+ * @template T
+ */
+
+/**
  * @typedef {import('../models/result/accident-result').default} AccidentResult
- * @typedef {ExecuteEventData & {result:AccidentResult,accident:string}} RunAccidentResultData
+ * @typedef {BaseRunResultData<AccidentResult> & {accident:string}} RunAccidentResultData
  */
 
 class RunAccidentResult {

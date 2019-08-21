@@ -2,9 +2,13 @@ import readline from "readline";
 import RunResultCollection from "./run-result-collection";
 
 /**
- * @typedef {import('./execute-event').ExecuteEventData} ExecuteEventData
+ * @typedef {import('./run-result').BaseRunResultData<T>} BaseRunResultData
+ * @template T
+ */
+
+/**
  * @typedef {import('../models/result/choice-result').default} ChoiceResult
- * @typedef {ExecuteEventData & {result:ChoiceResult}} RunChoiceResultData
+ * @typedef {BaseRunResultData<ChoiceResult>} RunChoiceResultData
  */
 
 class RunChoiceResult {

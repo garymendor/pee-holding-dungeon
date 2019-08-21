@@ -126,6 +126,34 @@
     "tags": "butt-touching",
     "saving-throw": "Holy"
   },
+  "weak-bladder": {
+    "name": {
+      "en-US": "Weak Bladder",
+      "ja-JP": "ゆるゆる尿道"
+    },
+    "description": {
+      "en-US": "You have difficulty holding your pee. +100% added to [Pee Incontinence].",
+      "ja-JP": "おしっこを我慢しづらい恥ずかしい体質。分岐時、尿意+100%で計算"
+    },
+    "effect": {
+      "apply": { "name": "pee-incontinence", "value": 100 }
+    },
+    "saving-throw": "Healing"
+  },
+  "weak-bowels": {
+    "name": {
+      "en-US": "Weak Bowels",
+      "ja-JP": "ゆるゆる尿道"
+    },
+    "description": {
+      "en-US": "You have difficulty holding your poo. +100% added to [Poo Incontinence].",
+      "ja-JP": "うんちを我慢しづらい恥ずかしい体質。分岐時、脱糞意+100%で計算"
+    },
+    "effect": {
+      "apply": { "name": "poo-incontinence", "value": 100 }
+    },
+    "saving-throw": "Healing"
+  },
   "orgasm-incontinence": {
     "name": {
       "en-US": "Orgasm Incontinence",

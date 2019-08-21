@@ -1,7 +1,11 @@
 /**
- * @typedef {import('./execute-event').ExecuteEventData} ExecuteEventData
+ * @typedef {import('./run-result').BaseRunResultData<T>} BaseRunResultData
+ * @template T
+ */
+
+/**
  * @typedef {import('../models/result/message-result').default} MessageResult
- * @typedef {ExecuteEventData & {result:MessageResult}} RunMessageResultData
+ * @typedef {BaseRunResultData<MessageResult>} RunMessageResultData
  */
 
 class RunMessageResult {

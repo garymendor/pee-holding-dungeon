@@ -382,20 +382,45 @@
         "value": 300,
         "results": [
           {
-            "type": "message",
-            "message": {
-              "en-US": "No more, no more... I cried out in a blissful sigh of sweet release as I have an accident! The fairies teased me, and I hung my head. +1100 Humiliation.",
-              "ja-JP": "これ以上は、もう…！　幸せそうな声を堪えながら失禁し開放感にゾクゾクしてしまった！　妖精達にからかわれ、俯いてしまった。尿意を0に。開発度+1100"
-            }
-          },
-          {
             "type": "accident",
-            "pee": { "name": "urination", "value": true },
-            "poo": { "name": "defecation", "value": true },
+            "pee": [
+              {
+                "type": "message",
+                "message": {
+                  "en-US": "No more, no more... I cried out in a blissful sigh of sweet release as I wet myself!",
+                  "ja-JP": "これ以上は、もう…！　幸せそうな声を堪えながら失禁し開放感にゾクゾクしてしまった！"
+                }
+              },
+              { "name": "urination", "value": true }
+            ],
+            "poo": [
+              {
+                "type": "message",
+                "message": {
+                  "en-US": "No more, no more... I cried out in a blissful sigh of sweet release as I soiled myself!",
+                  "ja-JP": "これ以上は、もう…！　幸せそうな声を堪えながら失禁し開放感にゾクゾクしてしまった！"
+                }
+              },
+              { "name": "defecation", "value": true }
+            ],
             "both": [
+              {
+                "type": "message",
+                "message": {
+                  "en-US": "No more, no more... I cried out in a blissful sigh of sweet release as I wet and soiled myself!",
+                  "ja-JP": "これ以上は、もう…！　幸せそうな声を堪えながら失禁し開放感にゾクゾクしてしまった！"
+                }
+              },
               { "name": "urination", "value": true },
               { "name": "defecation", "value": true }
             ]
+          },
+          {
+            "type": "message",
+            "message": {
+              "en-US": "The fairies teased me for being a potty-pants, and I hung my head. +1100 Humiliation.",
+              "ja-JP": "妖精達にからかわれ、俯いてしまった。尿意を0に。開発度+1100"
+            }
           },
           { "name": "humiliation", "value": 1100 }
         ]

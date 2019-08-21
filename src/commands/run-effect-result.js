@@ -3,9 +3,13 @@ import TriggerStatusEvent from "./trigger-status-event";
 import ApplyCharacterChange from "./apply-character-change";
 
 /**
- * @typedef {import('./execute-event').ExecuteEventData} ExecuteEventData
+ * @typedef {import('./run-result').BaseRunResultData<T>} BaseRunResultData
+ * @template T
+ */
+
+/**
  * @typedef {import('../models/result/effect-result').default} EffectResult
- * @typedef {ExecuteEventData & {result:EffectResult}} RunEffectResultData
+ * @typedef {BaseRunResultData<EffectResult>} RunEffectResultData
  */
 
 class RunEffectResult {
@@ -25,7 +29,7 @@ class RunEffectResult {
    * @returns {Promise<import('./execute-event').ExecuteEventData>}
    */
   async run() {
-    const { result, ...originalData } = this.data;
+    const { result, invert, ...originalData } = this.data;
     const { character } = originalData;
     const {
       character: newCharacter,
@@ -33,7 +37,8 @@ class RunEffectResult {
     } = new ApplyCharacterChange().run({
       character,
       name: result.data.name,
-      value: result.data.value
+      value: result.data.value,
+      invert
     });
     let data = {
       ...originalData,
@@ -46,14 +51,14 @@ class RunEffectResult {
       triggerId: "apply"
     }));
 
-    for (const index in statusChanges) {
-      const event = statusChanges[index];
+    for (const statusId in statusChanges) {
+      const statusValue = statusChanges[statusId];
       // Execute onStatus events
-      const onStatusList = this.data.statusCollection.getOnStatus(event.name);
+      const onStatusList = this.data.statusCollection.getOnStatus(statusId);
       for (const onStatusIndex in onStatusList) {
         const onStatus = onStatusList[onStatusIndex];
         // TODO: Use expression comparison
-        if (character.get(onStatus.name) && event.value === onStatus.value) {
+        if (character.get(onStatus.name) && statusValue === onStatus.value) {
           data = await new RunResultCollection({
             ...data,
             results: onStatus.results

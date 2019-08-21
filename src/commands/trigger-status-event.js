@@ -41,9 +41,7 @@ class TriggerStatusEvent {
     let newCharacter = character;
 
     for (const statusId in statusIds) {
-      if (!statusIds[statusId]) {
-        continue;
-      }
+      const statusValue = statusIds[statusId];
       const status = statusCollection.get(statusId);
       if (!status) {
         continue;
@@ -55,7 +53,8 @@ class TriggerStatusEvent {
 
       const runResult = await new RunResultCollection({
         ...request,
-        results
+        results,
+        invert: !statusValue
       }).run();
       newCharacter = runResult.character;
     }

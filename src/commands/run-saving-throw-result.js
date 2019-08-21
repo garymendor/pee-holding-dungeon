@@ -1,9 +1,13 @@
 import RunResultCollection from "./run-result-collection";
 
 /**
- * @typedef {import('./execute-event').ExecuteEventData} ExecuteEventData
+ * @typedef {import('./run-result').BaseRunResultData<T>} BaseRunResultData
+ * @template T
+ */
+
+/**
  * @typedef {import('../models/result/saving-throw-result').default} SavingThrowResult
- * @typedef {ExecuteEventData & {result:SavingThrowResult}} RunSavingThrowResultData
+ * @typedef {BaseRunResultData<SavingThrowResult>} RunSavingThrowResultData
  */
 
 class RunSavingThrowResult {
