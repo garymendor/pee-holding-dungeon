@@ -314,80 +314,14 @@
     },
     "saving-throw": false
   },
-  "exposed-panties-hypnosis": {
+  "exposed-panties": {
     "name": {
-      "en-US": "Exposed Panties (hypnosis)",
+      "en-US": "Exposed Panties",
       "ja-JP": "下着暴露"
     },
     "description": {
-      "en-US": "You've been hypnotized into thinking it's a good idea to expose your panties. Add +50 [Humiliation] when in public, with an additional +150 [Humiliation] if you've wet your panties and +200 [Humiliation] if you've soiled your panties.",
-      "ja-JP": "パンツが良く見えるようにスカートを捲りあげてしまう催眠暗示。人前で開発度+50。お漏らしパンツなら開発度+200"
-    },
-    "tagTriggers": {
-      "public": [
-        { "name": "humiliation", "value": 50 },
-        {
-          "message": "> I'm in a public place! Everyone can see my panties!"
-        },
-        {
-          "type": "stat-check",
-          "name": "wet-panties",
-          "value": true,
-          "results": [
-            {
-              "message": "> And worse, they can see I've wet my panties!"
-            },
-            { "name": "humiliation", "value": 150 }
-          ],
-          "elseResults": {
-            "type": "stat-check",
-            "name": "stained-panties",
-            "value": true,
-            "results": [
-              {
-                "message": "> And worse, they can see the yellow stain in my crotch!"
-              },
-              { "name": "humiliation", "value": 50 }
-            ]
-          }
-        },
-        {
-          "type": "stat-check",
-          "name": "soiled-panties",
-          "value": true,
-          "results": [
-            {
-              "message": "> And even worse, they can see I've soiled my panties!"
-            },
-            { "name": "humiliation", "value": 200 }
-          ],
-          "elseResults": {
-            "type": "stat-check",
-            "name": "skidmarked-panties",
-            "value": true,
-            "results": [
-              {
-                "message": "> And even worse, they can see the brown stain on my butt!"
-              },
-              { "name": "humiliation", "value": 50 }
-            ]
-          }
-        },
-        {
-          "message": "> If only there were some reason I could stop holding my skirt up... (dizzy)"
-        }
-      ]
-    },
-    "saving-throw": "Willpower"
-  },
-  "exposed-panties-damage": {
-    "name": {
-      "en-US": "Exposed Panties (damage)",
-      "ja-JP": "下着暴露"
-    },
-    "description": {
-      "en-US": "Your lower-body clothing has been damaged so that you cannot cover your panties. Add +50 [Humiliation] when in public, with an additional +150 [Humiliation] if you've wet your panties and +200 [Humiliation] if you've soiled your panties.",
-      "ja-JP": "人前で開発度+50。お漏らしパンツなら開発度+200"
+      "en-US": "Your skirt is lifted or missing, and your panties are visible. Add +50 [Humiliation] when in public, with an additional +150 [Humiliation] if you've wet your panties and +200 [Humiliation] if you've soiled your panties.",
+      "ja-JP": "スカートが捲れあがり、パンチラしている状態。人前で開発度+50。お漏らしパンツなら開発度+200。"
     },
     "tagTriggers": {
       "public": [
@@ -445,6 +379,42 @@
       ]
     },
     "saving-throw": false
+  },
+  "exposed-panties-hypnosis": {
+    "template": "exposed-panties",
+    "description": {
+      "en-US": "You've been hypnotized into thinking it's a good idea to expose your panties. Add +50 [Humiliation] when in public, with an additional +150 [Humiliation] if you've wet your panties and +200 [Humiliation] if you've soiled your panties.",
+      "ja-JP": "パンツが良く見えるようにスカートを捲りあげてしまう催眠暗示。人前で開発度+50。お漏らしパンツなら開発度+200"
+    },
+    "tagTriggers": {
+      "public": [
+        {},
+        {},
+        {},
+        {},
+        {
+          "message": "> If only there were some reason I could stop holding my skirt up... (dizzy)"
+        }
+      ]
+    },
+    "saving-throw": "Willpower"
+  },
+  "threePointTorment": {
+    "name": { "en-US": "Three-Point Torment", "ja-JP": "三点責め" },
+    "description": {
+      "en-US": "Vibrating clips are attached to the nipples and clit. They rub me constantly, and every floor I gain Horniness +100.",
+      "ja-JP": "乳首と淫核に振動クリップを付けられ、階層ごとにイかされて開発度+100"
+    },
+    "tags": ["breast-touching", "crotch-touching"],
+    "effect": {
+      "floor-end": [
+        {
+          "message": "> Bzzzzzz... the clips on my nipples and clit are driving me wild!"
+        },
+        { "name": "horniness", "value": 100 }
+      ]
+    },
+    "saving-throw": "Uncurse"
   },
   "wedgie": {
     "name": {

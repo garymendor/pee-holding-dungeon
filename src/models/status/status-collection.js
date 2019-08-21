@@ -2,11 +2,15 @@ import ResultCollection from "../result/result-collection";
 import Status from "./status";
 import fromPairs from "lodash/fromPairs";
 import toPairs from "lodash/toPairs";
+import applyTemplates from "../apply-templates";
 
 class StatusCollection {
   constructor(data = {}) {
     this.data = fromPairs(
-      toPairs(data).map(([key, value]) => [key, new Status(value)])
+      toPairs(applyTemplates(data)).map(([key, value]) => [
+        key,
+        new Status(value)
+      ])
     );
     this.onStatus = {};
     toPairs(this.data)

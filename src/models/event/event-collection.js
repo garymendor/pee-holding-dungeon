@@ -1,11 +1,15 @@
-import Event from "./event";
 import fromPairs from "lodash/fromPairs";
 import toPairs from "lodash/toPairs";
+import Event from "./event";
+import applyTemplates from "../apply-templates";
 
 class EventCollection {
   constructor(data = {}) {
     this.data = fromPairs(
-      toPairs(data).map(([key, value]) => [key, new Event(value)])
+      toPairs(applyTemplates(data)).map(([key, value]) => [
+        key,
+        new Event(value)
+      ])
     );
     this.rootKeysValue = toPairs(this.data)
       .filter(([, value]) => value.type() === "floor")

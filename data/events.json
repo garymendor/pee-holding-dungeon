@@ -3,12 +3,8 @@
     "type": "special",
     "comment": "A dummy event that does nothing, allowing other events to short-circuit execution without doing anything."
   },
-  "Forced Fitting Room - Lingerie and Blindfold": {
-    "type": "floor",
-    "description": {
-      "en-US": "Forced fitting room! I am surrounded by mirrors on all sides! A perverted outfit and blindfold appear on a hanger, and a note says that I will not be freed until I put them on and perform a humiliating pose!",
-      "ja-JP": "強制試着室だ！　鏡に四方を囲まれてしまった！　用意されたアイマスクとエッチな服を着て、恥ずかしいポーズをしないと解放されない！"
-    },
+  "Forced Fitting Room: Base": {
+    "type": "template",
     "results": [
       {
         "type": "choice",
@@ -17,51 +13,41 @@
             "description": {
               "en-US": "Follow Instructions",
               "ja-JP": "指示に従う"
-            },
-            "results": "Forced Fitting Room - Lingerie and Blindfold: Follow Instructions"
+            }
           },
           {
             "description": {
               "en-US": "Go Against Instructions",
               "ja-JP": "指示に逆らう"
-            },
-            "results": "Forced Fitting Room - Lingerie and Blindfold: Go Against Instructions"
+            }
           }
         ]
       }
     ]
   },
-  "Forced Fitting Room - Lingerie and Blindfold: Follow Instructions": {
-    "parent": "Forced Fitting Room - Lingerie and Blindfold",
-    "description": {
-      "en-US": "I change into the clothes and do the pose as instructed. The mirror disappears and I am released, but I do not notice. I continue to pose embarrassingly where there was no need for it any longer!",
-      "ja-JP": "ポーズを維持すると、鏡が消えて解放されるが、気付けない。何もないところで必死に恥ずかしいポーズを取り続けた！"
-    },
-    "results": { "name": "humiliation", "value": 50 }
-  },
-  "Forced Fitting Room - Lingerie and Blindfold: Go Against Instructions": {
-    "parent": "Forced Fitting Room - Lingerie and Blindfold",
+  "Forced Fitting Room: Base: Go Against Instructions": {
+    "type": "template",
+    "parent": "Forced Fitting Room: Base",
     "results": [
-      { "name": "need-for-bathroom", "value": 10 },
+      { "name": "need-for-bathroom", "value": 50, "//": "This would be a good place to start with randomness" },
       {
         "type": "accident-check",
         "value": 300,
-        "saving-throw": "STR",
-        "results": "Forced Fitting Room - Lingerie and Blindfold: Accident"
+        "saving-throw": "STR"
       },
       {
         "type": "saving-throw",
         "saving-throw": "Force",
-        "DC": 35,
-        "results": "Forced Fitting Room - Lingerie and Blindfold: Go Against Instructions"
+        "DC": 30
       },
       {
         "message": "I finally manage to break out of the fitting room."
       }
     ]
   },
-  "Forced Fitting Room - Lingerie and Blindfold: Accident": {
-    "parent": "Forced Fitting Room - Lingerie and Blindfold",
+  "Forced Fitting Room: Base: Accident": {
+    "parent": "Forced Fitting Room: Base",
+    "type": "template",
     "results": [
       {
         "type": "accident",
@@ -70,7 +56,8 @@
             "message": {
               "en-US": "I rub my thighs together, but can’t hold it any longer. A shameful pool spreads in the little room, and my hand between my legs makes me feel good.",
               "ja-JP": "内股を摺り合わせ、耐えていたが……。羞恥で半べそになりながら失禁して、気持ちよさそうに股間をヒクつかせてしまった！　　小部屋の中に羞恥の水溜まりが広がっていく。",
-              "ja-J2": "内股を摺り合わせ、耐えていたが……。「ぢょろろろろ……♡」下着の中に情けなくお漏らしして気が抜けてしまった！　小部屋の中に羞恥の水溜まりが広がっていく。尿意を0に、開発度+300。再選択"
+              "ja-J2": "内股を摺り合わせ、耐えていたが……。「ぢょろろろろ……♡」下着の中に情けなくお漏らしして気が抜けてしまった！　小部屋の中に羞恥の水溜まりが広がっていく。尿意を0に、開発度+300。再選択",
+              "ja-J3": "内股を摺り合わせ、耐えていたが……。赤面した顔を伏せながら恥ずかしそうに漏らしてしまった！　小部屋の中に羞恥の水溜まりが広がっていく。尿意を0に、開発度+300。再選択"
             }
           },
           { "name": "urination", "value": true },
@@ -102,23 +89,137 @@
             "description": {
               "en-US": "Follow Instructions",
               "ja-JP": "指示に従う"
-            },
-            "results": "Forced Fitting Room - Lingerie and Blindfold: Follow Instructions"
+            }
           },
           {
             "description": {
               "en-US": "Go Against Instructions",
               "ja-JP": "指示に逆らう"
-            },
-            "results": "Forced Fitting Room - Lingerie and Blindfold: Go Against Instructions"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "Forced Fitting Room: Lingerie and Blindfold": {
+    "type": "floor",
+    "template": "Forced Fitting Room: Base",
+    "description": {
+      "en-US": "Forced fitting room! I am surrounded by mirrors on all sides! I will not be freed until I put on a lewd outfit and blindfold and perform a humiliating pose!",
+      "ja-JP": "強制試着室だ！　鏡に四方を囲まれてしまった！　用意されたアイマスクとエッチな服を着て、恥ずかしいポーズをしないと解放されない！"
+    },
+    "results": [
+      {
+        "choices": [
+          {
+            "results": "Forced Fitting Room: Lingerie and Blindfold: Follow Instructions"
+          },
+          {
+            "results": "Forced Fitting Room: Lingerie and Blindfold: Go Against Instructions"
+          }
+        ]
+      }
+    ]
+  },
+  "Forced Fitting Room: Lingerie and Blindfold: Follow Instructions": {
+    "parent": "Forced Fitting Room: Lingerie and Blindfold",
+    "description": {
+      "en-US": "I change into the clothes and do the pose as instructed. The mirror disappears and I am released, but I do not notice. I continue to pose embarrassingly where there was no need for it any longer!",
+      "ja-JP": "ポーズを維持すると、鏡が消えて解放されるが、気付けない。何もないところで必死に恥ずかしいポーズを取り続けた！"
+    },
+    "results": { "name": "humiliation", "value": 50 }
+  },
+  "Forced Fitting Room: Lingerie and Blindfold: Go Against Instructions": {
+    "parent": "Forced Fitting Room: Lingerie and Blindfold",
+    "template": "Forced Fitting Room: Base: Go Against Instructions",
+    "results": [
+      {},
+      {
+        "results": "Forced Fitting Room: Lingerie and Blindfold: Accident"
+      },
+      {
+        "results": "Forced Fitting Room: Lingerie and Blindfold: Go Against Instructions"
+      },
+      {}
+    ]
+  },
+  "Forced Fitting Room: Lingerie and Blindfold: Accident": {
+    "template": "Forced Fitting Room: Base: Accident",
+    "parent": "Forced Fitting Room: Lingerie and Blindfold",
+    "results": [
+      {},
+      {},
+      {
+        "choices": [
+          {
+            "results": "Forced Fitting Room: Lingerie and Blindfold: Follow Instructions"
+          },
+          {
+            "results": "Forced Fitting Room: Lingerie and Blindfold: Go Against Instructions"
           }
         ]
       }
     ]
   },
   "Forced Fitting Room: Micro Bikini": {
-    "original": "強制試着室だ！　鏡に四方を囲まれてしまった！　用意されたマイクロビキニに着替え、恥ずかしいポーズをしないと解放されない！\n《選択分岐：指示に逆らう》\n尿意+10%。再選択\n\n《分岐条件：尿意300%以上》\n内股を摺り合わせ、耐えていたが……。赤面した顔を伏せながら恥ずかしそうに漏らしてしまった！　小部屋の中に羞恥の水溜まりが広がっていく。尿意を0に、開発度+300。再選択\n\n《選択分岐：指示に従う》\n30秒ポーズを維持すると、マジックミラーが消えて解放される。外には野次馬が何人も。……顔が真っ赤になってしまった！　開発度+100",
-    "//": "The forced fitting room, this time with a micro bikini."
+    "type": "floor",
+    "template": "Forced Fitting Room: Base",
+    "description": {
+      "en-US": "Forced fitting room! I am surrounded by mirrors on all sides! I will not be freed until I put on a micro bikini perform a humiliating pose!",
+      "ja-JP": "強制試着室だ！　鏡に四方を囲まれてしまった！　用意されたマイクロビキニに着替え、恥ずかしいポーズをしないと解放されない！"
+    },
+    "results": [
+      {
+        "choices": [
+          {
+            "results": "Forced Fitting Room: Micro Bikini: Follow Instructions"
+          },
+          {
+            "results": "Forced Fitting Room: Micro Bikini: Go Against Instructions"
+          }
+        ]
+      }
+    ]
+  },
+  "Forced Fitting Room: Micro Bikini: Follow Instructions": {
+    "parent": "Forced Fitting Room: Micro Bikini",
+    "description": {
+      "en-US": "I hold the pose for 30 seconds, and the magic mirrors disappear and I am released. There are a lot of rubberneckers outside! ...My face is red! Humiliation +100.",
+      "ja-JP": "30秒ポーズを維持すると、マジックミラーが消えて解放される。外には野次馬が何人も。……顔が真っ赤になってしまった！　開発度+100"
+    },
+    "results": { "name": "humiliation", "value": 100 }
+  },
+  "Forced Fitting Room: Micro Bikini: Go Against Instructions": {
+    "parent": "Forced Fitting Room: Micro Bikini",
+    "template": "Forced Fitting Room: Base: Go Against Instructions",
+    "results": [
+      {},
+      {
+        "results": "Forced Fitting Room: Micro Bikini: Accident"
+      },
+      {
+        "results": "Forced Fitting Room: Micro Bikini: Go Against Instructions"
+      },
+      {}
+    ]
+  },
+  "Forced Fitting Room: Micro Bikini: Accident": {
+    "template": "Forced Fitting Room: Base: Accident",
+    "parent": "Forced Fitting Room: Micro Bikini",
+    "results": [
+      {},
+      {},
+      {
+        "choices": [
+          {
+            "results": "Forced Fitting Room: Micro Bikini: Follow Instructions"
+          },
+          {
+            "results": "Forced Fitting Room: Micro Bikini: Go Against Instructions"
+          }
+        ]
+      }
+    ]
   },
   "Herd of Cats": {
     "type": "floor",
@@ -503,7 +604,7 @@
   },
   "Banana Peel: Miniskirt": {
     "original": "バナナの皮だ！　派手に転んで大開脚！　…カチリッ！　お尻で罠を作動させ、ミニスカメイド服を着せられた！　……こっそりと背中には『お漏らしXX回目♡』の張り紙が縫い付けられ、シルクのパンツが丸見えになっている。【下着暴露】を取得。\n\n【下着暴露】スカートが捲れあがり、パンチラしている状態。人前で開発度+50。お漏らしパンツなら開発度+200。",
-    "//": "You slip on a banana peel and get your clothes replaced with a maid uniform with a skirt that's way too short to hide your panties, plus a sign on your back saying [Wetting XXth]. A good use for the 'exposed-panties-damage' status."
+    "//": "You slip on a banana peel and get your clothes replaced with a maid uniform with a skirt that's way too short to hide your panties, plus a sign on your back saying [Wetting XXth]. This is why 'exposed-panties' status is different from 'exposed-panties-hypnosis."
   },
   "Cowgirl Trap": {
     "original": "セルフ搾乳の罠だ！胸がたゆんっと大きく膨らみ、先っちょがビリビリと痺れだした！その上カウガール服を着せられている！…皮手袋を嵌めた両手が独りで動き、星条旗ビキニから溢れそうな巨乳を揉みしだく。自分のものとは思えない巧みな手付きで乳腺をマッサージされ、気持ちよくなってしまう！ビンビンに立ち上がった乳首をコリコリほぐされ、ビュビュッ♡とミルクを溢れさせてしまった！快楽に抗って手袋を脱ぐが、…中身が入っているかのように搾乳を続ける。【乳牛】【乳揉みハンド】を取得。（階層ごとに開発度+100。判定時、尿意+100%で計算）",
@@ -576,30 +677,19 @@
     "original": "晒し台に架けられた！　90度のお辞儀をする姿勢で首と両手を一緒に拘束され、突き出したお尻をサキュバスにくすぐられる！　パンツを下ろされ、おしっこ穴まで丁寧にこちょられ……、寸止めで解放された！　尿意を299%に。開発度+100。\n\n《分岐条件：尿意限界300%未満》\n手加減されてたのに、顔を真っ赤に染めながら盛大に漏らしてしまった！　遠慮なく揶揄われ、開発度+300。尿意を0%に。",
     "//": "Not sure what the deal is with this one."
   },
-  "Child Prisoners: Pantsing": {
-    "type": "floor",
+  "Child Prisoners: Base": {
+    "type": "template",
     "original": "囚われた子供達を発見した！　安全な場所まで引率する。…なかなか進めず、尿意が溜まっていく。…信頼に満ちた無垢な視線を受けて、前を抑えられない。尿意+100%\n\n《分岐条件：ズボン&パンツ》\n悪戯っ子に不意を突かれた！　豪快に穿き物をズリ降ろされてしまう！　慌ててしゃがみ込むと、膀胱に甘い振動が加わった……！　尿意+150% 開発度+50 \n\n《分岐条件：尿意280%以上》\nピュッ♡とチビった一滴が呼び水になる。滝のような勢いで漏らしてしまい、恥ずかしさのあまり泣いてしまった！　子供達の目の前で盛大に痴態を見せ、散々囃し立てられた！　尿意を0%に。開発度+800",
     "description": {
       "en-US": "I found some child prisoners! I lead them toward a safe place. ...I can't go on easily, and my need for the bathroom is growing. ...I can't hold my crotch with those innocent eyes watching me. Need to pee +100% ",
-      "ja-JP": "囚われた子供達を発見した！　安全な場所まで引率する。…なかなか進めず、尿意が溜まっていく。…信頼に満ちた無垢な視線を受けて、前を抑えられない。尿意+100%"
+      "ja-JP": "囚われた子供達を発見した！　安全な場所まで引率する。…なかなか進めず、尿意が溜まっていく。…信頼に満ちた無垢な視線を受けて、前を抑えられない。尿意+100%",
+      "ja-J2": "囚われた子供達を発見した！　安全な場所まで引率する。…懐かれてなかなか進めず、尿意が溜まっていく。…両手を繋がれて、前を抑えられない。尿意+100%"
     },
     "tags": "public",
     "results": [
       { "name": "need-for-bathroom", "value": 100 },
       {
-        "type": "stat-check",
-        "name": "trousers",
-        "value": true,
-        "results": [
-          {
-            "message": {
-              "en-US": "A mischievous child took me by surprise! She pulled down my pants with a delighted squeal! When I crouched down to pull them back up, my bladder trembled...! Need to pee +150, Humiliation +50.",
-              "ja-JP": "悪戯っ子に不意を突かれた！　豪快に穿き物をズリ降ろされてしまう！　慌ててしゃがみ込むと、膀胱に甘い振動が加わった……！　尿意+150% 開発度+50"
-            }
-          },
-          { "name": "need-for-bathroom", "value": 150 },
-          { "name": "humiliation", "value": 50 }
-        ]
+        "//": "Fill in whatever mischievous thing is done by the little girls you rescued."
       },
       {
         "type": "accident-check",
@@ -611,8 +701,11 @@
             "pee": [
               {
                 "message": {
-                  "en-US": "Plip♡ and a little drop breaches the dam. Pee ran down my legs like a waterfall, and I sobbed in humiliation! I made a fool of myself in front of the kids, and I was devastated! Humiliation +800",
-                  "ja-JP": "ピュッ♡とチビった一滴が呼び水になる。滝のような勢いで漏らしてしまい、恥ずかしさのあまり泣いてしまった！　子供達の目の前で盛大に痴態を見せ、散々囃し立てられた！　尿意を0%に。開発度+800"
+                  "en-US": "Plip♡ and a little drop breaches the dam. Pee ran down my legs like a waterfall, and I sobbed in humiliation! I made a fool of myself in front of the kids, and I was devastated! Humiliation +800.",
+                  "en-U2": "My concentration was broken. \"Oooh...\" I called out in a cute voice, blushing over my own foolishness. An embarrassing stain spread on my clothes, and steam rose at my feet! The children scolded me! Humiliation +800.",
+                  "ja-JP": "ピュッ♡とチビった一滴が呼び水になる。滝のような勢いで漏らしてしまい、恥ずかしさのあまり泣いてしまった！　子供達の目の前で盛大に痴態を見せ、散々囃し立てられた！　尿意を0%に。開発度+800",
+                  "ja-J2": "集中が途切れ…、「うぅぅ……♡」可愛らしい声を漏らしながら自らの痴態に頬を染めてしまった！　服に恥ずかしい染みが広がり、足元に湯気が立ち上る！子供たちに散々揶揄わ",
+                  "ja-J3": "もう限界だ！　幸せそうに緩んだ顔を伏せながらお漏らししてしまった！　子供達の前で恥ずかしい水溜まりを作り、散々囃し立てられた！　尿意を0%に。開発度+700"
                 }
               },
               { "name": "urination", "value": true }
@@ -642,13 +735,89 @@
       }
     ]
   },
+  "Child Prisoners: Pantsing": {
+    "template": "Child Prisoners: Base",
+    "type": "floor",
+    "results": [
+      {},
+      {
+        "type": "stat-check",
+        "name": "trousers",
+        "value": true,
+        "results": [
+          {
+            "message": {
+              "en-US": "A mischievous child took me by surprise! She pulled down my pants with a delighted squeal! When I crouched down to pull them back up, my bladder trembled...! Need to pee +150, Humiliation +50.",
+              "ja-JP": "悪戯っ子に不意を突かれた！　豪快に穿き物をズリ降ろされてしまう！　慌ててしゃがみ込むと、膀胱に甘い振動が加わった……！　尿意+150% 開発度+50"
+            }
+          },
+          { "name": "need-for-bathroom", "value": 150 },
+          { "name": "humiliation", "value": 50 }
+        ]
+      },
+      {}
+    ]
+  },
   "Child Prisoners: Kanchou": {
     "original": "囚われた子供達を発見した！　安全な場所まで引率する。…懐かれてなかなか進めず、尿意が溜まっていく。…両手を繋がれて、前を抑えられない。尿意+100%\n\n《分岐条件：尿意150%以上》\n内股を摺り合わせ、もじもじ。扇情的にお尻を振って無意識に悪戯っ子を誘惑してしまう。……少し屈んだ瞬間、背後から思い切りカンチョーされた！　お尻を押さえて飛び上がる！　尿意+30% 開発度+100 \n\n《分岐条件：尿意250%以上》\n集中が途切れ…、「うぅぅ……♡」可愛らしい声を漏らしながら自らの痴態に頬を染めてしまった！　服に恥ずかしい染みが広がり、足元に湯気が立ち上る！子供たちに散々揶揄われた！尿意を0%に。開発度+800\n",
-    "//": "Just like the one above, except if you need to pee, your wriggling butt tempts a little girl to give you a kanchou."
+    "template": "Child Prisoners: Base",
+    "type": "floor",
+    "results": [
+      {},
+      {
+        "type": "accident-check",
+        "name": "need-to-pee",
+        "value": 150,
+        "results": [
+          {
+            "message": {
+              "en-US": "I rubbed my legs together and squirmed. I wiggled my ass seductively, and unintentionally tempted one of the little girls to mischief. The moment I bent over, she exclaimed \"Kanchou!\" and stuck her fingers up my butt! I held my rear and jumped up in surprise! Need to pee +30%, Humiliation +100.",
+              "ja-JP": "内股を摺り合わせ、もじもじ。扇情的にお尻を振って無意識に悪戯っ子を誘惑してしまう。……少し屈んだ瞬間、背後から思い切りカンチョーされた！　お尻を押さえて飛び上がる！　尿意+30% 開発度+100 "
+            }
+          },
+          { "name": "need-for-bathroom", "value": 30 },
+          { "name": "humiliation", "value": 100 }
+        ]
+      },
+      {}
+    ]
   },
   "Child Prisoners: Skirt Flip": {
     "original": "囚われた子供達を発見した！　安全な場所まで引率する。…なかなか進めず、尿意が溜まっていく。…信頼に満ちた無垢な視線を受けて、前を抑えられない。尿意+100%\n\n《分岐条件：スカート》\n悪戯っ子に不意を突かれた！　豪快にスカートを捲られ、大勢の前に下着を晒してしまう！　慌てて抑えるが、今度は手を離せなくなってしまった……！　尿意+50% 開発度+50（お漏らしパンツなら+300）\n\n《分岐条件：尿意250%以上》\nもう限界だ！　幸せそうに緩んだ顔を伏せながらお漏らししてしまった！　子供達の前で恥ずかしい水溜まりを作り、散々囃し立てられた！　尿意を0%に。開発度+700",
-    "//": "Same child-prisoners situation, but this time the little girl flips your skirt, with the bonus humiliation for if you've already had an accident."
+    "template": "Child Prisoners: Base",
+    "type": "floor",
+    "results": [
+      {},
+      {
+        "type": "stat-check",
+        "name": "skirt",
+        "value": "true",
+        "results": [
+          {
+            "message": {
+              "en-US": "A mischievous child surprised me! She excitedly flipped my skirt, and my panties were exposed before a lot of people! I hurry and hold it down, but now I can't take my hands off! Need to pee +50%, Humiliation +50 (+300 for wet panties).",
+              "ja-JP": "悪戯っ子に不意を突かれた！　豪快にスカートを捲られ、大勢の前に下着を晒してしまう！　慌てて抑えるが、今度は手を離せなくなってしまった……！　尿意+50% 開発度+50（お漏らしパンツなら+300）"
+            }
+          },
+          { "name": "need-for-bathroom", "value": 50 },
+          { "name": "humiliation", "value": 50 },
+          {
+            "//": "I should probably have some standard way to apply the \"exposed panties, worse if wet\" concept.",
+            "type": "stat-check",
+            "name": "wet-panties",
+            "value": true,
+            "results": { "name": "humiliation", "value": 250 }
+          },
+          {
+            "type": "stat-check",
+            "name": "soiled-panties",
+            "value": true,
+            "results": { "name": "humiliation", "value": 300 }
+          }
+        ]
+      },
+      {}
+    ]
   },
   "Overhead Ladder: Rushing Water": {
     "original": "川に雲梯がかかっている。　両手でぶら下がり、渡り始めた。　……川のせせらぎに尿意を刺激される！　股間を押さえられず、もじもじと摺り合わせてしまう。　尿意+50% \n\n《分岐条件：尿意250%以上》\nあともう少し、というところで耐えきれず……。消え入りそうなほど顔を赤らめ「ぷしゃぁぁぁ……♡」とお漏らししてしまった！　ぶら下がったまま、恥ずかしいものをポタポタと垂らしていく！　尿意を0%に。開発度+350。",
@@ -924,9 +1093,16 @@
               { "name": "defecation", "value": true }
             ]
           },
+          {
+            "message": {
+              "en-US": "Moreover, the time is up and I got a failing mark! A punishment trap was activated, and cursed toys are placed in my clothes. Need to pee 0%. Humiliation +400. Gained [Three-Point Torment].",
+              "ja-JP": "……その上時間切れで赤点になってしまった！　お仕置き罠が作動し、服の内側に呪いの玩具を仕込まれる。尿意0%に。開発度+400。【三点責め】を取得"
+            }
+          },
           { "name": "trousers", "value": null },
           { "name": "shirt", "value": "$Too-Short Schoolgirl Blouse" },
           { "name": "skirt", "value": "$Mini Schoolgirl Skirt" },
+          { "name": "threePointTorment", "value": true },
           { "name": "humiliation", "value": 400 }
         ]
       }

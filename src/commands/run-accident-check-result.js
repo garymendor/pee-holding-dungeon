@@ -1,5 +1,4 @@
 import RunResultCollection from "./run-result-collection";
-import { DEFAULT_DC } from "../models/result/saving-throw-result";
 
 /**
  * @typedef {import('./run-result').BaseRunResultData<T>} BaseRunResultData
@@ -29,15 +28,44 @@ class RunAccidentCheckResult {
   async run() {
     const { result, ...data } = this.data;
     const { character } = data;
-    const accident = result.compare(character);
+    let accident = result.compare(character);
     if (!accident) {
       return { ...data, continue: true };
     }
     if (result.savingThrow()) {
+      // If the config doesn't specify a DC, the DC is Need/10. If the character is
+      // having both types of accident, roll a separate DC for each.
+
       // TODO: Nearly duplicated code with RunSavingThrowResult
-      const saveValue = character.get(result.savingThrow());
-      const d20 = 1 + Math.floor(Math.random() * 20);
-      if (saveValue + d20 >= (result.dc() || DEFAULT_DC)) {
+      // Save vs. peeing
+      if (accident === "pee" || accident === "both") {
+        const saveValue = character.get(result.savingThrow());
+        const d20 = 1 + Math.floor(Math.random() * 20);
+        const dc =
+          result.dc() ||
+          10 +
+            (character.get("need-to-pee") + character.get("pee-incontinence")) /
+              10;
+        if (saveValue + d20 >= dc) {
+          accident = accident === "both" ? "poo" : null;
+        }
+      }
+
+      // Save vs. pooing
+      if (accident === "poo" || accident === "both") {
+        const saveValue = character.get(result.savingThrow());
+        const d20 = 1 + Math.floor(Math.random() * 20);
+        const dc =
+          result.dc() ||
+          10 +
+            (character.get("need-to-poo") + character.get("poo-incontinence")) /
+              10;
+        if (saveValue + d20 >= dc) {
+          accident = accident === "both" ? "pee" : null;
+        }
+      }
+
+      if (!accident) {
         return { ...data, continue: true };
       }
     }
