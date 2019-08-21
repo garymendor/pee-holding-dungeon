@@ -56,7 +56,6 @@
         "results": "Forced Fitting Room - Lingerie and Blindfold: Go Against Instructions"
       },
       {
-        "type": "message",
         "message": "I finally manage to break out of the fitting room."
       }
     ]
@@ -68,7 +67,6 @@
         "type": "accident",
         "pee": [
           {
-            "type": "message",
             "message": {
               "en-US": "I rub my thighs together, but can’t hold it any longer. A shameful pool spreads in the little room, and my hand between my legs makes me feel good.",
               "ja-JP": "内股を摺り合わせ、耐えていたが……。羞恥で半べそになりながら失禁して、気持ちよさそうに股間をヒクつかせてしまった！　　小部屋の中に羞恥の水溜まりが広がっていく。",
@@ -81,7 +79,6 @@
         ],
         "poo": [
           {
-            "type": "message",
             "message": "I squeeze my cheeks together, but can’t hold it any longer. A shameful bulge spreads in the seat of my panties."
           },
           { "name": "defecation", "value": true },
@@ -89,7 +86,6 @@
         ],
         "both": [
           {
-            "type": "message",
             "message": "I rub my thighs together and squeeze my cheeks together, but can’t hold it any longer. A shameful pool spreads in the little room and even more shameful bulge spreads in the seat of my panties, and my hand between my legs makes me feel good."
           },
           { "name": "urination", "value": true },
@@ -98,10 +94,7 @@
           { "name": "horniness", "value": 100 }
         ]
       },
-      {
-        "type": "message",
-        "message": "Keep trying to escape, or follow the instructions?"
-      },
+      { "message": "Keep trying to escape, or follow the instructions?" },
       {
         "type": "choice",
         "choices": [
@@ -315,7 +308,6 @@
         "value": false,
         "results": [
           {
-            "type": "message",
             "message": {
               "en-US": "My panties were lowered while I was walking and I fell down! ...I can't get my panties back up! Everyone is staring at my bare crotch! My face is hot!",
               "ja-JP": "歩行中にパンツを下げられ、素っ転んでしまった！　……なかなかパンツを取り戻せない！　剥きだしの股間に視線が集まってくる！　顔が熱い！　尿意+10%　開発度+50"
@@ -327,7 +319,6 @@
         ]
       },
       {
-        "type": "message",
         "message": {
           "en-US": "I tried my best with everyone looking at my butt, but I couldn't get my trousers back, so I started running away with my lower body exposed. Urine intention + 50% Development level +200. If you have left the stain bread, the development level is +500.",
           "ja-JP": "お尻を見られながら頑張ったが、取り戻せず、下半身丸だしで逃げ出す羽目になった。尿意+50% 開発度+200。　染みパンを残してきたなら、開発度+500。"
@@ -388,7 +379,6 @@
           },
           "results": [
             {
-              "type": "message",
               "message": {
                 "en-US": "Delicious tea and sweets were served. ...No matter how many times I drink my tea, they serve me more, again and again! [Need to pee] +50%.",
                 "ja-JP": "美味しい紅茶とお菓子を振る舞われた。……何度飲み干しても次々におかわりを注がれてしまう！　尿意+50%。",
@@ -418,7 +408,6 @@
                       "results": "Fairy Tea Party: Accident"
                     },
                     {
-                      "type": "message",
                       "message": "At long last, the fairies grow bored of feeding me, and I walk away holding myself desperately."
                     }
                   ]
@@ -458,7 +447,6 @@
             "type": "accident",
             "pee": [
               {
-                "type": "message",
                 "message": {
                   "en-US": "No more, no more... I cried out in a blissful sigh of sweet release as I wet myself!",
                   "ja-JP": "これ以上は、もう…！　幸せそうな声を堪えながら失禁し開放感にゾクゾクしてしまった！"
@@ -468,7 +456,6 @@
             ],
             "poo": [
               {
-                "type": "message",
                 "message": {
                   "en-US": "No more, no more... I cried out in a blissful sigh of sweet release as I soiled myself!",
                   "ja-JP": "これ以上は、もう…！　幸せそうな声を堪えながら失禁し開放感にゾクゾクしてしまった！"
@@ -478,7 +465,6 @@
             ],
             "both": [
               {
-                "type": "message",
                 "message": {
                   "en-US": "No more, no more... I cried out in a blissful sigh of sweet release as I wet and soiled myself!",
                   "ja-JP": "これ以上は、もう…！　幸せそうな声を堪えながら失禁し開放感にゾクゾクしてしまった！"
@@ -489,7 +475,6 @@
             ]
           },
           {
-            "type": "message",
             "message": {
               "en-US": "The fairies teased me for being a potty-pants, and I hung my head. +1100 Humiliation.",
               "ja-JP": "妖精達にからかわれ、俯いてしまった。尿意を0に。開発度+1100"
@@ -542,7 +527,6 @@
             "type": "accident",
             "pee": [
               {
-                "type": "message",
                 "message": {
                   "en-US": "A strong urge to pee rushed in and I held my crotch! I stuck out my butt unsteadily. ... I can't move one more step! Hiding my front with the silver tray ... \"Kuo ... ♡\" I shamefully wet myself while clenching my teeth! Warmth and steam rise from my feet. I was embarrassed in front of a lot of colleagues.",
                   "ja-JP": "強烈な波が押し寄せ、股間を抑えてしまった！お尻を突きだして、そわそわ。…もう一歩も動けない！銀盆で前を隠し……、「くぅ…♡」歯を食いしばりながら悔しそうに失禁してしまった！　足元からホカホカと湯気が立ち上る。大勢の同業者に恥ずかしい姿を晒した…。尿意を0%に。開発度+350。"
@@ -552,7 +536,6 @@
             ],
             "poo": [
               {
-                "type": "message",
                 "message": {
                   "en-US": "A strong urge to poo rushed in and I held my rear! I stuck out my butt unsteadily. ... I can't move one more step! Hiding my back with the silver tray ... \"Kuo ... ♡\" I shamefully soiled myself while clenching my teeth! Little brown lumps ooze down the back of my legs. I was embarrassed in front of a lot of colleagues."
                 }
@@ -561,7 +544,6 @@
             ],
             "both": [
               {
-                "type": "message",
                 "message": {
                   "en-US": "A strong urge to pee rushed in and I held my crotch! I stuck out my butt unsteadily. ... I can't move one more step! Hiding my front with the silver tray ... \"Kuo ... ♡\" I shamefully wet and soiled myself while clenching my teeth! Warmth and steam rise from my feet, and little brown lumps ooze down the back of my legs. I was embarrassed in front of a lot of colleagues."
                 }
@@ -610,7 +592,6 @@
         "value": true,
         "results": [
           {
-            "type": "message",
             "message": {
               "en-US": "A mischievous child took me by surprise! She pulled down my pants with a delighted squeal! When I crouched down to pull them back up, my bladder trembled...! Need to pee +150, Humiliation +50.",
               "ja-JP": "悪戯っ子に不意を突かれた！　豪快に穿き物をズリ降ろされてしまう！　慌ててしゃがみ込むと、膀胱に甘い振動が加わった……！　尿意+150% 開発度+50"
@@ -629,7 +610,6 @@
             "type": "accident",
             "pee": [
               {
-                "type": "message",
                 "message": {
                   "en-US": "Plip♡ and a little drop breaches the dam. Pee ran down my legs like a waterfall, and I sobbed in humiliation! I made a fool of myself in front of the kids, and I was devastated! Humiliation +800",
                   "ja-JP": "ピュッ♡とチビった一滴が呼び水になる。滝のような勢いで漏らしてしまい、恥ずかしさのあまり泣いてしまった！　子供達の目の前で盛大に痴態を見せ、散々囃し立てられた！　尿意を0%に。開発度+800"
@@ -639,7 +619,6 @@
             ],
             "poo": [
               {
-                "type": "message",
                 "message": {
                   "en-US": "Ping♡ and a little pebble begins the avalanche. A squelching sound, and poo filled my panties like a mudslide, and I sobbed in humiliation! I made a fool of myself in front of the kids, and I was devastated! Humiliation +800",
                   "ja-JP": "ピュッ♡とチビった一滴が呼び水になる。滝のような勢いで漏らしてしまい、恥ずかしさのあまり泣いてしまった！　子供達の目の前で盛大に痴態を見せ、散々囃し立てられた！　尿意を0%に。開発度+800"
@@ -649,7 +628,6 @@
             ],
             "both": [
               {
-                "type": "message",
                 "message": {
                   "en-US": "Plip♡ and a little drop breaches the dam. Pee ran down my legs like a waterfall, poo filled my panties like a landslide, and I sobbed in humiliation! I made a fool of myself in front of the kids, and I was devastated! Humiliation +800",
                   "ja-JP": "ピュッ♡とチビった一滴が呼び水になる。滝のような勢いで漏らしてしまい、恥ずかしさのあまり泣いてしまった！　子供達の目の前で盛大に痴態を見せ、散々囃し立てられた！　尿意を0%に。開発度+800"
@@ -691,7 +669,6 @@
         "saving-throw": ["Healing", "Willpower", "Holy"],
         "results": [
           {
-            "type": "message",
             "message": {
               "en-US": "The priestess asks for my \"holy water\" in exchange for treating me. I pull my panties down in the middle of the cathedral, and the cold bottle is pressed against my crotch... \"Ahh...\" While exhaling a lewd sigh, I relieve myself. Under the ogling gaze of the lewd priestess, I fill the bottle to the brim.",
               "ja-JP": "治療と引き替えに聖水の提供を要求される。大聖堂の真ん中でパンツを下げられ、冷たい瓶を押し当てられ……、「んふーっ♡」と色っぽく溜め息を吐きながら、尿意を解消する。淫魔のシスターに見られながら、なみなみと注いでいく。尿意0%に。開発度+250。状態異常1つ回復"
@@ -707,7 +684,6 @@
         ],
         "elseResults": [
           {
-            "type": "message",
             "message": {
               "en-US": "Naively, I accept a blessing from a succubus dressed as a priestess.",
               "ja-JP": "シスター服の淫魔に騙され、祝福を受けることに。"
@@ -759,7 +735,6 @@
         "value": { "$gt": 2000 },
         "results": [
           {
-            "type": "message",
             "message": {
               "en-US": "They told me that holding it had started to feel good. I couldn't deny it, and my face was red. Gained [Desperation Fetish]. Humiliation +100.",
               "ja-JP": "おしっこ我慢が気持ちよくなりはじめていることを指摘され、否定できずに顔を赤くしてしまった。開発度+100pt。【我慢好き】を獲得。"
@@ -795,7 +770,6 @@
         "value": { "$gt": 2000 },
         "results": [
           {
-            "type": "message",
             "message": {
               "en-US": "Though the rumors about me were cruel, I couldn't convince anyone that they were lies. Humiliation +1000.",
               "ja-JP": "酷い噂も、あながち嘘じゃないのが困りものだ。更に開発度+1000pt。"
@@ -825,7 +799,6 @@
         "value": { "$gt": 1700 },
         "results": [
           {
-            "type": "message",
             "message": {
               "en-US": "I go insane because I want to end it as soon as I can. I spread my legs and provoked a slime, but only my butthole is prodded! After 9 hours it's finally peeled off and I pee my panties intensely! Humiliation +1800.",
               "ja-JP": "早く出したくて正気を失っている。股を開いてスライムを挑発してしまい、お尻の穴ばかりを責められる！9時間後に剥がされて大放尿！尿意を0%に。開発度+1800"
@@ -836,7 +809,6 @@
         ],
         "elseResults": [
           {
-            "type": "message",
             "message": {
               "en-US": "While blushing, I arrive at a rest area and have a female adventurer take it off in the bathroom. At that moment, while lowering my embarrassed face, I accepted that I was going to wet myself. Need to pee 0, +700 Humiliation.",
               "ja-JP": "赤面しながら休憩所に辿り着き、トイレで女性冒険者に剥がしてもらう。その瞬間、恥ずかしそう顔を伏せながら、お漏らしというゴールを受け入れてしまった！　尿意を0%に。開発度+700。"
@@ -880,7 +852,6 @@
         "name": "panties",
         "value": null,
         "results": {
-          "type": "message",
           "message": "At least the spell gave me some panties to wear... though if I can't solve the test quickly..."
         }
       },
@@ -889,7 +860,6 @@
         "name": "wet-panties",
         "value": true,
         "results": {
-          "type": "message",
           "message": "At least the spell gave me some clean panties to wear... well, clean for now..."
         },
         "elseResults": {
@@ -897,7 +867,6 @@
           "name": "soiled-panties",
           "value": true,
           "results": {
-            "type": "message",
             "message": "At least the spell gave me some clean panties to wear... well, clean for now..."
           }
         }
@@ -911,7 +880,6 @@
         "DC": 30,
         "results": [
           {
-            "type": "message",
             "message": {
               "en-US": "Geez, this test is harder than I thought! My need to pee is growing...",
               "ja-JP": "もう、この筆記問題は思ったより難しい！"
@@ -929,7 +897,6 @@
             "type": "accident",
             "pee": [
               {
-                "type": "message",
                 "message": {
                   "en-US": "It seems to be solvable if I could think properly, but ... I can't concentrate because I want to pee. I hold it while rubbing my knees together and shaking unconsciously. However, \"Jobababa...♡\" While violently flooding my crotch with warm liquid, I was in a blissful trance! Pee dripped from the wooden chair.",
                   "ja-JP": "ちゃんと考えれば解けそうだが、……おしっこがしたくて集中できない。膝を摺り合わせたり、貧乏揺すりしながら耐える。しかし、「じょばばばば♡」と温かい汁をクロッチで暴れさせながら、恍惚としてしまった！　木製の椅子からおしっこが滴っていく。"
@@ -939,7 +906,6 @@
             ],
             "poo": [
               {
-                "type": "message",
                 "message": {
                   "en-US": "It seems to be solvable if I could think properly, but ... I can't concentrate because I want to poo. I hold it while pressing my butt against the chair and shaking unconsciously. However, \"Prprprpffft...♡\" While violently filling the seat of my panties with warm mud, I was in a blissful trance!",
                   "ja-JP": "ちゃんと考えれば解けそうだが、……うんちがしたくて集中できない。???"
@@ -949,7 +915,6 @@
             ],
             "both": [
               {
-                "type": "message",
                 "message": {
                   "en-US": "It seems to be solvable if I could think properly, but ... I can't concentrate because I want to pee and poo. I hold it while rubbing knees and shaking unconsciously. However, \"Jobababa...♡\" While violently flooding my crotch with warm liquid, and the seat of my panties with warm mud, I was in a blissful trance! Pee dripped from the wooden chair.",
                   "ja-JP": "ちゃんと考えれば解けそうだが、……おしっことうんちがしたくて集中できない。膝を摺り合わせたり、貧乏揺すりしながら耐える。しかし、「じょばばばば♡」と温かい汁をクロッチで暴れさせながら、恍惚としてしまった！　木製の椅子からおしっこが滴っていく。"

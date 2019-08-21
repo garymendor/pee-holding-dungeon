@@ -27,7 +27,16 @@ function resultCreate(data) {
       return new ChoiceResult(data);
     case "effect":
     default:
-      return new EffectResult({ type: "effect", ...data });
+      if (data.message) {
+        return new MessageResult({ type: "message", ...data });
+      }
+      if (data.name) {
+        return new EffectResult({ type: "effect", ...data });
+      }
+      return new MessageResult({
+        type: "message",
+        message: `Result type not supported: ${data.type}`
+      });
   }
 }
 
