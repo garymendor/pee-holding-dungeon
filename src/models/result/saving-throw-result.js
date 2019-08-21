@@ -1,6 +1,8 @@
 import ResultCollection from "./result-collection";
 import Result from "./result";
 
+export const DEFAULT_DC = 25;
+
 class SavingThrowResult extends Result {
   constructor(data) {
     super(data);
@@ -21,18 +23,6 @@ class SavingThrowResult extends Result {
    */
   dc() {
     return this.data.DC;
-  }
-
-  /**
-   * Compares the character's value for the stat with the target stat.
-   * @param {any} value
-   * The character's value for the stat.
-   */
-  compare(value) {
-    if (!value) {
-      return !this.data.value;
-    }
-    return this.data.value === value;
   }
 
   /**

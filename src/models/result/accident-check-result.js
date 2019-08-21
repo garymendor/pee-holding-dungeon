@@ -28,6 +28,22 @@ class AccidentCheckResult extends Result {
   }
 
   /**
+   * Gets the name of an extra saving throw to roll before resolving the accident.
+   * @returns {string}
+   */
+  savingThrow() {
+    return this.data["saving-throw"];
+  }
+
+  /**
+   * Gets the DC of the saving throw, if any.
+   * @returns {number}
+   */
+  dc() {
+    return this.data.DC;
+  }
+
+  /**
    * Compares the character's value for the stat with the target stat.
    * @param {Character} character
    * @returns {string}

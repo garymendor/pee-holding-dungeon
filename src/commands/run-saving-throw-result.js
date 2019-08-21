@@ -1,4 +1,5 @@
 import RunResultCollection from "./run-result-collection";
+import { DEFAULT_DC } from "../models/result/saving-throw-result";
 
 /**
  * @typedef {import('./run-result').BaseRunResultData<T>} BaseRunResultData
@@ -30,16 +31,16 @@ class RunSavingThrowResult {
     const { character } = data;
     const saveValue = character.get(result.savingThrow());
     const d20 = 1 + Math.floor(Math.random() * 20);
-    if (saveValue + d20 < result.dc()) {
-      return new RunResultCollection({
+    if (saveValue + d20 >= (result.dc() || DEFAULT_DC)) {
+      return {
         ...data,
-        results: result.results()
-      }).run();
+        continue: true
+      };
     }
-    return {
+    return new RunResultCollection({
       ...data,
-      continue: true
-    };
+      results: result.results()
+    }).run();
   }
 }
 

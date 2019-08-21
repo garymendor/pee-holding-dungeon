@@ -46,10 +46,8 @@
       {
         "type": "accident-check",
         "value": 300,
-        "results": [
-          { "type": "saving-throw", "saving-throw": "STR", "DC": 20 },
-          "Forced Fitting Room - Lingerie and Blindfold: Accident"
-        ]
+        "saving-throw": "STR",
+        "results": "Forced Fitting Room - Lingerie and Blindfold: Accident"
       },
       {
         "type": "saving-throw",
@@ -416,6 +414,7 @@
                     {
                       "type": "accident-check",
                       "value": 300,
+                      "saving-throw": "STR",
                       "results": "Fairy Tea Party: Accident"
                     },
                     {
@@ -453,6 +452,7 @@
       {
         "type": "accident-check",
         "value": 300,
+        "saving-throw": "STR",
         "results": [
           {
             "type": "accident",
@@ -536,6 +536,7 @@
       {
         "type": "accident-check",
         "value": 250,
+        "saving-throw": "STR",
         "results": [
           {
             "type": "accident",
@@ -622,6 +623,7 @@
       {
         "type": "accident-check",
         "value": 280,
+        "saving-throw": "STR",
         "results": [
           {
             "type": "accident",
@@ -904,8 +906,24 @@
       { "name": "wet-panties", "value": false },
       { "name": "soiled-panties", "value": false },
       {
+        "type": "saving-throw",
+        "saving-throw": "Puzzle",
+        "DC": 30,
+        "results": [
+          {
+            "type": "message",
+            "message": {
+              "en-US": "Geez, this test is harder than I thought! My need to pee is growing...",
+              "ja-JP": "もう、この筆記問題は思ったより難しい！"
+            }
+          },
+          { "name": "need-for-bathroom", "value": 100 }
+        ]
+      },
+      {
         "type": "accident-check",
         "value": 230,
+        "saving-throw": "STR",
         "results": [
           {
             "type": "accident",

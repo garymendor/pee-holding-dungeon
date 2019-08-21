@@ -1,4 +1,5 @@
 import RunResultCollection from "./run-result-collection";
+import { DEFAULT_DC } from "../models/result/saving-throw-result";
 
 /**
  * @typedef {import('./run-result').BaseRunResultData<T>} BaseRunResultData
@@ -29,14 +30,22 @@ class RunAccidentCheckResult {
     const { result, ...data } = this.data;
     const { character } = data;
     const accident = result.compare(character);
-    if (accident) {
-      return new RunResultCollection({
-        ...data,
-        results: result.results(),
-        accident
-      }).run();
+    if (!accident) {
+      return { ...data, continue: true };
     }
-    return { ...data, continue: true };
+    if (result.savingThrow()) {
+      // TODO: Nearly duplicated code with RunSavingThrowResult
+      const saveValue = character.get(result.savingThrow());
+      const d20 = 1 + Math.floor(Math.random() * 20);
+      if (saveValue + d20 >= (result.dc() || DEFAULT_DC)) {
+        return { ...data, continue: true };
+      }
+    }
+    return new RunResultCollection({
+      ...data,
+      results: result.results(),
+      accident
+    }).run();
   }
 }
 
