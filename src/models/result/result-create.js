@@ -15,7 +15,7 @@ function resultCreate(data) {
   switch (data.type) {
     case "stat-check":
       return new StatCheckResult(data);
-    case "saving-throw":
+    case "savingThrow":
       return new SavingThrowResult(data);
     case "accident-check":
       return new AccidentCheckResult(data);

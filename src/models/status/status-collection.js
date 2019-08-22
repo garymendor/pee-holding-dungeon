@@ -2,10 +2,14 @@ import ResultCollection from "../result/result-collection";
 import Status from "./status";
 import fromPairs from "lodash/fromPairs";
 import toPairs from "lodash/toPairs";
+import mapArrayOrSingle from "../map-array-or-single";
 import applyTemplates from "../apply-templates";
 
 class StatusCollection {
   constructor(data = {}) {
+    /**
+     * @type {Object<string,Status>}
+     */
     this.data = fromPairs(
       toPairs(applyTemplates(data)).map(([key, value]) => [
         key,
@@ -13,20 +17,14 @@ class StatusCollection {
       ])
     );
     this.onStatus = {};
-    toPairs(this.data)
-      .filter(([, value]) => value["on-status"])
-      .map(([key, { "on-status": { name, value, results } }]) => [
-        name,
-        {
-          name: key,
-          value,
-          results: new ResultCollection(results)
-        }
-      ])
-      .forEach(([key, value]) => {
-        const onStatus = this.onStatus[key] || [];
-        this.onStatus[key] = [...onStatus, value];
-      });
+    for (const statusKey in this.data) {
+      const onStatusValues = this.data[statusKey].onStatus();
+      for (const onStatusKey in onStatusValues) {
+        const onStatusValue = onStatusValues[onStatusKey];
+        const existingOnStatus = this.onStatus[onStatusKey] || [];
+        this.onStatus[onStatusKey] = [...existingOnStatus, onStatusValue];
+      }
+    }
   }
 
   /**

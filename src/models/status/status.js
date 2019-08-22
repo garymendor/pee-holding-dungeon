@@ -7,22 +7,31 @@ import mapArrayOrSingle from "../map-array-or-single";
  * @typedef {import('../result/result-collection').ResultDataCollection} ResultDataCollection
  */
 
+/**
+ * @typedef {Object} OnStatusValue
+ * @property {any} value
+ * @property {ResultCollection} results
+ */
+
 class Status {
   constructor(data) {
     this.data = {
       ...data,
       tags: mapArrayOrSingle(data.tags),
       name: new LocalizableString(data.name),
-      description: new LocalizableString(data.description)
+      description: new LocalizableString(data.description),
+      effect: mapValues(data.effect, results => new ResultCollection(results)),
+      tagTriggers: mapValues(
+        data.tagTriggers,
+        results => new ResultCollection(results)
+      ),
+      onStatus: mapValues(data.onStatus, onStatusData =>
+        mapArrayOrSingle(onStatusData).map(onStatus => ({
+          value: onStatus.value,
+          results: new ResultCollection(onStatus.results)
+        }))
+      )
     };
-    this.data.effect = mapValues(
-      this.data.effect,
-      results => new ResultCollection(results)
-    );
-    this.data.tagTriggers = mapValues(
-      this.data.tagTriggers,
-      results => new ResultCollection(results)
-    );
   }
 
   name(localeId) {
@@ -31,6 +40,13 @@ class Status {
 
   description(localeId) {
     return this.data.description.get(localeId);
+  }
+
+  /**
+   * @returns {Object<string,{value:any,results:ResultCollection}>}
+   */
+  onStatus() {
+    return this.data.onStatus;
   }
 
   /**

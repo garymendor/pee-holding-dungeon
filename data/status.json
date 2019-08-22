@@ -123,7 +123,7 @@
     "tags": "butt-touching",
     "saving-throw": "Holy"
   },
-  "weak-bladder": {
+  "weakBladder": {
     "name": {
       "en-US": "Weak Bladder",
       "ja-JP": "ゆるゆる尿道"
@@ -137,7 +137,7 @@
     },
     "saving-throw": "Healing"
   },
-  "weak-bowels": {
+  "weakBowels": {
     "name": {
       "en-US": "Weak Bowels",
       "ja-JP": "ゆるゆる尿道"
@@ -160,13 +160,14 @@
       "en-US": "Your constitution is weakened, causing you to become incontinent when you cum.",
       "ja-JP": "絶頂する度に失禁してしまう恥ずかしい体質。開発度の増加量2倍"
     },
-    "on-status": {
-      "name": "climax",
-      "value": true,
-      "results": [
-        { "name": "urination", "value": true },
-        { "name": "defecation", "value": true }
-      ]
+    "onStatus": {
+      "climax": {
+        "value": true,
+        "results": [
+          { "name": "urination", "value": true },
+          { "name": "defecation", "value": true }
+        ]
+      }
     },
     "saving-throw": "Healing"
   },
@@ -184,13 +185,14 @@
     "description": {
       "en-US": "[Sensitive Urethra]: The victim's urethra is sexually sensitive, adding +100 [Horniness] when [Urination] occurs. Removed with [Healing]."
     },
-    "on-status": {
-      "name": "urination",
-      "value": true,
-      "results": [
-        { "message": "> It feels really good to pee! My body feels hot..." },
-        { "name": "horniness", "value": 100 }
-      ]
+    "onStatus": {
+      "urination": {
+        "value": true,
+        "results": [
+          { "message": "> It feels really good to pee! My body feels hot..." },
+          { "name": "horniness", "value": 100 }
+        ]
+      }
     },
     "saving-throw": "Healing"
   },
@@ -262,6 +264,13 @@
     },
     "saving-throw": "Willpower"
   },
+  "masochist": {
+    "name": { "en-US": "Masochist", "ja-JP": "ドM" },
+    "//": "TODO: Implement",
+    "description": {
+      "en-US": "The victim gains sexual pleasure from pain and humiliation. Any effect that adds [Humiliation] adds the same amount of [Horniness]."
+    }
+  },
   "holy-water-dispenser": {
     "name": {
       "en-US": "Holy Water Dispenser",
@@ -323,6 +332,8 @@
       "en-US": "Your skirt is lifted or missing, and your panties are visible. Add +50 [Humiliation] when in public, with an additional +150 [Humiliation] if you've wet your panties and +200 [Humiliation] if you've soiled your panties.",
       "ja-JP": "スカートが捲れあがり、パンチラしている状態。人前で開発度+50。お漏らしパンツなら開発度+200。"
     },
+    "//": "Maybe I can use an exposedPanties tag to automatically make the exposed-panties humiliation happen automatically where it should.",
+    "tags": "exposedPanties",
     "tagTriggers": {
       "public": [
         { "name": "humiliation", "value": 50 },
@@ -425,10 +436,11 @@
       "en-US": "The victim's panties are too tight and wedge into her crotch, stimulating her and actually making it harder to hold it.",
       "ja-JP": "パンツが捻れ、キツく食い込んでいる状態。おしっこ穴を強く抑えられる代わりに、クリや割れ目が擦れて気持ち良い。分岐時、尿意-50%で計算、階を進むごとに開発度+20。"
     },
-    "on-status": {
-      "name": "panties",
-      "value": null,
-      "results": { "name": "wedgie", "value": null }
+    "onStatus": {
+      "panties": {
+        "value": null,
+        "results": { "name": "wedgie", "value": null }
+      }
     },
     "effect": {
       "apply": { "name": "pee-incontinence", "value": 50 },
@@ -441,7 +453,8 @@
     },
     "saving-throw": false
   },
-  "cursed-panties": {
+  "stuckPanties": {},
+  "cursedPanties": {
     "name": {
       "en-US": "Cursed Panties",
       "ja-JP": "憑依パンツ"
@@ -451,10 +464,54 @@
       "ja-JP": "呪いの装備に股間を責められ、階層を進むごとに開発度+100"
     },
     "effect": {
-      "apply": { "name": "stuck-panties", "value": true },
+      "apply": { "name": "stuckPanties", "value": true },
       "floor-end": { "name": "horniness", "value": 100 }
     },
     "saving-throw": "Uncurse"
+  },
+  "pottyUntrainingPanties": {
+    "template": "orgasm-incontinence",
+    "name": {
+      "en-US": "Potty-Untraining Panties",
+      "ja-JP": "トイレ忘れ物パンツ??"
+    },
+    "description": {
+      "en-US": "Panties that want to be your toilet. You hecome incontinent when you climax, and whenever you have an accident, Horniness +100.",
+      "ja-JP": "あなたのトイレになりたいパンツ。絶頂する度に失禁してしまう。お漏らしするたびに、+100開発度。"
+    },
+    "onStatus": {
+      "urination": {
+        "value": true,
+        "result": {
+          "type": "stat-check",
+          "name": "panties",
+          "value": true,
+          "results": { "name": "horniness", "value": 100 }
+        }
+      },
+      "defecation": {
+        "value": true,
+        "result": {
+          "type": "stat-check",
+          "name": "panties",
+          "value": true,
+          "results": { "name": "horniness", "value": 100 }
+        }
+      }
+    }
+  },
+  "childishPanties": {
+    "name": {
+      "en-US": "Childish Panties",
+      "ja-JP": "お子様パンツ"
+    },
+    "description": {
+      "en-US": "Cute panties that are mainly worn by small children. Humiliation +50 any time your panties are exposed.",
+      "ja-JP": "主に子供が履く可愛らしいパンツのこと。パンツを見せたら、開発度+50"
+    },
+    "tagTriggers": {
+      "exposedPanties": { "name": "humiliation", "value": 50 }
+    }
   },
   "stained-panties": {
     "name": {
@@ -464,10 +521,11 @@
     "description": {
       "en-US": "Your panties have a visible pee stain - a sign of a close call or incomplete washing. No direct effect, but can trigger branches."
     },
-    "on-status": {
-      "name": "panties",
-      "value": null,
-      "results": { "name": "stained-panties", "value": false }
+    "onStatus": {
+      "panties": {
+        "value": null,
+        "results": { "name": "stained-panties", "value": false }
+      }
     },
     "saving-throw": false
   },
@@ -479,10 +537,11 @@
     "description": {
       "en-US": "You have peed in your panties. They are soaking wet and feel gross against your crotch. +100 [Humiliation] whenever you go up a floor."
     },
-    "on-status": {
-      "name": "panties",
-      "value": null,
-      "results": { "name": "wet-panties", "value": false }
+    "onStatus": {
+      "panties": {
+        "value": null,
+        "results": { "name": "wet-panties", "value": false }
+      }
     },
     "effect": {
       "apply": { "name": "stained-panties", "value": true },
@@ -503,10 +562,11 @@
     "description": {
       "en-US": "Your panties have a visible poo stain - a sign of a close call or incomplete washing. No direct effect, but can trigger branches."
     },
-    "on-status": {
-      "name": "panties",
-      "value": null,
-      "results": { "name": "skidmarked-panties", "value": false }
+    "onStatus": {
+      "panties": {
+        "value": null,
+        "results": { "name": "skidmarked-panties", "value": false }
+      }
     },
     "saving-throw": false
   },
@@ -518,10 +578,11 @@
     "description": {
       "en-US": "You have pooped in your panties. They are squishy and muddy and feel utterly disgusting against your butt. +200 [Humiliation] whenever you go up a floor."
     },
-    "on-status": {
-      "name": "panties",
-      "value": null,
-      "results": { "name": "soiled-panties", "value": false }
+    "onStatus": {
+      "panties": {
+        "value": null,
+        "results": { "name": "soiled-panties", "value": false }
+      }
     },
     "effect": {
       "apply": { "name": "skidmarked-panties", "value": true },
@@ -531,6 +592,14 @@
         },
         { "name": "humiliation", "value": 200 }
       ]
+    },
+    "wetBedroll": {
+      "name": "Wet Bedroll",
+      "description": "You wet the bedroll while sleeping in the open. If you sleep on it again another night, Humiliation +50."
+    },
+    "soiledBedroll": {
+      "name": "Soiled Bedroll",
+      "description": "You soiled the bedroll while sleeping in the open. If you sleep on it again another night, Humiliation +100."
     },
     "saving-throw": false
   }

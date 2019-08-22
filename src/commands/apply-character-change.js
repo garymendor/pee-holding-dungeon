@@ -114,6 +114,11 @@ class ApplyCharacterChange {
         newCharacterData.values["need-to-poo"] = 0;
         response.statusChanges["defecation"] = true;
         break;
+      case "sleep":
+        // Sleep gives you a chance to roll saving throws against all status effects with a save.
+        // TODO: Implement this in run-effect-result.
+        response.statusChanges[name] = value;
+        break;
       default:
         response.statusChanges[name] = value;
         if (typeof value === "boolean" || value === null) {

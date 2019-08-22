@@ -6,7 +6,8 @@ export const DEFAULT_DC = 25;
 class SavingThrowResult extends Result {
   constructor(data) {
     super(data);
-    this.data.results = new ResultCollection(this.data.results);
+    this.data.failureResults = new ResultCollection(this.data.failureResults);
+    this.data.successResults = new ResultCollection(this.data.successResults);
   }
 
   /**
@@ -14,7 +15,7 @@ class SavingThrowResult extends Result {
    * @returns {string}
    */
   savingThrow() {
-    return this.data["saving-throw"];
+    return this.data.savingThrow;
   }
 
   /**
@@ -26,11 +27,19 @@ class SavingThrowResult extends Result {
   }
 
   /**
-   * Gets the results to execute if the comparison succeeds.
+   * Gets the results to execute if the saving throw fails.
    * @returns {ResultCollection}
    */
-  results() {
-    return this.data.results;
+  failureResults() {
+    return this.data.failureResults;
+  }
+
+  /**
+   * Gets the results to execute if the saving throw succeeds.
+   * @returns {ResultCollection}
+   */
+  successResults() {
+    return this.data.successResults;
   }
 }
 

@@ -29,19 +29,24 @@
     "type": "template",
     "parent": "Forced Fitting Room: Base",
     "results": [
-      { "name": "need-for-bathroom", "value": 50, "//": "This would be a good place to start with randomness" },
+      {
+        "name": "need-for-bathroom",
+        "value": 50,
+        "//": "This would be a good place to start with randomness"
+      },
       {
         "type": "accident-check",
         "value": 300,
         "saving-throw": "STR"
       },
       {
-        "type": "saving-throw",
-        "saving-throw": "Force",
-        "DC": 30
-      },
-      {
-        "message": "I finally manage to break out of the fitting room."
+        "type": "savingThrow",
+        "savingThrow": "Force",
+        "DC": 30,
+        "failureResults": "// Replace this with the Go Against Instructions event.",
+        "successResults": {
+          "message": "I finally manage to break out of the fitting room."
+        }
       }
     ]
   },
@@ -138,9 +143,8 @@
         "results": "Forced Fitting Room: Lingerie and Blindfold: Accident"
       },
       {
-        "results": "Forced Fitting Room: Lingerie and Blindfold: Go Against Instructions"
-      },
-      {}
+        "failureResults": "Forced Fitting Room: Lingerie and Blindfold: Go Against Instructions"
+      }
     ]
   },
   "Forced Fitting Room: Lingerie and Blindfold: Accident": {
@@ -198,9 +202,8 @@
         "results": "Forced Fitting Room: Micro Bikini: Accident"
       },
       {
-        "results": "Forced Fitting Room: Micro Bikini: Go Against Instructions"
-      },
-      {}
+        "failureResults": "Forced Fitting Room: Micro Bikini: Go Against Instructions"
+      }
     ]
   },
   "Forced Fitting Room: Micro Bikini: Accident": {
@@ -1044,10 +1047,10 @@
       { "name": "wet-panties", "value": false },
       { "name": "soiled-panties", "value": false },
       {
-        "type": "saving-throw",
-        "saving-throw": "Puzzle",
+        "type": "savingThrow",
+        "savingThrow": "Puzzle",
         "DC": 30,
-        "results": [
+        "failureResults": [
           {
             "message": {
               "en-US": "Geez, this test is harder than I thought! My need to pee is growing...",
@@ -1115,5 +1118,634 @@
   "Pussy Picture Lock": {
     "original": "閉じ込められた！カメラ付きの扉にパンツの内側を認証させないと開かないらしい。もじもじと逡巡してしまう。…従わずに長々と抵抗していたが、他に出る手段は無さそうだ。……渋々脱いだ下着をあやとりのように広げてクロッチを見せつける。……なかなか認証されず、顔を真っ赤にしながら恥ずかしいものを掲げ続けた。……その姿を正面と真下からも隠し撮りされ、アングラサイトで配信されてしまった！　尿意+100%。開発度+150。尿意200%以上なら黄色い染みを見られて+350。ぐしょぐしょのお漏らしパンツなら+700。",
     "//": "Have to take a picture of your bare crotch to escape. Extra embarrassing if your panties are a mess."
+  },
+  "High-Quality Inn": {
+    "type": "floorEnd",
+    "description": "I find an inn with all the amenities, including free changes of underwear and a private place to sleep.",
+    "results": "High-Quality Inn: Services"
+  },
+  "High-Quality Inn: Services": {
+    "parent": "High-Quality Inn",
+    "description": "What do you want to do while at the inn?",
+    "results": {
+      "type": "choice",
+      "choices": [
+        {
+          "description": "Change your panties (or get some if you lost yours).",
+          "results": [
+            { "name": "panties", "value": null },
+            { "name": "panties", "value": true },
+            "High-Quality Inn: Services"
+          ]
+        },
+        {
+          "description": "Go to the bathroom.",
+          "results": [
+            { "message": "I relieve myself in a nice private place." },
+            { "name": "panties", "value": false },
+            { "name": "urination", "value": true },
+            { "name": "defecation", "value": true },
+            { "name": "panties", "value": true },
+            "High-Quality Inn: Services"
+          ]
+        },
+        {
+          "description": "Masturbate in private",
+          "results": [
+            {
+              "type": "stat-check",
+              "name": "horniness",
+              "value": { "$gt": 1000 },
+              "results": {
+                "message": "I engage in a marathon masturbation session! ...and leave a big tip for the maid, since my love juices made a mess of the sheets! Horniness to 0."
+              },
+              "elseResults": {
+                "message": "I relieve myself of my sexual tension. Horniness to 0."
+              }
+            },
+            { "name": "horniness", "value": ["$sub", 0, "horniness"] },
+            "High-Quality Inn: Services"
+          ]
+        },
+        {
+          "description": "Sleep for the night",
+          "results": [
+            {
+              "message": "I get a good night's sleep, and I face the morning well-rested. Humiliation -1000."
+            },
+            { "name": "sleep", "value": true },
+            {
+              "type": "stat-check",
+              "name": "soiledBedroll",
+              "value": true,
+              "results": [
+                { "message": "The maid even washes my soiled bedroll for me!" },
+                { "name": "soiledBedroll", "value": false },
+                { "name": "wetBedroll", "value": false }
+              ]
+            },
+            {
+              "type": "stat-check",
+              "name": "wetBedroll",
+              "value": true,
+              "results": [
+                { "message": "The maid even washes my wet bedroll for me!" },
+                { "name": "wetBedroll", "value": false }
+              ]
+            },
+            {
+              "name": "humiliation",
+              "value": ["$max", 0, ["$sub", "humiliation", 1000]]
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "Haunted Inn": {
+    "type": "floorEnd",
+    "description": "The only place you can find to rest is an inn that is rumored to be haunted by spirits.",
+    "results": {
+      "type": "choice",
+      "choices": [
+        {
+          "description": "Stay at the inn.",
+          "results": "Haunted Inn: Services"
+        },
+        {
+          "description": "Make camp outdoors.",
+          "results": "Roughing It: Services"
+        }
+      ]
+    }
+  },
+  "Haunted Inn: Services": {
+    "parent": "Haunted Inn",
+    "description": "What do you want to do while at the inn?",
+    "results": {
+      "type": "choice",
+      "choices": [
+        {
+          "description": "Change your panties (or get some if you lost yours).",
+          "results": [
+            { "name": "panties", "value": null },
+            { "name": "panties", "value": true },
+            {
+              "type": "savingThrow",
+              "savingThrow": "Holy",
+              "DC": 25,
+              "failureResults": [
+                {
+                  "message": "The new panties are haunted! They refuse to come off and start molesting me!"
+                },
+                { "name": "cursedPanties", "value": true }
+              ]
+            },
+            "Haunted Inn: Services"
+          ]
+        },
+        {
+          "description": "Go to the bathroom.",
+          "results": [
+            {
+              "type": "savingThrow",
+              "savingThrow": "Holy",
+              "DC": 25,
+              "failureResults": [
+                {
+                  "message": "Just as I enter the bathroom, I am assaulted by a spine-chilling wail! I have an accident right then and there!"
+                },
+                { "name": "urination", "value": true },
+                { "name": "defecation", "value": true }
+              ],
+              "successResults": [
+                {
+                  "message": "I drive away the bathroom spirits and relieve myself in peace."
+                },
+                { "name": "panties", "value": false },
+                { "name": "urination", "value": true },
+                { "name": "defecation", "value": true },
+                { "name": "panties", "value": true }
+              ]
+            },
+            "Haunted Inn: Services"
+          ]
+        },
+        {
+          "description": "Masturbate in private",
+          "results": [
+            {
+              "type": "savingThrow",
+              "savingThrow": "Holy",
+              "DC": 25,
+              "failureResults": [
+                {
+                  "message": "Just as I am about to cum, I realize the bed is surrounded by leering ghosts! It's too late to stop... I let out a lewd \"Ahhhh♡\" in front of them all!"
+                },
+                { "name": "humiliation", "value": 500 }
+              ],
+              "successResults": {
+                "message": "I can't shake the feeling I'm being watched, so I only let myself climax once."
+              }
+            },
+            {
+              "name": "horniness",
+              "value": ["$max", 0, ["$sub", "horniness", 500]]
+            },
+            "Haunted Inn: Services"
+          ]
+        },
+        {
+          "description": "Sleep for the night",
+          "results": [
+            {
+              "type": "accident-check",
+              "value": 100,
+              "saving-throw": "Holy",
+              "failureResults": [
+                {
+                  "message": "I am plagued by terrible dreams and wet the bed! The maid chastises me loudly, and an audience gathers to watch her berate me while I stand there in my wet pajamas. Need to pee to 0, Humiliation +500."
+                },
+                { "name": "urination", "value": true },
+                { "name": "defecation", "value": true },
+                { "name": "humiliation", "value": 500 }
+              ],
+              "successResults": [
+                {
+                  "message": "It's not the most restful night's sleep, but it's better than staying awake all night. Humiliation -100."
+                },
+                {
+                  "name": "humiliation",
+                  "value": ["$max", 0, ["$sub", "humiliation", 200]]
+                }
+              ]
+            },
+            { "name": "sleep", "value": true }
+          ]
+        }
+      ]
+    }
+  },
+  "Day Care": {
+    "type": "floorEnd",
+    "//": "Yes, I know 'day care' is kind of a misnomer here.",
+    "description": "The only place I can find to rest looks more like a children's day care than an inn. The check-in desk has a contract with a lot of fine print...",
+    "results": [
+      {
+        "type": "savingThrow",
+        "savingThrow": "INT",
+        "DC": 30,
+        "successResults": {
+          "message": "Upon closer inspection, I realize that signing the contract will magically compel me to speak in childish terms, and to obey everything the staff tells me to do, whether I want to or not."
+        }
+      },
+      {
+        "type": "choice",
+        "choices": [
+          {
+            "description": "Stay at the day care.",
+            "results": "Day Care: Services"
+          },
+          {
+            "description": "Make camp outdoors.",
+            "results": "Roughing It: Services"
+          }
+        ]
+      }
+    ]
+  },
+  "Day Care: Services": {
+    "parent": "Day Care",
+    "description": [
+      "The main room is filled with \"children\" of all ages, all dressed in kindergarten clothes. The matron gives me a large milk bottle and tells me to drink the whole thing.",
+      "The milk tastes funny - it's full of potty drugs! But the spell takes hold, and I have no choice but to drink it all!",
+      "Once I've had my bottle, she leads me to the changing corner and tells me to strip to my panties."
+    ],
+    "results": [
+      { "name": "weakBladder", "value": true },
+      { "name": "weakBowels", "value": true },
+      { "name": "need-for-bathroom", "value": 100 },
+      { "name": "panties", "value": null },
+      { "name": "panties", "value": "$Children's Panties" },
+      { "name": "childishPanties", "value": true },
+      {
+        "type": "stat-check",
+        "expression": ["$or", "wet-panties", "soiled-panties"],
+        "results": [
+          {
+            "message": [
+              "The matron is very cross with me that I've had an accident! She strips off my dirty panties, washes my bottom, and then gives me a good spanking!",
+              "She then dresses me in children's panties and a kindergarten uniform, and give me a one-hour timeout standing in the naughty corner holding my kindergarten dress up so everyone can see my new panties! (Humiliation +200)"
+            ]
+          },
+          { "name": "humiliation", "value": 100 },
+          { "type": "subEvent", "event": "Day Care: Accident Check" }
+        ],
+        "elseResults": {
+          "message": "The matron tells me I'm a good girl for not having an accident, but that I shouldn't be wearing big girl panties. She gives me a pair of children's panties and tells me to change into them."
+        }
+      },
+      { "message": "More to come..." }
+    ]
+  },
+  "Day Care: Accident Check": {
+    "parent": "Day Care",
+    "results": {
+      "type": "accident-check",
+      "value": 200,
+      "saving-throw": "STR",
+      "results": [
+        {
+          "type": "accident",
+          "pee": [
+            {
+              "message": [
+                "I beg to be allowed to go potty, but the matron tells me to be a big girl and hold it. But I can't!",
+                "A shameful yellow stain spreads in the crotch of my little-girl panties, and golden water runs down my legs and puddles around my feet!",
+                "The day-care spell takes hold of me, and I can't stop myself from saying, \"Miss, I had a accident! I went pee-pee in my panties...\" Humiliation +100"
+              ]
+            },
+            { "name": "humiliation", "value": 100 },
+            { "name": "urination", "value": true }
+          ],
+          "poo": [
+            {
+              "message": [
+                "I beg to be allowed to go potty, but the matron tells me to be a big girl and hold it. But I can't!",
+                "A shameful brown bulge expands in the seat of my little-girl panties, and little muddy brown lumps ooze down my legs and pile up around my feet!",
+                "The day-care spell takes hold of me, and I can't stop myself from saying, \"Miss, I had a accident! I went poo-poo in my panties...\" Humiliation +200"
+              ]
+            },
+            { "name": "humiliation", "value": 200 },
+            { "name": "defecation", "value": true }
+          ],
+          "both": [
+            {
+              "message": [
+                "I beg to be allowed to go potty, but the matron tells me to be a big girl and hold it. But I can't!",
+                "A shameful yellow stain spreads in the crotch of my little-girl panties, an even more shameful brown bulge expands in the seat, and golden water and muddy brown lumps run down my legs and puddle around my feet!",
+                "The day-care spell takes hold of me, and I can't stop myself from saying, \"Miss, I had a accident! I went pee-pee and poo-poo in my panties...\" Humiliation +300"
+              ]
+            },
+            { "name": "humiliation", "value": 300 },
+            { "name": "defecation", "value": true }
+          ]
+        },
+        {
+          "message": [
+            "The matron gives me aspanking and another full bottle to drink, and gives me an extra hour timeout standing in the corner in my potty panties.",
+            "When my timeout is done, I beg the matron to change me, but she tells me that bad girls who go potty in their panties don't deserve clean panties."
+          ]
+        },
+        { "name": "need-for-bathroom", "value": 100 }
+      ]
+    }
+  },
+  "Roughing It": {
+    "type": "floorEnd",
+    "description": "There's absolutely no place to stay. You make camp in the field, surrounded by monsters of all sorts.",
+    "results": "Roughing It: Services"
+  },
+  "Roughing It: Services": {
+    "parent": "Roughing It",
+    "description": "What do you want to do while in camp?",
+    "results": {
+      "type": "choice",
+      "choices": [
+        {
+          "description": "Change your panties (not yet implemented).",
+          "results": [
+            {
+              "message": "Inventory not implemented yet, so we can't tell if you have changes of panties on hand. Sorry!"
+            },
+            "Roughing It: Services"
+          ]
+        },
+        {
+          "description": "Go to the bathroom in the woods.",
+          "results": [
+            {
+              "type": "chanceEvent",
+              "events": [
+                {
+                  "value": 50,
+                  "results": [
+                    {
+                      "message": "Just as I begin to relieve myself, a pair of demons come out of nowhere! One of them holds my arms behind my back, and the other pulls my panties back up and tickles me until I have an accident! They mock me cruelly and run away. Need to Pee to 0, Humiliation +1000."
+                    },
+                    { "name": "urination", "value": true },
+                    { "name": "defecation", "value": true },
+                    { "name": "humiliation", "value": 1000 }
+                  ]
+                },
+                {
+                  "value": 30,
+                  "results": [
+                    {
+                      "message": "Just as I begin to relieve myself, a pair of demons come out of nowhere! I have to pull my panties back up and drive them off! Need to pee +50%."
+                    },
+                    { "name": "need-for-bathroom", "value": 50 },
+                    {
+                      "type": "accident-check",
+                      "value": 200,
+                      "saving-throw": "STR",
+                      "results": [
+                        {
+                          "message": "I can't fight them off with one hand between my legs, but as soon as I let go of my crotch... \"Pssssh...\" A shameful stain spreads in my crotch, and the demons cruelly mock me for my accident! Need to pee to 0, Humiliation +1000."
+                        },
+                        { "name": "urination", "value": true },
+                        { "name": "defecation", "value": true },
+                        { "name": "humiliation", "value": 1000 }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "value": 20,
+                  "results": [
+                    {
+                      "message": "I find some tall bushes, pull my panties down warily, and relieve myself. Luckily, nothing interferes... this time."
+                    },
+                    { "name": "panties", "value": false },
+                    { "name": "urination", "value": true },
+                    { "name": "defecation", "value": true },
+                    { "name": "panties", "value": true }
+                  ]
+                }
+              ],
+              "successResults": [
+                {
+                  "message": "I drive away the bathroom spirits and relieve myself in peace."
+                },
+                { "name": "panties", "value": false },
+                { "name": "urination", "value": true },
+                { "name": "defecation", "value": true },
+                { "name": "panties", "value": true }
+              ]
+            },
+            "Roughing It: Services"
+          ]
+        },
+        {
+          "description": "Wet your panties.",
+          "results": [
+            {
+              "type": "stat-check",
+              "name": "need-to-pee",
+              "value": { "$gt": 100 },
+              "results": [
+                {
+                  "type": "savingThrow",
+                  "savingThrow": "Willpower",
+                  "DC": 25,
+                  "successResults": [
+                    {
+                      "message": "Rather than wait to lose control in a public place or try to pull my panties down in the demon-haunted woods, I endure the private humiliation of soaking my panties with shameful golden water where no one can see me. Need to Pee 0, Humiliation +100."
+                    },
+                    { "name": "urination", "value": true }
+                  ],
+                  "failureResults": {
+                    "message": "I can't bring myself to do something so disgusting! I'm embarrassed to have even considered it. Humiliation +100."
+                  }
+                },
+                { "name": "humiliation", "value": 100 }
+              ],
+              "elseResults": {
+                "message": "I don't need to pee badly enough to even think of doing such a thing!",
+                "//": "Find a way to remove this choice"
+              }
+            },
+            "Roughing It: Services"
+          ]
+        },
+        {
+          "description": "Soil your panties.",
+          "results": [
+            {
+              "type": "stat-check",
+              "name": "need-to-poo",
+              "value": { "$gt": 100 },
+              "results": [
+                {
+                  "type": "savingThrow",
+                  "savingThrow": "Willpower",
+                  "DC": 30,
+                  "successResults": [
+                    {
+                      "message": "Rather than wait to lose control in a public place or try to pull my panties down in the demon-haunted woods, I endure the private humiliation of filling my panties with disgusting brown mud where no one can see me. Need to poo 0, Humiliation +200."
+                    },
+                    { "name": "defecation", "value": true }
+                  ],
+                  "failureResults": {
+                    "message": "I can't bring myself to do something so disgusting! I'm embarrassed to have even considered it. Humiliation +200."
+                  }
+                },
+                { "name": "humiliation", "value": 200 }
+              ],
+              "elseResults": {
+                "message": "I don't need to poo badly enough to even think of doing such a thing!",
+                "//": "Find a way to remove this choice"
+              }
+            },
+            "Roughing It: Services"
+          ]
+        },
+        {
+          "description": "Masturbate",
+          "results": [
+            {
+              "type": "chanceEvent",
+              "events": [
+                {
+                  "value": 60,
+                  "results": [
+                    {
+                      "message": "My lewd moans draw a large audience of demons, and they treat my nakedness as an invitation! I end up stripped naked, covered in demon seed, and violated in every hole. At least they saw to my pleasure... Horniness to 0."
+                    },
+                    {
+                      "type": "stat-check",
+                      "name": "horniness",
+                      "value": { "$gt": 1000 },
+                      "results": [
+                        {
+                          "message": "In fact, they made me cum so many times that I started to get into it..."
+                        },
+                        { "name": "masochist", "value": true }
+                      ]
+                    },
+                    { "name": "horniness", "value": ["$sub", 0, "horniness"] }
+                  ]
+                },
+                {
+                  "value": 30,
+                  "results": [
+                    {
+                      "message": "My lewd moans draw a small audience of demons. There are few enough of them that they don't try to assault me, but they make lewd remarks as I put on a naughty show for them. Horniness -500, Humiliation +500."
+                    },
+                    {
+                      "type": "stat-check",
+                      "name": "masochist",
+                      "value": true,
+                      "results": [
+                        {
+                          "message": "The humiliation of being ogled only makes me hornier, and I put on a spectacular show for them."
+                        },
+                        {
+                          "name": "horniness",
+                          "value": ["$max", 0, ["$sub", "horniness", 1000]]
+                        },
+                        { "name": "humiliation", "value": 2000 }
+                      ],
+                      "elseResults": [
+                        {
+                          "name": "horniness",
+                          "value": ["$max", 0, ["$sub", "horniness", 500]]
+                        },
+                        { "name": "humiliation", "value": 500 }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "value": 10,
+                  "results": [
+                    {
+                      "message": "Out in the open like this, I don't dare do more than give myself a quickie."
+                    },
+                    {
+                      "name": "horniness",
+                      "value": ["$max", 0, ["$sub", "horniness", 500]]
+                    },
+                    { "name": "humiliation", "value": 500 }
+                  ]
+                }
+              ]
+            },
+            "Roughing It: Services"
+          ]
+        },
+        {
+          "description": "Sleep for the night.",
+          "results": [
+            { "name": "need-for-bathroom", "value": 100 },
+            {
+              "type": "accident-check",
+              "value": 150,
+              "saving-throw": "WIS",
+              "results": [
+                {
+                  "type": "stat-check",
+                  "name": "soiledBedroll",
+                  "value": true,
+                  "results": [
+                    {
+                      "message": "My bedroll is still a poo-covered mess from a previous accident! It's not going to be a very good night's sleep... Humiliation +100, +50 if it is also wet."
+                    },
+                    {
+                      "type": "stat-check",
+                      "name": "wetBedroll",
+                      "value": true,
+                      "results": { "name": "humiliation", "value": 50 }
+                    },
+                    { "name": "humiliation", "value": 100 }
+                  ],
+                  "elseResults": {
+                    "type": "stat-check",
+                    "name": "wetBedroll",
+                    "value": true,
+                    "results": [
+                      {
+                        "message": "My bedroll is still a pee-soaked mess from a previous accident! It's not going to be a very good night's sleep... Humiliation +50."
+                      },
+                      { "name": "humiliation", "value": 50 }
+                    ]
+                  }
+                },
+                {
+                  "type": "accident",
+                  "pee": [
+                    {
+                      "message": "I really should've gone to the bathroom before bed... I wet the bed, and I wake up in a puddle! My bedroll is soaked with pee! Humiliation +200."
+                    },
+                    { "name": "urination", "value": true },
+                    { "name": "wetBedroll", "value": true },
+                    { "name": "humiliation", "value": 200 }
+                  ],
+                  "poo": [
+                    {
+                      "message": "I really should've gone to the bathroom before bed... I soil the bed, and I wake up with a sticky load in my panties! My bedroll is smeared with poo! Humiliation +400."
+                    },
+                    { "name": "defecation", "value": true },
+                    { "name": "soiledBedroll", "value": true },
+                    { "name": "humiliation", "value": 400 }
+                  ],
+                  "both": [
+                    {
+                      "message": "I really should've gone to the bathroom before bed... I wet and soil the bed, and I wake up in a puddle with a sticky load in my panties! My bedroll is utterly ruined! Humiliation +600."
+                    },
+                    { "name": "urination", "value": true },
+                    { "name": "wetBedroll", "value": true },
+                    { "name": "defecation", "value": true },
+                    { "name": "soiledBedroll", "value": true },
+                    { "name": "humiliation", "value": 600 }
+                  ]
+                }
+              ]
+            },
+            { "message": "My sleep wasn't very restful, but I must press on." },
+            { "name": "sleep", "value": true }
+          ]
+        },
+        {
+          "description": "Press on without sleep.",
+          "results": [
+            {
+              "message": "Rather than try to sleep in the monster-haunted woods, I press on through the night."
+            },
+            { "name": "need-for-bathroom", "value": 100 }
+          ]
+        }
+      ]
+    }
   }
 }

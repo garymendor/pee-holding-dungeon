@@ -170,13 +170,36 @@
       "description": "A result that rolls a saving throw, and if the throw fails, executes a new set of results.",
       "type": "object",
       "properties": {
-        "type": { "const": "saving-throw" },
-        "saving-throw": { "$ref": "#saving-throw" },
-        "results": { "$ref": "#result-array" }
+        "type": { "const": "savingThrow" },
+        "savingThrow": { "$ref": "#saving-throw" },
+        "failureResults": { "$ref": "#result-array" },
+        "successResults": { "$ref": "#result-array" }
       },
-      "required": ["type", "saving-throw", "results"]
+      "required": ["type", "savingThrow"]
     },
-    "#result-message": {
+    "result-chance-event": {
+      "$id": "#result/chance-event",
+      "description": "A result that determines randomly from a set of events.",
+      "type": "object",
+      "properties": {
+        "type": { "const": "chanceEvent" },
+        "events": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "value": {
+                "type": "number",
+                "description": "The odds of this event happening. Can be an expression. TODO: Expression schema"
+              },
+              "results": { "$ref": "#result-array" }
+            }
+          }
+        }
+      },
+      "required": ["type", "events"]
+    },
+    "result-message": {
       "$id": "#result/message",
       "description": "A result that displays a specified message.",
       "type": "object",

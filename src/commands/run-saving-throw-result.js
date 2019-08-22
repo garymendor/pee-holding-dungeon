@@ -32,15 +32,26 @@ class RunSavingThrowResult {
     const saveValue = character.get(result.savingThrow());
     const d20 = 1 + Math.floor(Math.random() * 20);
     if (saveValue + d20 >= (result.dc() || DEFAULT_DC)) {
-      return {
-        ...data,
-        continue: true
-      };
+      const results = result.successResults();
+      if (results.length) {
+        return new RunResultCollection({
+          ...data,
+          results
+        }).run();
+      }
+    } else {
+      const results = result.failureResults();
+      if (results.length) {
+        return new RunResultCollection({
+          ...data,
+          results
+        }).run();
+      }
     }
-    return new RunResultCollection({
+    return {
       ...data,
-      results: result.results()
-    }).run();
+      continue: true
+    };
   }
 }
 

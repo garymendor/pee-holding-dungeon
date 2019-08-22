@@ -53,7 +53,7 @@ class RunResult {
       "stat-check": RunStatCheckResult,
       "accident-check": RunAccidentCheckResult,
       accident: RunAccidentResult,
-      "saving-throw": RunSavingThrowResult
+      savingThrow: RunSavingThrowResult
     };
     if (result.data.log) {
       output.debug("Current state: result object", result);
