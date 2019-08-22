@@ -182,7 +182,7 @@
       "description": "A result that determines randomly from a set of events.",
       "type": "object",
       "properties": {
-        "type": { "const": "chanceEvent" },
+        "type": { "const": "chance" },
         "events": {
           "type": "array",
           "items": {

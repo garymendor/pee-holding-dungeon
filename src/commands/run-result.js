@@ -1,6 +1,7 @@
 import RunEffectResult from "./run-effect-result";
 import RunEventResult from "./run-event-result";
 import RunMessageResult from "./run-message-result";
+import RunChanceResult from "./run-chance-result";
 import RunChoiceResult from "./run-choice-result";
 import RunStatCheckResult from "./run-stat-check-result";
 import RunAccidentCheckResult from "./run-accident-check-result";
@@ -49,6 +50,7 @@ class RunResult {
       event: RunEventResult,
       effect: RunEffectResult,
       message: RunMessageResult,
+      chance: RunChanceResult,
       choice: RunChoiceResult,
       "stat-check": RunStatCheckResult,
       "accident-check": RunAccidentCheckResult,

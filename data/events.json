@@ -1465,7 +1465,7 @@
           "description": "Go to the bathroom in the woods.",
           "results": [
             {
-              "type": "chanceEvent",
+              "type": "chance",
               "events": [
                 {
                   "value": 50,
@@ -1594,7 +1594,7 @@
           "description": "Masturbate",
           "results": [
             {
-              "type": "chanceEvent",
+              "type": "chance",
               "events": [
                 {
                   "value": 60,

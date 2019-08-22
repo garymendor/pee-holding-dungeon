@@ -1,6 +1,7 @@
 import EventResult from "./event-result";
 import EffectResult from "./effect-result";
 import MessageResult from "./message-result";
+import ChanceResult from "./chance-result";
 import ChoiceResult from "./choice-result";
 import StatCheckResult from "./stat-check-result";
 import SavingThrowResult from "./saving-throw-result";
@@ -23,6 +24,8 @@ function resultCreate(data) {
       return new AccidentResult(data);
     case "message":
       return new MessageResult(data);
+    case "chance":
+      return new ChanceResult(data);
     case "choice":
       return new ChoiceResult(data);
     case "effect":
@@ -35,7 +38,7 @@ function resultCreate(data) {
       }
       return new MessageResult({
         type: "message",
-        message: `Result type not supported: ${data.type}`
+        message: `Result type not supported: ${JSON.stringify(data)}`
       });
   }
 }

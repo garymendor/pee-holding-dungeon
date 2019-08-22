@@ -1,12 +1,12 @@
 import ResultCollection from "./result-collection";
 import Result from "./result";
 
-class ChanceEventResult extends Result {
+class ChanceResult extends Result {
   constructor(data) {
     super(data);
     this.data.events = this.data.events.map(val => ({
       ...val,
-      results: new ResultCollection(val)
+      results: new ResultCollection(val.results)
     }));
   }
 
@@ -18,4 +18,4 @@ class ChanceEventResult extends Result {
   }
 }
 
-export default ChanceEventResult;
+export default ChanceResult;
