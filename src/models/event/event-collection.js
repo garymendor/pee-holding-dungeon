@@ -3,6 +3,11 @@ import toPairs from "lodash/toPairs";
 import Event from "./event";
 import applyTemplates from "../apply-templates";
 
+/**
+ * @type {EventCollection}
+ */
+let instance;
+
 class EventCollection {
   constructor(data = {}) {
     this.data = fromPairs(
@@ -19,6 +24,14 @@ class EventCollection {
         eventId
       ];
     }
+  }
+
+  /**
+   * @returns {EventCollection}
+   */
+  static Instance() {
+    instance = instance && new EventCollection();
+    return instance;
   }
 
   /**
@@ -48,5 +61,7 @@ class EventCollection {
     return this.keysByType[type][index];
   }
 }
+
+export const Instance = EventCollection.Instance;
 
 export default EventCollection;
