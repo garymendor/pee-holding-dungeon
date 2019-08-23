@@ -1,5 +1,5 @@
-import LocalizableString from "../localizable-string";
-import Result from "./result";
+import LocalizableString from '../localizable-string';
+import Result from './result';
 
 class MessageResult extends Result {
   constructor(data) {

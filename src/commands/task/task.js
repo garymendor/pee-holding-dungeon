@@ -51,11 +51,22 @@
  */
 
 /**
- * Creates an empty task runner.
- * @returns {TaskRunner}
+ * Runs a single task in the queue of a state.
+ * @param {TaskInput} state The input state.
+ * @returns {Promise<TaskOutput>}
+ * The result of running the first task in the queue.
  */
-function task() {
-  return (state) => state;
+async function runOneTask(state) {
+  if (!state || !state.queue || !state.queue.length) {
+    return state;
+  }
+
+  const [nextTask, ...remainingQueue] = state.queue;
+  const nextState = { ...state, queue: remainingQueue };
+  if (!nextTask) {
+    return nextState;
+  }
+  return nextTask(nextState);
 }
 
-export default task;
+export default runOneTask;

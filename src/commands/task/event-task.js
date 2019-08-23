@@ -1,5 +1,5 @@
 import { Instance as Events } from '../../models/event/event-collection';
-import ResultTask from './result-task';
+import ResultTask from './result/result-task';
 import debug from '../../debug';
 
 /**

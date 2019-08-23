@@ -1,12 +1,12 @@
 import { Instance as Events } from '../../models/event/event-collection';
-import ResultTask from './result-task';
+import ResultTask from './result/result-task';
 import debug from '../../debug';
 import EventTask from './event-task';
 import Result from '../../models/result/result';
 
 jest
   .mock('../../models/event/event-collection')
-  .mock('./result-task')
+  .mock('./result/result-task')
   .mock('../../debug');
 
 describe('A task for an event', () => {
