@@ -29,10 +29,7 @@ class RunAccidentCheckResult {
     const { result, ...data } = this.data;
     const { character } = data;
     let accident = result.compare(character);
-    if (!accident) {
-      return { ...data, continue: true };
-    }
-    if (result.savingThrow()) {
+    if (accident && result.savingThrow()) {
       // If the config doesn't specify a DC, the DC is Need/10. If the character is
       // having both types of accident, roll a separate DC for each.
 
@@ -64,10 +61,13 @@ class RunAccidentCheckResult {
           accident = accident === "both" ? "pee" : null;
         }
       }
-
-      if (!accident) {
-        return { ...data, continue: true };
+    }
+    if (!accident) {
+      const results = result.madeItResults();
+      if (results.length()) {
+        return new RunResultCollection({ ...data, results }).run();
       }
+      return { ...data, continue: true };
     }
     return new RunResultCollection({
       ...data,

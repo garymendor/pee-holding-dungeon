@@ -1164,6 +1164,7 @@
               }
             },
             { "name": "horniness", "value": ["$sub", 0, "horniness"] },
+            { "name": "climax", "value": true },
             "High-Quality Inn: Services"
           ]
         },
@@ -1195,7 +1196,7 @@
             },
             {
               "name": "humiliation",
-              "value": ["$max", 0, ["$sub", "humiliation", 1000]]
+              "value": ["$floor", -1000, 0]
             }
           ]
         }
@@ -1290,8 +1291,9 @@
             },
             {
               "name": "horniness",
-              "value": ["$max", 0, ["$sub", "horniness", 500]]
+              "value": ["$floor", -500, 0]
             },
+            { "name": "climax", "value": true },
             "Haunted Inn: Services"
           ]
         },
@@ -1302,23 +1304,21 @@
               "type": "accident-check",
               "value": 100,
               "saving-throw": "Holy",
-              "failureResults": [
+              "results": [
                 {
                   "message": "I am plagued by terrible dreams and wet the bed! The maid chastises me loudly, and an audience gathers to watch her berate me while I stand there in my wet pajamas. Need to pee to 0, Humiliation +500."
                 },
                 { "name": "urination", "value": true },
                 { "name": "defecation", "value": true },
                 { "name": "humiliation", "value": 500 }
-              ],
-              "successResults": [
-                {
-                  "message": "It's not the most restful night's sleep, but it's better than staying awake all night. Humiliation -100."
-                },
-                {
-                  "name": "humiliation",
-                  "value": ["$max", 0, ["$sub", "humiliation", 200]]
-                }
               ]
+            },
+            {
+              "message": "It's not the most restful night's sleep, but it's better than staying awake all night. Humiliation -100."
+            },
+            {
+              "name": "humiliation",
+              "value": ["$floor", -200, 0]
             },
             { "name": "sleep", "value": true }
           ]
@@ -1336,7 +1336,10 @@
         "savingThrow": "INT",
         "DC": 30,
         "successResults": {
-          "message": "Upon closer inspection, I realize that signing the contract will magically compel me to speak in childish terms, and to obey everything the staff tells me to do, whether I want to or not."
+          "message": "Upon closer inspection, I realize that signing the contract will magically compel me to speak in childish terms, prevent me from changing my clothes or using the potty without permission, and to obey everything the staff tells me to do, whether I want to or not. If the matron asks me if I'm a big girl and I say yes, the spell is broken, but I must leave immediately."
+        },
+        "failureResults": {
+          "message": "The only part I understand is that if the matron asks me if I'm a big girl and I say yes, I'm allowed to get out of the contract but have to leave immediately."
         }
       },
       {
@@ -1356,15 +1359,10 @@
   },
   "Day Care: Services": {
     "parent": "Day Care",
-    "description": [
-      "The main room is filled with \"children\" of all ages, all dressed in kindergarten clothes. The matron gives me a large milk bottle and tells me to drink the whole thing.",
-      "The milk tastes funny - it's full of potty drugs! But the spell takes hold, and I have no choice but to drink it all!",
-      "Once I've had my bottle, she leads me to the changing corner and tells me to strip to my panties."
-    ],
+    "description": "The main room is filled with other \"little girls\" of all ages, all dressed in kindergarten clothes. The matron gives me a large milk bottle and tells me to drink the whole thing. The milk tastes funny - it's full of potty drugs! But the spell takes hold, and I have no choice but to drink it all! Once I've had my bottle, she leads me to the changing corner and tells me to strip to my panties.",
     "results": [
       { "name": "weakBladder", "value": true },
       { "name": "weakBowels", "value": true },
-      { "name": "need-for-bathroom", "value": 100 },
       { "name": "panties", "value": null },
       { "name": "panties", "value": "$Children's Panties" },
       { "name": "childishPanties", "value": true },
@@ -1373,19 +1371,58 @@
         "expression": ["$or", "wet-panties", "soiled-panties"],
         "results": [
           {
-            "message": [
-              "The matron is very cross with me that I've had an accident! She strips off my dirty panties, washes my bottom, and then gives me a good spanking!",
-              "She then dresses me in children's panties and a kindergarten uniform, and give me a one-hour timeout standing in the naughty corner holding my kindergarten dress up so everyone can see my new panties! (Humiliation +200)"
-            ]
+            "message": "The matron is very cross with me that I've had an accident! She strips off my dirty panties, washes my bottom, and then gives me a good spanking! She then dresses me in children's panties and a kindergarten uniform, and give me a one-hour timeout standing in the naughty corner, holding my kindergarten dress up so everyone can see my new panties!"
           },
           { "name": "humiliation", "value": 100 },
-          { "type": "subEvent", "event": "Day Care: Accident Check" }
+          {
+            "type": "event",
+            "event": "Day Care: Accident Check",
+            "continue": true
+          }
         ],
         "elseResults": {
-          "message": "The matron tells me I'm a good girl for not having an accident, but that I shouldn't be wearing big girl panties. She gives me a pair of children's panties and tells me to change into them."
+          "message": "The matron tells me I'm a good girl for not having an accident, but that little girls like me shouldn't be wearing big girl panties. She gives me a pair of children's panties and tells me to change into them."
         }
       },
-      { "message": "More to come..." }
+      {
+        "message": "Now that I'm properly dressed, the matron leaves me to play with the other \"little girls\"."
+      },
+      {
+        "type": "stat-check",
+        "name": "horniness",
+        "value": { "$gt": 500 },
+        "results": {
+          "type": "savingThrow",
+          "savingThrow": "Willpower",
+          "DC": 30,
+          "failureResults": [
+            {
+              "message": [
+                "Despite everything, I'm still unbearably horny, and I can't resist the urge to put my hand under my skirt and rub myself - and the matron stops me immediately! She smacks my hand and says, \"No! Bad! Good little girls don't play with themselves! Now go stand in the corner, and no going potty until you're sorry!\"",
+                "After standing in the corner for what seems like ages, I need to go the bathroom. I ask the matron, \"Miss, I'm weally sowwy. can I pwease go potty?\" She shakes her head. \"No, sweetie. Bad little girls aren't really sorry until they can't hold their poo anymore and have an accident.\"",
+                "I begin to cry as I ask, \"You mean I hafta go to the baffroom in my panties?\" The matron says, \"That's right, dearie. But you have to hold your poo as long as you possibly can first.\""
+              ]
+            },
+            {
+              "type": "event",
+              "event": "Day Care: Punishment Accident Check",
+              "continue": true
+            }
+          ]
+        }
+      },
+      {
+        "message": "Next up, we're all served dinner - hamburger steak with a little flag in it - and told to go and play until bedtime, and to be sure to ask if we need to use the potty. Of course, with only one potty for the whole \"class\", I end up having to wait my turn to use it."
+      },
+      { "name": "need-for-bathroom", "value": 50 },
+      {
+        "type": "event",
+        "event": "Day Care: Accident Check",
+        "continue": true
+      },
+      {
+        "message": "After dinner, it's finally time for everyone to be tucked into their cribs."
+      }
     ]
   },
   "Day Care: Accident Check": {
@@ -1394,52 +1431,136 @@
       "type": "accident-check",
       "value": 200,
       "saving-throw": "STR",
-      "results": [
+      "results": "Day Care: Accident",
+      "madeItResults": [
         {
-          "type": "accident",
-          "pee": [
-            {
-              "message": [
-                "I beg to be allowed to go potty, but the matron tells me to be a big girl and hold it. But I can't!",
-                "A shameful yellow stain spreads in the crotch of my little-girl panties, and golden water runs down my legs and puddles around my feet!",
-                "The day-care spell takes hold of me, and I can't stop myself from saying, \"Miss, I had a accident! I went pee-pee in my panties...\" Humiliation +100"
-              ]
-            },
-            { "name": "humiliation", "value": 100 },
-            { "name": "urination", "value": true }
-          ],
-          "poo": [
-            {
-              "message": [
-                "I beg to be allowed to go potty, but the matron tells me to be a big girl and hold it. But I can't!",
-                "A shameful brown bulge expands in the seat of my little-girl panties, and little muddy brown lumps ooze down my legs and pile up around my feet!",
-                "The day-care spell takes hold of me, and I can't stop myself from saying, \"Miss, I had a accident! I went poo-poo in my panties...\" Humiliation +200"
-              ]
-            },
-            { "name": "humiliation", "value": 200 },
-            { "name": "defecation", "value": true }
-          ],
-          "both": [
-            {
-              "message": [
-                "I beg to be allowed to go potty, but the matron tells me to be a big girl and hold it. But I can't!",
-                "A shameful yellow stain spreads in the crotch of my little-girl panties, an even more shameful brown bulge expands in the seat, and golden water and muddy brown lumps run down my legs and puddle around my feet!",
-                "The day-care spell takes hold of me, and I can't stop myself from saying, \"Miss, I had a accident! I went pee-pee and poo-poo in my panties...\" Humiliation +300"
-              ]
-            },
-            { "name": "humiliation", "value": 300 },
-            { "name": "defecation", "value": true }
-          ]
+          "message": "Finally the matron tells me I'm allowed to go potty. I hurry over to the potty, pull down my little-girl panties, and let go in relief. The matron watches me closely. It's humiliating to go to the potty in front of so many people, but at least I didn't have an accident."
         },
         {
-          "message": [
-            "The matron gives me aspanking and another full bottle to drink, and gives me an extra hour timeout standing in the corner in my potty panties.",
-            "When my timeout is done, I beg the matron to change me, but she tells me that bad girls who go potty in their panties don't deserve clean panties."
-          ]
+          "type": "stat-check",
+          "expression": ["$or", "wet-panties", "soiled-panties"],
+          "results": {
+            "message": "The matron says, \"You were a good girl and went to the potty properly. Come here and let me give you some clean panties. \""
+          }
         },
-        { "name": "need-for-bathroom", "value": 100 }
+        { "name": "panties", "value": null },
+        { "name": "urination", "value": true },
+        { "name": "defecation", "value": true },
+        { "name": "panties", "value": "$Children's Panties" },
+        { "name": "humiliation", "value": 50 }
       ]
     }
+  },
+  "Day Care: Accident": {
+    "parent": "Day Care",
+    "results": [
+      {
+        "type": "accident",
+        "pee": [
+          {
+            "message": [
+              "I beg to be allowed to use the potty, but the matron tells me to be a good girl and hold it. But I can't!",
+              "A shameful yellow stain spreads in the crotch of my little-girl panties, and golden water runs down my legs and puddles around my feet! The day-care spell takes hold of me, and I can't stop myself from saying, \"Miss, I had a accident! I went pee-pee in my panties...\""
+            ]
+          },
+          { "name": "humiliation", "value": 100 },
+          { "name": "urination", "value": true }
+        ],
+        "poo": [
+          {
+            "message": [
+              "I beg to be allowed to use the potty, but the matron tells me to be a good girl and hold it. But I can't!",
+              "A shameful brown bulge expands in the seat of my little-girl panties, and little muddy brown lumps ooze down my legs and pile up around my feet! The day-care spell takes hold of me, and I can't stop myself from saying, \"Miss, I had a accident! I went poo-poo in my panties...\""
+            ]
+          },
+          { "name": "humiliation", "value": 200 },
+          { "name": "defecation", "value": true }
+        ],
+        "both": [
+          {
+            "message": [
+              "I beg to be allowed to use the potty, but the matron tells me to be a good girl and hold it. But I can't!",
+              "A shameful yellow stain spreads in the crotch of my little-girl panties, an even more shameful brown bulge expands in the seat, and golden water and muddy brown lumps run down my legs and puddle around my feet! The day-care spell takes hold of me, and I can't stop myself from saying, \"Miss, I had a accident! I went pee-pee and poo-poo in my panties...\""
+            ]
+          },
+          { "name": "humiliation", "value": 300 },
+          { "name": "urination", "value": true },
+          { "name": "defecation", "value": true }
+        ]
+      },
+      {
+        "message": "The matron gives me a spanking, and makes me stay in the corner in my potty panties. When my timeout is done, I beg the matron to change me. She responds \"No, because you're a bad little girl who went potty in her panties, and only good little girls get clean panties to wear. Are you going to tell me that you're a big girl?\""
+      },
+      {
+        "type": "choice",
+        "choices": [
+          {
+            "description": "\"I am a big girl!\"",
+            "results": [
+              {
+                "message": "My head clears and the spell is broken. The matron says, \"If you say so! But this is no place for big girls! Leave now!\""
+              },
+              "Roughing It"
+            ]
+          },
+          {
+            "description": "\"No, miss.\"",
+            "results": {
+              "message": "\"That's what I thought,\" says the matron. \"Now once you prove to me you're a good girl by going potty properly, you'll get a change of panties.\""
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "Day Care: Punishment Accident Check": {
+    "parent": "Day Care",
+    "results": {
+      "type": "accident-check",
+      "value": 300,
+      "saving-throw": "STR",
+      "results": "Day Care: Punishment Accident",
+      "madeItResults": [
+        { "name": "need-for-bathroom", "value": 20 },
+        { "name": "need-to-pee", "value": 10 },
+        "Day Care: Punishment Accident Check"
+      ]
+    }
+  },
+  "Day Care: Punishment Accident": {
+    "template": "Day Care: Accident",
+    "parent": "Day Care",
+    "results": [
+      {
+        "pee": [
+          {
+            "message": [
+              "No matter how much I beg the matron, she refuses to let me go potty! I have no choice but to stand there, rubbing my legs together and doing a potty dance, until I can't hold it any more and pee in my panties!"
+            ]
+          },
+          {},
+          {},
+          {
+            "message": "The matron clicks her tongue at me in disappointment. \"You're a bad girl, but peeing your panties isn't enough to mean you're sorry.\""
+          },
+          "Day Care: Punishment Accident Check"
+        ],
+        "poo": [
+          {
+            "message": [
+              "No matter how much I beg the matron, she refuses to let me go potty! I have no choice but to stand there, bouncing up and down and doing a potty dance, until I can't hold it any more and poo in my panties!"
+            ]
+          }
+        ],
+        "both": [
+          {
+            "message": [
+              "No matter how much I beg the matron, she refuses to let me go potty! I have no choice but to stand there, wiggling and bouncing and squirming, until I can't hold it any more and pee and poo in my panties!"
+            ]
+          }
+        ]
+      }
+    ]
   },
   "Roughing It": {
     "type": "floorEnd",
@@ -1613,6 +1734,7 @@
                         { "name": "masochist", "value": true }
                       ]
                     },
+                    { "name": "climax", "value": true },
                     { "name": "horniness", "value": ["$sub", 0, "horniness"] }
                   ]
                 },
@@ -1632,18 +1754,19 @@
                         },
                         {
                           "name": "horniness",
-                          "value": ["$max", 0, ["$sub", "horniness", 1000]]
+                          "value": ["$floor", -1000, 0]
                         },
                         { "name": "humiliation", "value": 2000 }
                       ],
                       "elseResults": [
                         {
                           "name": "horniness",
-                          "value": ["$max", 0, ["$sub", "horniness", 500]]
+                          "value": ["$floor", -500, 0]
                         },
                         { "name": "humiliation", "value": 500 }
                       ]
-                    }
+                    },
+                    { "name": "climax", "value": true }
                   ]
                 },
                 {
@@ -1654,9 +1777,10 @@
                     },
                     {
                       "name": "horniness",
-                      "value": ["$max", 0, ["$sub", "horniness", 500]]
+                      "value": ["$floor", -500, 0]
                     },
-                    { "name": "humiliation", "value": 500 }
+                    { "name": "humiliation", "value": 500 },
+                    { "name": "climax", "value": true }
                   ]
                 }
               ]

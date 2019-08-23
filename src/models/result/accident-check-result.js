@@ -9,6 +9,7 @@ class AccidentCheckResult extends Result {
   constructor(data) {
     super(data);
     this.data.results = new ResultCollection(this.data.results);
+    this.data.madeItResults = new ResultCollection(this.data.madeItResults);
   }
 
   /**
@@ -71,11 +72,19 @@ class AccidentCheckResult extends Result {
   }
 
   /**
-   * Gets the results to execute if the comparison succeeds.
+   * Gets the results to execute if the character has an accident.
    * @returns {ResultCollection}
    */
   results() {
     return this.data.results;
+  }
+
+  /**
+   * Gets the results to execute if the character does not have an accident.
+   * @returns {ResultCollection}
+   */
+  madeItResults() {
+    return this.data.madeItResults;
   }
 }
 

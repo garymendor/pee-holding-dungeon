@@ -33,7 +33,7 @@ class RunChanceResult {
     const { character } = data;
     const eventValues = result
       .events()
-      .map(event => evaluateExpression(character.flatData, event.value));
+      .map(event => evaluateExpression(character.flatData, null, event.value));
     const eventSum = eventValues.reduce((sum, val) => sum + val, 0);
     let roll = Math.floor(Math.random() * eventSum);
     let selectedIndex = 0;

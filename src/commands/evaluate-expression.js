@@ -1,17 +1,26 @@
 const EvaluateExpression = {
+  $or(context, key, values) {
+    if (!values || !Array.isArray(values) || values.length === 0) {
+      throw new Error(`$max requires an array of expressions, got: ${values}`);
+    }
+    const actualValues = values.map(val => evaluate(context, key, val));
+    return actualValues.reduce((sum, val) => sum || val, false);
+  },
+
   /**
    * Subtract the second value from the first. Assumes both evaluate to numbers.
    * @param {any} context
+   * @param {string} key
    * @param {any[]} values
    * @returns {number}
    */
-  $sub(context, values) {
+  $sub(context, key, values) {
     if (!values || !Array.isArray(values) || values.length !== 2) {
       throw new Error(
         `$sub requires an array of two expressions, got: ${values}`
       );
     }
-    const actualValues = values.map(val => evaluate(context, val));
+    const actualValues = values.map(val => evaluate(context, key, val));
     if (!(typeof actualValues[0] === "number")) {
       throw new Error(
         `$sub requires the first expression evaluate to a number, got: ${JSON.stringify(
@@ -31,21 +40,62 @@ const EvaluateExpression = {
   /**
    * Returns the maximum of all supplied values. Assumes all inputs evaluate to numbers.
    * @param {any} context
+   * @param {string} key
    * @param {any[]} values
    */
-  $max(context, values) {
-    if (!values || !Array.isArray(values)) {
+  $max(context, key, values) {
+    if (!values || !Array.isArray(values) || values.length === 0) {
       throw new Error(`$max requires an array of expressions, got: ${values}`);
     }
-    const actualValues = values.map(val => evaluate(context, val));
-    return actualValues.reduce((sum, val, index) => {
+    const actualValues = values.map(val => evaluate(context, key, val));
+    const response = actualValues.reduce((sum, val, index) => {
       if (typeof val !== "number") {
         throw new Error(
           `$max requires all expressions evaluate to a number, got at index ${index}: ${val}`
         );
       }
-      return sum + val;
-    }, 0);
+      return sum > val ? sum : val;
+    }, actualValues[0]);
+    return response;
+  },
+  /**
+   * Returns the minimum of all supplied values. Assumes all inputs evaluate to numbers.
+   * @param {any} context
+   * @param {string} key
+   * @param {any[]} values
+   */
+  $min(context, key, values) {
+    if (!values || !Array.isArray(values) || values.length === 0) {
+      throw new Error(`$min requires an array of expressions, got: ${values}`);
+    }
+    const actualValues = values.map(val => evaluate(context, key, val));
+    const response = actualValues.reduce((sum, val, index) => {
+      if (typeof val !== "number") {
+        throw new Error(
+          `$min requires all expressions evaluate to a number, got at index ${index}: ${val}`
+        );
+      }
+      return sum < val ? sum : val;
+    }, actualValues[0]);
+    return response;
+  },
+  /**
+   * Takes two arguments: a value to add to a stat and a minimum value for the stat.
+   * Returns either the first argument or the amount that will set the stat to the
+   * minimum value.
+   * @param {any} context
+   * @param {string} key
+   * @param {any[]} values
+   */
+  $floor(context, key, values) {
+    if (!values || !Array.isArray(values) || values.length !== 2) {
+      throw new Error(
+        `$floor requires an array of two expressions, got: ${values}`
+      );
+    }
+    const [addValue, floor] = values.map(val => evaluate(context, key, val));
+    const newValue = context[key] + addValue;
+    return newValue >= floor ? addValue : floor - context[key];
   }
 };
 
@@ -53,6 +103,8 @@ const EvaluateExpression = {
  * Evaluates an expression object to a number.
  * @param {any} context
  * The character flatData.
+ * @param {string} key
+ * The key of the value being manipulated.
  * @param {any} expression
  * An object containing an expression:
  * * If it is a string, and it starts with `"$"`, return the literal string following
@@ -64,7 +116,7 @@ const EvaluateExpression = {
  * * Otherwise, return the original object.
  * @returns {any}
  */
-function evaluate(context, expression) {
+function evaluate(context, key, expression) {
   if (typeof expression === "string") {
     if (expression.startsWith("$")) {
       return expression.substring(1);
@@ -80,16 +132,16 @@ function evaluate(context, expression) {
   const [operator, ...operands] = expression;
   const operatorFunc = EvaluateExpression[operator];
   if (operatorFunc) {
-    return operatorFunc(context, operands);
+    return operatorFunc(context, key, operands);
   }
-  const firstVal = evaluate(context, operator);
+  const firstVal = evaluate(context, key, operator);
   if (!typeof firstVal === "number") {
     throw new Error(
       `$sum requires all expressions evaluate to a number, got at index 0: ${firstVal}`
     );
   }
   return operands
-    .map(val => evaluate(context, val))
+    .map(val => evaluate(context, key, val))
     .reduce((sum, val, index) => {
       if (typeof val !== "number") {
         throw new Error(

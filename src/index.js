@@ -21,6 +21,8 @@ const eventCollection = new EventCollection(eventsData);
 const localeId = process.env.APP_LOCALE;
 const eventIds =
   process.env.APP_EVENT_ID && process.env.APP_EVENT_ID.split(",");
+const innEventIds =
+  process.env.APP_INN_EVENT_ID && process.env.APP_INN_EVENT_ID.split(",");
 const maxFloorCount = parseInt(process.env.APP_FLOORS) || 15;
 
 if (eventIds && eventIds.length) {
@@ -44,7 +46,6 @@ function help(output) {
     "",
     "H - This help",
     "N - Next floor(default)",
-    "C - Change panties",
     "Q - Quit"
   ].forEach(line => output.log(line));
 }
@@ -66,20 +67,30 @@ async function fullRun(output = console) {
     data.eventId =
       (eventIds && eventIds.length > floorCount && eventIds[floorCount]) ||
       eventCollection.getRandomEventId();
-    floorCount++;
-    console.log(`--- Floor ${floorCount} ---`);
+
+    console.log(`--- Floor ${floorCount + 1}: Adventuring Phase ---`);
     const command = new ExecuteEvent(data);
     data = await command.run();
     console.log("");
-    console.log("---");
+    console.log(data.character.toString());
+
+    console.log(`--- Floor ${floorCount + 1}: Inn Phase ---`);
+    data.eventId =
+      (innEventIds &&
+        innEventIds.length > floorCount &&
+        innEventIds[floorCount]) ||
+      eventCollection.getRandomEventId("floorEnd");
+    data = await new ExecuteEvent(data).run();
     console.log("");
     console.log(data.character.toString());
-    console.log("");
+
+    console.log(`--- Floor ${floorCount + 1}: End ---`);
+    floorCount++;
     let nextFloor = false;
     while (!nextFloor && !quit) {
       const { responseIndex } = await new UserInput("Main Loop").requestCommand(
         "Type command (H for help)> ",
-        ["n", "h", "?", "c", "q"],
+        ["n", "h", "?", "q"],
         {
           caseInsensitive: true,
           allowInvalid: true
@@ -91,9 +102,6 @@ async function fullRun(output = console) {
           help(output);
           break;
         case 3:
-          output.log("Changing not yet supported.");
-          break;
-        case 4:
           quit = true;
           break;
         case 0:

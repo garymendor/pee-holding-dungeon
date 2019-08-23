@@ -1,4 +1,5 @@
 import RunResultCollection from "./run-result-collection";
+import evaluateExpression from "./evaluate-expression";
 
 /**
  * @typedef {import('./run-result').BaseRunResultData<T>} BaseRunResultData
@@ -29,8 +30,18 @@ class RunStatCheckResult {
   async run() {
     const { result, ...data } = this.data;
     const { character } = data;
-    const actualValue = character.get(result.name());
-    if (result.compare(actualValue)) {
+    let isMatch = false;
+    if (result.expression()) {
+      isMatch = evaluateExpression(
+        character.flatData,
+        null,
+        result.expression()
+      );
+    } else {
+      const actualValue = character.get(result.name());
+      isMatch = result.compare(actualValue);
+    }
+    if (isMatch) {
       const results = result.results();
       if (results.length()) {
         return await new RunResultCollection({

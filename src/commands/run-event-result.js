@@ -33,12 +33,13 @@ class RunEventResult {
     const { result, ...data } = this.data;
     const nextData = await new ExecuteEvent({
       ...data,
-      childEvent: true,
+      skipStartEvents: true,
+      skipEndEvents: result.continue(),
       eventId: result.event()
     }).run();
     return {
       ...nextData,
-      continue: false
+      continue: result.continue()
     };
   }
 }

@@ -47,7 +47,11 @@ class ApplyCharacterChange {
     const { character, name, value: inputValue, invert } = request;
     const response = { statusChanges: {} };
     let newCharacterData = { ...character.data };
-    const evaluatedValue = evaluateExpression(character.flatData, inputValue);
+    const evaluatedValue = evaluateExpression(
+      character.flatData,
+      name,
+      inputValue
+    );
     const value = invert ? this.invert(evaluatedValue) : evaluatedValue;
 
     switch (name) {
@@ -114,9 +118,11 @@ class ApplyCharacterChange {
         newCharacterData.values["need-to-poo"] = 0;
         response.statusChanges["defecation"] = true;
         break;
+      // Sleep gives you a chance to roll saving throws against all status effects with a save.
+      // TODO: Implement this in run-effect-result.
       case "sleep":
-        // Sleep gives you a chance to roll saving throws against all status effects with a save.
-        // TODO: Implement this in run-effect-result.
+      // Climax represents an orgasm. Most events that trigger climax will take care of reducing horniness.
+      case "climax":
         response.statusChanges[name] = value;
         break;
       default:

@@ -25,6 +25,10 @@ class StatCheckResult extends Result {
     return this.data.value;
   }
 
+  expression() {
+    return this.data.expression;
+  }
+
   /**
    * Compares the character's value for the stat with the target stat.
    * @param {any} value

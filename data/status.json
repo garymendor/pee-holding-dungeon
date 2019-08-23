@@ -164,6 +164,9 @@
       "climax": {
         "value": true,
         "results": [
+          {
+            "message": "> In the throes of orgasm, I lose control of my bodily functions!"
+          },
           { "name": "urination", "value": true },
           { "name": "defecation", "value": true }
         ]
@@ -593,14 +596,14 @@
         { "name": "humiliation", "value": 200 }
       ]
     },
-    "wetBedroll": {
-      "name": "Wet Bedroll",
-      "description": "You wet the bedroll while sleeping in the open. If you sleep on it again another night, Humiliation +50."
-    },
-    "soiledBedroll": {
-      "name": "Soiled Bedroll",
-      "description": "You soiled the bedroll while sleeping in the open. If you sleep on it again another night, Humiliation +100."
-    },
     "saving-throw": false
+  },
+  "wetBedroll": {
+    "name": "Wet Bedroll",
+    "description": "You wet the bedroll while sleeping in the open. If you sleep on it again another night, Humiliation +50."
+  },
+  "soiledBedroll": {
+    "name": "Soiled Bedroll",
+    "description": "You soiled the bedroll while sleeping in the open. If you sleep on it again another night, Humiliation +100."
   }
 }

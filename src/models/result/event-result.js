@@ -12,6 +12,10 @@ class EventResult extends Result {
   event() {
     return this.data.event;
   }
+
+  continue() {
+    return !!this.data.continue;
+  }
 }
 
 export default EventResult;

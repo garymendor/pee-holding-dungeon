@@ -17,11 +17,12 @@ import TriggerStatusEvent from "./trigger-status-event";
  * @property {string} eventId
  * @property {string} localeId
  * @property {Console} output
- * @property {boolean} childEvent
+ * @property {boolean} skipStartEvents
  * True if this event was triggered by another event.
  * @property {Object<string,boolean>} tags
  * A collection of tags currently in effect.
  * @property {boolean} continue
+ * @property {boolean} skipEndEvents
  */
 
 class ExecuteEvent {
@@ -49,7 +50,8 @@ class ExecuteEvent {
       return this.data;
     }
     const { character, statusCollection, output, localeId } = this.data;
-    let data = this.data;
+    const { skipStartEvents, skipEndEvents, ...baseData } = this.data;
+    let data = baseData;
 
     // Apply event tags
     event.tags().forEach(tag => {
@@ -58,14 +60,16 @@ class ExecuteEvent {
 
     // Apply status effect tags
     for (const statusId in character.data.status) {
-      statusCollection
-        .get(statusId)
-        .tags()
-        .forEach(tag => (data.tags[tag] = true));
+      const status = statusCollection.get(statusId);
+      if (!status) {
+        output.debug("No status entry found for statusId", statusId);
+      }
+      status.tags().forEach(tag => (data.tags[tag] = true));
     }
 
-    if (!data.childEvent) {
+    if (!skipStartEvents) {
       // Floor start behavior
+      console.debug(`Floor start: ${this.data.eventId}`);
       for (const statusId in character.data.status) {
         const status = statusCollection.get(statusId);
         for (const tag in data.tags) {
@@ -88,7 +92,9 @@ class ExecuteEvent {
       ...data,
       results: event.results()
     }).run();
-    if (data.continue) {
+
+    if (data.continue && !skipEndEvents) {
+      console.debug(`Floor end: ${this.data.eventId}`);
       // Floor end behavior
       // Execute floor-end status events
       ({ character: data.character } = await new TriggerStatusEvent().run({

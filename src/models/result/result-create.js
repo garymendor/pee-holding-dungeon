@@ -28,6 +28,8 @@ function resultCreate(data) {
       return new ChanceResult(data);
     case "choice":
       return new ChoiceResult(data);
+    case "event":
+      return new EventResult(data);
     case "effect":
     default:
       if (data.message) {

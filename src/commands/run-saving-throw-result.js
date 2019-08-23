@@ -31,7 +31,8 @@ class RunSavingThrowResult {
     const { character } = data;
     const saveValue = character.get(result.savingThrow());
     const d20 = 1 + Math.floor(Math.random() * 20);
-    if (saveValue + d20 >= (result.dc() || DEFAULT_DC)) {
+    const dc = result.dc() || DEFAULT_DC;
+    if (saveValue + d20 >= dc) {
       const results = result.successResults();
       if (results.length) {
         return new RunResultCollection({

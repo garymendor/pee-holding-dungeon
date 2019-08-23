@@ -11,9 +11,14 @@ class EventCollection {
         new Event(value)
       ])
     );
-    this.rootKeysValue = toPairs(this.data)
-      .filter(([, value]) => value.type() === "floor")
-      .map(([key]) => key);
+    this.keysByType = {};
+    for (const eventId in this.data) {
+      const eventType = this.data[eventId].type();
+      this.keysByType[eventType] = [
+        ...(this.keysByType[eventType] || []),
+        eventId
+      ];
+    }
   }
 
   /**
@@ -34,20 +39,13 @@ class EventCollection {
   }
 
   /**
-   * Gets the collection of root event IDs.
-   * @returns {string[]}
-   */
-  rootKeys() {
-    return this.rootKeysValue;
-  }
-
-  /**
    * Gets a random event ID using `Math.random`.
+   * @param {string} type
    * @returns {string}
    */
-  getRandomEventId() {
-    const index = Math.floor(Math.random() * this.rootKeys().length);
-    return this.rootKeys()[index];
+  getRandomEventId(type = "floor") {
+    const index = Math.floor(Math.random() * this.keysByType[type].length);
+    return this.keysByType[type][index];
   }
 }
 
