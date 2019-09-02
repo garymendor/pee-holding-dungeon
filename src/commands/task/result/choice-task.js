@@ -38,7 +38,7 @@ class ChoiceTask {
         ...choice
           .results()
           .items()
-          .map((result) => new ResultTask(result)),
+          .map((result) => new ResultTask(result).run),
         ...nextState.queue,
       ],
     };

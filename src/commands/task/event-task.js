@@ -10,10 +10,17 @@ import debug from '../../debug';
 class EventTask {
   /**
    * Creates a task to execute an event.
-   * @param {string} eventId
+   * @param {string=} eventId The event ID for the floor or null for a random event.
    */
   constructor(eventId) {
-    this.eventId = eventId;
+    this.eventId = eventId || Events().getRandomEventId('floor');
+  }
+
+  /**
+   * Creates a mini-task to increment the floor number.
+   */
+  static floorChangeTask() {
+    return (state) => ({ ...state, floorIndex: state.floorIndex ? state.floorIndex + 1 : 1 });
   }
 
   /**
@@ -27,6 +34,11 @@ class EventTask {
       return state;
     }
     const queue = state.queue || [];
+    const output = [];
+    const message = event.description(state.localeId);
+    if (message) {
+      output.push(message);
+    }
 
     return {
       ...state,
@@ -35,8 +47,10 @@ class EventTask {
           .results()
           .items()
           .map((result) => new ResultTask(result).run),
+        EventTask.floorChangeTask(),
         ...queue,
       ],
+      output,
     };
   }
 }

@@ -7,6 +7,8 @@
  * @typedef {Object} TaskContext
  * @property {Character} character
  * A player character.
+ * @property {number} floorIndex
+ * What floor the character is on (0 means first floor).
  * @property {Object<string,number>} tags
  * Tags which apply to the current situation. Whenever a tag is applied,
  * its number is incremented; when it is unapplied, the number is decremented.
@@ -46,7 +48,8 @@
 
 /**
  * A function that attempts to apply a particular operation to
- * a task context.
+ * a task context. All task runners should pass through any fields they
+ * do not recognize.
  * @typedef {(state:TaskInput)=>Promise<TaskOutput>} TaskRunner
  */
 

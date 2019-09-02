@@ -35,6 +35,8 @@ describe('Task for ChoiceResult', () => {
       // Arrange
       const state = { foo: 'bar', queue: [jest.fn()], inputIndex };
       const task = new ChoiceTask(choiceResult);
+      const taskFunc = jest.fn();
+      ResultTask.mockImplementation(() => ({ run: taskFunc }));
 
       // Arrange
       const nextState = task.run(state);
@@ -42,7 +44,7 @@ describe('Task for ChoiceResult', () => {
       // Assert
       expect(nextState).toEqual({
         foo: 'bar',
-        queue: [expect.any(ResultTask), state.queue[0]],
+        queue: [taskFunc, state.queue[0]],
       });
       expect(ResultTask).toHaveBeenCalledTimes(1);
       expect(ResultTask).toHaveBeenCalledWith(expect.any(MessageResult));

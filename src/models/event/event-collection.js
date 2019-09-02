@@ -1,7 +1,8 @@
-import fromPairs from "lodash/fromPairs";
-import toPairs from "lodash/toPairs";
-import Event from "./event";
-import applyTemplates from "../apply-templates";
+import fromPairs from 'lodash/fromPairs';
+import toPairs from 'lodash/toPairs';
+import Event from './event';
+import applyTemplates from '../apply-templates';
+import eventsData from '../../../data/events';
 
 /**
  * @type {EventCollection}
@@ -13,15 +14,15 @@ class EventCollection {
     this.data = fromPairs(
       toPairs(applyTemplates(data)).map(([key, value]) => [
         key,
-        new Event(value)
-      ])
+        new Event(value),
+      ]),
     );
     this.keysByType = {};
     for (const eventId in this.data) {
       const eventType = this.data[eventId].type();
       this.keysByType[eventType] = [
         ...(this.keysByType[eventType] || []),
-        eventId
+        eventId,
       ];
     }
   }
@@ -30,7 +31,7 @@ class EventCollection {
    * @returns {EventCollection}
    */
   static Instance() {
-    instance = instance && new EventCollection();
+    instance = instance || new EventCollection(eventsData);
     return instance;
   }
 
@@ -56,12 +57,12 @@ class EventCollection {
    * @param {string} type
    * @returns {string}
    */
-  getRandomEventId(type = "floor") {
+  getRandomEventId(type = 'floor') {
     const index = Math.floor(Math.random() * this.keysByType[type].length);
     return this.keysByType[type][index];
   }
 }
 
-export const Instance = EventCollection.Instance;
+export const { Instance } = EventCollection;
 
 export default EventCollection;
