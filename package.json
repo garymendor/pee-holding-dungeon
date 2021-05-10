@@ -18,7 +18,7 @@
     "@babel/preset-env": "^7.5.5",
     "@babel/register": "^7.5.5",
     "dotenv": "^8.1.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "regenerator-runtime": "^0.13.3"
   },
   "devDependencies": {
